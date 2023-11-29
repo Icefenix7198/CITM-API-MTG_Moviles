@@ -1,5 +1,5 @@
-import 'package:api_mtg/widgets/Statefull.dart';
-import 'package:api_mtg/widgets/Stateless.dart';
+import 'package:api_mtg/Screens/Home.dart';
+import 'package:api_mtg/Screens/Portada.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,15 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        //Toda la app que se muestre sera este body
-        body: const Column(
-          children: [
-            StatefulPlantilla(title: "Texto"),
-            StatelessPlantilla(title: "Text2"),
-          ],
-        ),
-      ),
+      routes: {
+        "/": (context) => PortadaScreen(),
+        "/home": (context) => HomeScreen(),
+      },
     );
   }
 }
