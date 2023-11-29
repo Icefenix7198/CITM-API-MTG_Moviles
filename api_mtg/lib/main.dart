@@ -1,5 +1,6 @@
 import 'package:api_mtg/Screens/Home.dart';
 import 'package:api_mtg/Screens/Portada.dart';
+import 'package:api_mtg/Screens/WIP_API.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => PortadaScreen(),
         "/home": (context) => HomeScreen(),
+        "/home/api": (_) => ApiDataLoadApp(),
       },
     );
   }

@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
         child: ElevatedButton(
           child: Text("Go to Init"),
           onPressed: () {
-            Navigator.of(context).pushNamed("/");
+            Navigator.of(context).pushNamed("/home/api");
           },
         ),
       ),
