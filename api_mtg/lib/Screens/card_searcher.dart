@@ -1,7 +1,8 @@
-import 'package:api_mtg/widgets/API.dart';
-import 'package:api_mtg/widgets/ListaCartas.dart';
+import 'package:api_mtg/widgets/Card_grid.dart';
+import 'package:api_mtg/widgets/api_load.dart';
+//import 'package:api_mtg/widgets/card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:api_mtg/Model/Carta.dart';
+import 'package:api_mtg/Model/card.dart';
 
 class ApiDataLoadApp extends StatelessWidget {
   const ApiDataLoadApp({super.key});
@@ -13,7 +14,7 @@ class ApiDataLoadApp extends StatelessWidget {
         future: apiLoadUsers(),
         builder: (
           BuildContext context,
-          AsyncSnapshot<List<Carta>> snapshot,
+          AsyncSnapshot<List<MtgCard>> snapshot,
         ) {
           if (!snapshot.hasData) {
             return const Center(
@@ -21,12 +22,7 @@ class ApiDataLoadApp extends StatelessWidget {
             );
           }
           final userList = snapshot.data!;
-          return ListView.builder(
-            itemCount: userList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return UserListItem(carta: userList[index]);
-            },
-          );
+          return CardGrid(cardList: userList,);
         },
       ),
     );

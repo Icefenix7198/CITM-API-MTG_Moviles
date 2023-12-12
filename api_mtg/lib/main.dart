@@ -1,7 +1,6 @@
-import 'package:api_mtg/Screens/Home.dart';
-import 'package:api_mtg/Screens/Portada.dart';
-import 'package:api_mtg/Screens/SocialScreen.dart';
-import 'package:api_mtg/Screens/WIP_API.dart';
+import 'package:api_mtg/Screens/home.dart';
+import 'package:api_mtg/Screens/cover.dart';
+import 'package:api_mtg/Screens/card_searcher.dart';
 import 'package:flutter/material.dart';
 
 void main() {

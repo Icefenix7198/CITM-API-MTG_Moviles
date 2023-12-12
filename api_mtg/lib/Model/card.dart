@@ -1,6 +1,5 @@
-import 'dart:ffi';
 
-class Carta {
+class MtgCard {
   String name;
   String type;
   String artist;
@@ -12,7 +11,7 @@ class Carta {
   num moneyEUR;
   num moneyTIX;
 
-  Carta.fromJson(Map<String, dynamic> json)
+  MtgCard.fromJson(Map<String, dynamic> json)
       : name = json["name"],
         type = json["type_line"],
         convManaCost = json["cmc"],
