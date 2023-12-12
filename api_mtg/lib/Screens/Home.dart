@@ -10,11 +10,22 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Hub")),
       body: Center(
-        child: ElevatedButton(
-          child: Text("Go to Init"),
-          onPressed: () {
-            Navigator.of(context).pushNamed("/home/api");
-          },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              child: Text("Go API"),
+              onPressed: () {
+                Navigator.of(context).pushNamed("/home/api");
+              },
+            ),
+            ElevatedButton(
+              child: Text("Go to Social"),
+              onPressed: () {
+                Navigator.of(context).pushNamed("/home/social");
+              },
+            ),
+          ],
         ),
       ),
     );

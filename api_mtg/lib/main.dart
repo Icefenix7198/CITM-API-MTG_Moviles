@@ -1,5 +1,6 @@
 import 'package:api_mtg/Screens/Home.dart';
 import 'package:api_mtg/Screens/Portada.dart';
+import 'package:api_mtg/Screens/SocialScreen.dart';
 import 'package:api_mtg/Screens/WIP_API.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         "/": (context) => PortadaScreen(),
         "/home": (context) => HomeScreen(),
         "/home/api": (_) => ApiDataLoadApp(),
+        "/home/social": (context) => SocialScreen(),
       },
     );
   }
