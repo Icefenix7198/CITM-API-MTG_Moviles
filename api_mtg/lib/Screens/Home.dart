@@ -8,10 +8,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Hub")),
+      appBar: AppBar(title: const Text("Hub")),
       body: Center(
         child: ElevatedButton(
-          child: Text("Go to Init"),
+          child: const Text("Go to Init"),
           onPressed: () {
             Navigator.of(context).pushNamed("/home/api");
           },

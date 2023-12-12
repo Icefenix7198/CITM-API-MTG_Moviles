@@ -1,21 +1,21 @@
-import 'package:api_mtg/Model/Carta.dart';
+import 'package:api_mtg/Model/card.dart';
 import 'package:flutter/material.dart';
 
 class UserListItem extends StatelessWidget {
   const UserListItem({
     super.key,
-    required this.carta,
+    required this.mtgCard,
   });
 
-  final Carta carta;
+  final MtgCard mtgCard;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text("${carta.name} ${carta.artist}"),
-      subtitle: Text(carta.type),
+      title: Text("${mtgCard.name} ${mtgCard.artist}"),
+      subtitle: Text(mtgCard.type),
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(carta.avatarUrl),
+        backgroundImage: NetworkImage(mtgCard.avatarUrl),
       ),
     );
   }
