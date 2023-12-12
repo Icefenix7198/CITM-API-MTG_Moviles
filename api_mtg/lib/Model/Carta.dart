@@ -4,21 +4,23 @@ class Carta {
   String name;
   String type;
   String artist;
-  Int convManaCost;
-  List<String> colors;
+  num convManaCost;
+  String colors;
   String rules;
   String avatarUrl;
-  List<Double> prices;
-  Double moneyAux;
+  num moneyUSD;
+  num moneyEUR;
+  num moneyTIX;
 
   Carta.fromJson(Map<String, dynamic> json)
       : name = json["name"],
         type = json["type_line"],
         convManaCost = json["cmc"],
-        colors = json["colors"],
+        colors = json["colors"][0],
         artist = json["artist"],
         rules = json["oracle_text"],
-        avatarUrl = json["picture"]["large"],
-        moneyAux = json["dinero"]["USD"],
-        prices.add(moneyAux);
+        avatarUrl = json["image_uris"]["large"],
+        moneyUSD = double.parse(json["prices"]["usd"]),
+        moneyEUR = double.parse(json["prices"]["eur"]),
+        moneyTIX = double.parse(json["prices"]["tix"]);
 }

@@ -12,8 +12,8 @@ class UserListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text("${carta.firstName} ${carta.lastName}"),
-      subtitle: Text(carta.email),
+      title: Text("${carta.name} ${carta.artist}"),
+      subtitle: Text(carta.type),
       leading: CircleAvatar(
         backgroundImage: NetworkImage(carta.avatarUrl),
       ),
