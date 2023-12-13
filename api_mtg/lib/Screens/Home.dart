@@ -1,3 +1,4 @@
+import 'package:api_mtg/widgets/navigator_bar.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,6 +26,10 @@ class HomeScreen extends StatelessWidget {
                 Navigator.of(context).pushNamed("/home/social");
               },
             ),
+            const Spacer(),
+            const NavigatorBarra(
+              title: "Name",
+            )
           ],
         ),
       ),

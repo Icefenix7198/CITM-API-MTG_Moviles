@@ -22,34 +22,56 @@ class _NavigatorBarra extends State<NavigatorBarra> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         //Botones para cambiar de pantalla
-        //Pantalla X
-        IconButton(
-          onPressed: () =>
-              {Navigator.of(context).pushReplacementNamed("/home")},
-          icon: const Icon(Icons.abc),
+        //Pantalla home
+        Column(
+          children: [
+            IconButton(
+              onPressed: () =>
+                  {Navigator.of(context).pushReplacementNamed("/home")},
+              icon: const Icon(Icons.home),
+            ),
+            const Text("Home")
+          ],
         ),
 
-        //Pantalla Y
-        IconButton(
-          onPressed: () =>
-              {Navigator.of(context).pushReplacementNamed("/home")},
-          icon: const Icon(Icons.abc),
+        //Pantalla Social
+        Column(
+          children: [
+            IconButton(
+              onPressed: () =>
+                  {Navigator.of(context).pushReplacementNamed("/home/social")},
+              icon: const Icon(Icons.chat_bubble_outline),
+            ),
+            const Text("Social")
+          ],
         ),
 
         //Pantalla Z
-        IconButton(
-          onPressed: () =>
-              {Navigator.of(context).pushReplacementNamed("/home")},
-          icon: const Icon(Icons.abc),
+        Column(
+          children: [
+            IconButton(
+              onPressed: () =>
+                  {Navigator.of(context).pushReplacementNamed("/home/api")},
+              icon: const Icon(Icons.games),
+            ),
+            const Text("API")
+          ],
         ),
 
         //Pantalla A
-        IconButton(
-          onPressed: () =>
-              {Navigator.of(context).pushReplacementNamed("/home")},
-          icon: const Icon(Icons.abc),
+        Column(
+          children: [
+            IconButton(
+              onPressed: () =>
+                  {Navigator.of(context).pushReplacementNamed("/home")},
+              icon: const Icon(Icons.abc),
+            ),
+            const Text("Placeholder")
+          ],
         ),
       ],
     );
