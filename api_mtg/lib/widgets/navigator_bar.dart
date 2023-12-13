@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class NavigatorBarra extends StatefulWidget {
-  const NavigatorBarra({super.key, required this.title});
+  const NavigatorBarra({
+    super.key,
+    /*required this.title*/
+  });
 
   //Variables por paramentro del widget, se acceden mediante widget.nombre
-  final String title;
+  //final String title;
 
   @override
   State<NavigatorBarra> createState() => _NavigatorBarra();
@@ -34,7 +37,10 @@ class _NavigatorBarra extends State<NavigatorBarra> {
                   {Navigator.of(context).pushReplacementNamed("/home")},
               icon: const Icon(Icons.home),
             ),
-            const Text("Home")
+            const Text(
+              "Home",
+              style: TextStyle(color: Colors.pinkAccent),
+            )
           ],
         ),
 
@@ -46,7 +52,10 @@ class _NavigatorBarra extends State<NavigatorBarra> {
                   {Navigator.of(context).pushReplacementNamed("/home/social")},
               icon: const Icon(Icons.chat_bubble_outline),
             ),
-            const Text("Social")
+            const Text(
+              "Social",
+              style: TextStyle(color: Colors.pinkAccent),
+            )
           ],
         ),
 
@@ -58,7 +67,10 @@ class _NavigatorBarra extends State<NavigatorBarra> {
                   {Navigator.of(context).pushReplacementNamed("/home/api")},
               icon: const Icon(Icons.games),
             ),
-            const Text("API")
+            const Text(
+              "API",
+              style: TextStyle(color: Colors.pinkAccent),
+            )
           ],
         ),
 
@@ -70,7 +82,10 @@ class _NavigatorBarra extends State<NavigatorBarra> {
                   {Navigator.of(context).pushReplacementNamed("/home")},
               icon: const Icon(Icons.abc),
             ),
-            const Text("Placeholder")
+            const Text(
+              "Placeholder",
+              style: TextStyle(color: Colors.pinkAccent),
+            )
           ],
         ),
       ],
