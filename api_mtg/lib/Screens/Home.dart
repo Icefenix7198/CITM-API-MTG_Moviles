@@ -47,9 +47,7 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             const Spacer(),
-            const NavigatorBarra(
-              title: "Name",
-            )
+            const NavigatorBarra(),
           ],
         ),
       ),
