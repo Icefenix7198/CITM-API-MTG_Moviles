@@ -10,6 +10,7 @@ class ApiDataLoadApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(33, 30, 30, 0.965),
       body: FutureBuilder(
         future: apiLoadUsers(),
         builder: (

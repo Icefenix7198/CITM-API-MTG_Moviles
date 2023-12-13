@@ -1,6 +1,7 @@
 import 'package:api_mtg/Model/Users.dart';
 import 'package:api_mtg/widgets/API_Users.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
+//import 'package:api_mtg/widgets/api_users.dart';
 import 'package:api_mtg/widgets/user_list_display.dart';
 import 'package:flutter/material.dart';
 
@@ -57,9 +58,7 @@ class SocialScreen extends StatelessWidget {
                           alignment: Alignment.bottomLeft,
                           child: Text(
                             "Social",
-                            style: TextStyle(
-                                fontSize: 40,
-                                color: Color.fromARGB(255, 246, 244, 244)),
+                            style: TextStyle(fontSize: 50, color: Colors.white),
                           ),
                         ),
                       ),

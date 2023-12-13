@@ -15,7 +15,7 @@ class UserListItem extends StatelessWidget {
       title: Text("${mtgCard.name} ${mtgCard.artist}"),
       subtitle: Text(mtgCard.type),
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(mtgCard.avatarUrl),
+        backgroundImage: NetworkImage(mtgCard.cardImg),
       ),
     );
   }
