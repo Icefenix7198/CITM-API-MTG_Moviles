@@ -22,10 +22,17 @@ class ApiDataLoadApp extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(),
+                  CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
                   Padding(
                     padding: EdgeInsets.all(16),
-                    child: Text("Loading API"),
+                    child: Text(
+                      "Loading API",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                   )
                 ],
               ),

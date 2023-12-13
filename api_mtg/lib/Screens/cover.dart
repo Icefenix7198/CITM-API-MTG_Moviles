@@ -8,7 +8,7 @@ class PortadaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Initial Screen")),
+      //appBar: AppBar(title: const Text("Initial Screen")),
       body: Center(
         child: ElevatedButton(
           child: const Text("Go to New Screen"),

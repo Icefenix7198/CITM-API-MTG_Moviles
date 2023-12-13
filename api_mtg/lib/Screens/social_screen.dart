@@ -48,12 +48,12 @@ class SocialScreen extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: const BoxDecoration(
-                            color: Color.fromARGB(255, 144, 57, 57),
+                            color: Color.fromARGB(255, 201, 83, 81),
                             borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(16),
                                 bottomRight: Radius.circular(16))),
                         child: const Align(
-                          alignment: Alignment.bottomLeft,
+                          alignment: Alignment.centerLeft,
                           child: Text(
                             "Social",
                             style: TextStyle(fontSize: 50, color: Colors.white),

@@ -9,17 +9,37 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Hub")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 201, 83, 81),
+                    ),
+                    child: const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Home",
+                        style: TextStyle(fontSize: 50, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const Spacer(),
             ElevatedButton(
               child: const Text("Go API"),
               onPressed: () {
                 Navigator.of(context).pushNamed("/home/api");
               },
             ),
+            const Spacer(),
             ElevatedButton(
               child: Text("Go to Social"),
               onPressed: () {
