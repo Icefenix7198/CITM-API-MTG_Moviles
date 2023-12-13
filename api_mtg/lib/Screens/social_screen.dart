@@ -1,6 +1,6 @@
 import 'package:api_mtg/Model/Users.dart';
-import 'package:api_mtg/widgets/API_Users.dart';
-import 'package:api_mtg/widgets/UserListDisplay.dart';
+import 'package:api_mtg/widgets/api_users.dart';
+import 'package:api_mtg/widgets/user_list_display.dart';
 import 'package:flutter/material.dart';
 
 class SocialScreen extends StatelessWidget {
@@ -11,7 +11,7 @@ class SocialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(33, 30, 30, 0.965),
+      backgroundColor: const Color.fromRGBO(33, 30, 30, 0.965),
       body: FutureBuilder(
         future: apiLoadUsers(),
         builder: (
@@ -20,7 +20,21 @@ class SocialScreen extends StatelessWidget {
         ) {
           if (!snapshot.hasData) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text(
+                      "Loading API",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )
+                ],
+              ),
             );
           }
           final userList = snapshot.data!;
@@ -32,19 +46,17 @@ class SocialScreen extends StatelessWidget {
                     Expanded(
                       flex: 30,
                       child: Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 144, 57, 57),
                             borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(16),
                                 bottomRight: Radius.circular(16))),
-                        child: Align(
+                        child: const Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
                             "Social",
-                            style: TextStyle(
-                                fontSize: 40,
-                                color: Color.fromARGB(255, 246, 244, 244)),
+                            style: TextStyle(fontSize: 50, color: Colors.white),
                           ),
                         ),
                       ),
@@ -52,21 +64,27 @@ class SocialScreen extends StatelessWidget {
                   ],
                 ),
                 Expanded(
-                  flex: 70,
-                  child: ListView.builder(
-                    itemCount: userList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Column(
-                        children: [
-                          UsersListItem(user: userList[index]),
-                          Divider(
-                            height: 0,
-                            thickness: 0.12,
-                          ),
-                        ],
-                      );
-                    },
+                  flex: 65,
+                  child: Container(
+                    child: ListView.builder(
+                      itemCount: userList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
+                          children: [
+                            UsersListItem(user: userList[index]),
+                            const Divider(
+                              height: 0,
+                              thickness: 0.12,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ),
+                ),
+                Expanded(
+                  flex: 5,
+                  child: Container(),
                 ),
               ],
             ),

@@ -19,7 +19,7 @@ class CardGrid extends StatelessWidget {
         cardColor = Colors.blue;
         break;
       case "B":
-        cardColor = Colors.black;
+        cardColor = const Color.fromARGB(255, 77, 8, 89);
         break;
       case "R":
         cardColor = Colors.red;
@@ -28,7 +28,6 @@ class CardGrid extends StatelessWidget {
         cardColor = Colors.green;
         break;
     }
-
     return cardColor;
   }
 
@@ -38,18 +37,30 @@ class CardGrid extends StatelessWidget {
       itemCount: cardList.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 5,
-        childAspectRatio: 1 / 2,
       ),
       padding: const EdgeInsets.all(20),
       itemBuilder: (context, index) {
         return Card(
           child: Container(
-            color: cardColor(cardList[index]),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              color: cardColor(cardList[index]),
+            ),
             child: Column(
               children: [
-                Image(image: NetworkImage(cardList[index].avatarUrl)),
-                Text(cardList[index].name),
-                Text(cardList[index].artist),
+                Image(image: NetworkImage(cardList[index].cropImg)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FittedBox(
+                        fit: BoxFit.contain, child: Text(cardList[index].name)),
+                    FittedBox(
+                        fit: BoxFit.contain,
+                        child: Text(cardList[index].manaCost)),
+                  ],
+                ),
+                FittedBox(
+                    fit: BoxFit.contain, child: Text(cardList[index].type)),
               ],
             ),
           ),

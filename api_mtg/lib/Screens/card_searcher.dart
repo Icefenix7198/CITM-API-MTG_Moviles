@@ -10,6 +10,7 @@ class ApiDataLoadApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(33, 30, 30, 0.965),
       body: FutureBuilder(
         future: apiLoadUsers(),
         builder: (
@@ -18,11 +19,22 @@ class ApiDataLoadApp extends StatelessWidget {
         ) {
           if (!snapshot.hasData) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text("Loading API"),
+                  )
+                ],
+              ),
             );
           }
           final userList = snapshot.data!;
-          return CardGrid(cardList: userList,);
+          return CardGrid(
+            cardList: userList,
+          );
         },
       ),
     );
