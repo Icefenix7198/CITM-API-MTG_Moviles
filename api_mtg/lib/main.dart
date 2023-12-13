@@ -1,3 +1,4 @@
+import 'package:api_mtg/Screens/card_screen.dart';
 import 'package:api_mtg/Screens/social_screen.dart';
 import 'package:api_mtg/Screens/home.dart';
 import 'package:api_mtg/Screens/cover.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         "/home": (context) => HomeScreen(),
         "/home/api": (_) => ApiDataLoadApp(),
         "/home/social": (context) => SocialScreen(),
+        "/home/api/card": (context) => CardScreen(),
       },
     );
   }

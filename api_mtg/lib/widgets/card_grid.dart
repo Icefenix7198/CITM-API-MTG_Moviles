@@ -12,7 +12,7 @@ class CardGrid extends StatefulWidget {
   @override
   State<CardGrid> createState() => _CardGridState();
 }
-
+//TODO: hacer bonito
 class _CardGridState extends State<CardGrid> {
   @override
   Widget build(BuildContext context) {
@@ -57,30 +57,39 @@ class _CardGridState extends State<CardGrid> {
       ),
       padding: const EdgeInsets.all(20),
       itemBuilder: (context, index) {
-        return Card(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              color: _cardColor(widget.cardList[index]),
-            ),
-            child: Column(
-              children: [
-                Image(image: NetworkImage(widget.cardList[index].cropImg)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    FittedBox(
-                        fit: BoxFit.contain,
-                        child: Text(widget.cardList[index].name)),
-                    FittedBox(
-                        fit: BoxFit.contain,
-                        child: Text(widget.cardList[index].manaCost)),
-                  ],
-                ),
-                FittedBox(
-                    fit: BoxFit.contain,
-                    child: Text(widget.cardList[index].type)),
-              ],
+        return GestureDetector(
+          onTap: () {
+            // Pass card reference
+            Navigator.of(context).pushNamed(
+              "/home/api/card",
+              arguments: widget.cardList[index],
+            );
+          },
+          child: Card(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                color: _cardColor(widget.cardList[index]),
+              ),
+              child: Column(
+                children: [
+                  Image(image: NetworkImage(widget.cardList[index].cropImg)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(widget.cardList[index].name)),
+                      FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(widget.cardList[index].manaCost)),
+                    ],
+                  ),
+                  FittedBox(
+                      fit: BoxFit.contain,
+                      child: Text(widget.cardList[index].type)),
+                ],
+              ),
             ),
           ),
         );
