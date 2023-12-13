@@ -19,11 +19,22 @@ class ApiDataLoadApp extends StatelessWidget {
         ) {
           if (!snapshot.hasData) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text("Loading API"),
+                  )
+                ],
+              ),
             );
           }
           final userList = snapshot.data!;
-          return CardGrid(cardList: userList,);
+          return CardGrid(
+            cardList: userList,
+          );
         },
       ),
     );

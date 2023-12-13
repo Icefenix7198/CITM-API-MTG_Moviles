@@ -11,6 +11,7 @@ class SocialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(33, 30, 30, 0.965),
       body: FutureBuilder(
         future: apiLoadUsers(),
         builder: (
@@ -19,7 +20,21 @@ class SocialScreen extends StatelessWidget {
         ) {
           if (!snapshot.hasData) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text(
+                      "Loading API",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )
+                ],
+              ),
             );
           }
           final userList = snapshot.data!;
@@ -31,9 +46,13 @@ class SocialScreen extends StatelessWidget {
                     Expanded(
                       flex: 30,
                       child: Container(
-                        padding: EdgeInsets.all(8),
-                        color: Color.fromARGB(255, 141, 86, 50),
-                        child: Align(
+                        padding: const EdgeInsets.all(10),
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 144, 57, 57),
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(16),
+                                bottomRight: Radius.circular(16))),
+                        child: const Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
                             "Social",
@@ -45,13 +64,27 @@ class SocialScreen extends StatelessWidget {
                   ],
                 ),
                 Expanded(
-                  flex: 70,
-                  child: ListView.builder(
-                    itemCount: userList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return UsersListItem(user: userList[index]);
-                    },
+                  flex: 65,
+                  child: Container(
+                    child: ListView.builder(
+                      itemCount: userList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
+                          children: [
+                            UsersListItem(user: userList[index]),
+                            const Divider(
+                              height: 0,
+                              thickness: 0.12,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ),
+                ),
+                Expanded(
+                  flex: 5,
+                  child: Container(),
                 ),
               ],
             ),
