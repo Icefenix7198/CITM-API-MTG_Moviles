@@ -66,21 +66,27 @@ class SocialScreen extends StatelessWidget {
                   ],
                 ),
                 Expanded(
-                  flex: 70,
-                  child: ListView.builder(
-                    itemCount: userList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Column(
-                        children: [
-                          UsersListItem(user: userList[index]),
-                          const Divider(
-                            height: 0,
-                            thickness: 0.12,
-                          ),
-                        ],
-                      );
-                    },
+                  flex: 65,
+                  child: Container(
+                    child: ListView.builder(
+                      itemCount: userList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
+                          children: [
+                            UsersListItem(user: userList[index]),
+                            const Divider(
+                              height: 0,
+                              thickness: 0.12,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ),
+                ),
+                Expanded(
+                  flex: 5,
+                  child: Container(),
                 ),
               ],
             ),
