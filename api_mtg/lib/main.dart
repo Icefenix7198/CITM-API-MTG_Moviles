@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        "/": (context) => PortadaScreen(),
-        "/home": (context) => HomeScreen(),
-        "/home/api": (_) => ApiDataLoadApp(),
-        "/home/social": (context) => SocialScreen(),
-        "/home/api/card": (context) => CardScreen(),
+        "/": (context) => const PortadaScreen(),
+        "/home": (context) => const HomeScreen(),
+        "/home/api": (_) => const ApiDataLoadApp(),
+        "/home/social": (context) => const SocialScreen(),
+        "/home/api/card": (context) => const CardScreen(),
       },
     );
   }

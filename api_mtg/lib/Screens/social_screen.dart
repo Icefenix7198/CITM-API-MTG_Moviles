@@ -84,7 +84,9 @@ class SocialScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const NavigatorBarra(),
+                const NavigatorBarra(
+                  actualScreen: NavScreens.social,
+                ),
               ],
             ),
           );

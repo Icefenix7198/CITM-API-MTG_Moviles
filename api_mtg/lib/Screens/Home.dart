@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:api_mtg/widgets/navigator_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -41,13 +42,15 @@ class HomeScreen extends StatelessWidget {
             ),
             const Spacer(),
             ElevatedButton(
-              child: Text("Go to Social"),
+              child: const Text("Go to Social"),
               onPressed: () {
                 Navigator.of(context).pushNamed("/home/social");
               },
             ),
             const Spacer(),
-            const NavigatorBarra(),
+            const NavigatorBarra(
+              actualScreen: NavScreens.home,
+            ),
           ],
         ),
       ),

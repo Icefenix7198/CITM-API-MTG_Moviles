@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 
 class StatelessPlantilla extends StatelessWidget {
@@ -7,7 +8,7 @@ class StatelessPlantilla extends StatelessWidget {
   final String title;
 
   @override
-  Placeholder build(BuildContext context){
+  Placeholder build(BuildContext context) {
     return const Placeholder(); //Aqui dentro va toda la funcion
-    }
+  }
 }

@@ -18,9 +18,9 @@ class UsersListItem extends StatelessWidget {
         style: const TextStyle(color: Colors.white),
       ),
       subtitle: Text(
-        UserStatus(user.status),
+        userStatus(user.status),
         style: TextStyle(
-          color: UserOnline(user.status) == true ? Colors.green : Colors.grey,
+          color: userOnline(user.status) == true ? Colors.green : Colors.grey,
         ),
       ),
       leading: CircleAvatar(
@@ -43,21 +43,21 @@ class UsersListItem extends StatelessWidget {
   }
 }
 
-String UserStatus(String Status) {
+String userStatus(String status) {
   String online = "";
 
-  if (Status == "0") {
+  if (status == "0") {
     online = "Offline";
   }
 
-  if (Status == "1") {
+  if (status == "1") {
     online = "Online";
   }
 
   return online;
 }
 
-bool UserOnline(String isOnline) {
+bool userOnline(String isOnline) {
   bool online = false;
 
   if (isOnline == "0") {

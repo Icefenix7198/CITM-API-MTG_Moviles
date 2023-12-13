@@ -20,7 +20,7 @@ class _ScreenImplementation extends StatefulWidget {
   State<_ScreenImplementation> createState() => __ScreenImplementationState();
 }
 
-//TODO: hacer bonito
+//TO_DO: hacer bonito
 class __ScreenImplementationState extends State<_ScreenImplementation> {
   @override
   Widget build(BuildContext context) {
@@ -50,9 +50,15 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  FittedBox(fit: BoxFit.contain, child: Text("${widget.cardMtg.moneyEUR}€")),
-                  FittedBox(fit: BoxFit.contain, child: Text("${widget.cardMtg.moneyUSD}\$")),
-                  FittedBox(fit: BoxFit.contain, child: Text("${widget.cardMtg.moneyTIX}TIX")),
+                  FittedBox(
+                      fit: BoxFit.contain,
+                      child: Text("${widget.cardMtg.moneyEUR}€")),
+                  FittedBox(
+                      fit: BoxFit.contain,
+                      child: Text("${widget.cardMtg.moneyUSD}\$")),
+                  FittedBox(
+                      fit: BoxFit.contain,
+                      child: Text("${widget.cardMtg.moneyTIX}TIX")),
                 ],
               )
             ],
