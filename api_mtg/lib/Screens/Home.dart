@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ElevatedButton(
-              child: Text("Go API"),
+              child: const Text("Go API"),
               onPressed: () {
                 Navigator.of(context).pushNamed("/home/api");
               },

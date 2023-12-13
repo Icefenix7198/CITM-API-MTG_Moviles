@@ -1,6 +1,6 @@
 import 'package:api_mtg/Model/Users.dart';
-import 'package:api_mtg/widgets/API_Users.dart';
-import 'package:api_mtg/widgets/UserListDisplay.dart';
+import 'package:api_mtg/widgets/api_users.dart';
+import 'package:api_mtg/widgets/user_list_display.dart';
 import 'package:flutter/material.dart';
 
 class SocialScreen extends StatelessWidget {
@@ -11,7 +11,6 @@ class SocialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(33, 30, 30, 0.965),
       body: FutureBuilder(
         future: apiLoadUsers(),
         builder: (
@@ -32,19 +31,13 @@ class SocialScreen extends StatelessWidget {
                     Expanded(
                       flex: 30,
                       child: Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: const BoxDecoration(
-                            color: Color.fromARGB(255, 144, 57, 57),
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(16),
-                                bottomRight: Radius.circular(16))),
+                        padding: EdgeInsets.all(8),
+                        color: Color.fromARGB(255, 141, 86, 50),
                         child: Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
                             "Social",
-                            style: TextStyle(
-                                fontSize: 40,
-                                color: Color.fromARGB(255, 246, 244, 244)),
+                            style: TextStyle(fontSize: 50, color: Colors.white),
                           ),
                         ),
                       ),
@@ -56,15 +49,7 @@ class SocialScreen extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: userList.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Column(
-                        children: [
-                          UsersListItem(user: userList[index]),
-                          Divider(
-                            height: 0,
-                            thickness: 0.12,
-                          ),
-                        ],
-                      );
+                      return UsersListItem(user: userList[index]);
                     },
                   ),
                 ),
