@@ -20,7 +20,21 @@ class SocialScreen extends StatelessWidget {
         ) {
           if (!snapshot.hasData) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text(
+                      "Loading API",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )
+                ],
+              ),
             );
           }
           final userList = snapshot.data!;
