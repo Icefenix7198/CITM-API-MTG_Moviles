@@ -1,5 +1,7 @@
 import 'package:api_mtg/Model/Users.dart';
-import 'package:api_mtg/widgets/api_users.dart';
+import 'package:api_mtg/widgets/API_Users.dart';
+import 'package:api_mtg/widgets/navigator_bar.dart';
+//import 'package:api_mtg/widgets/api_users.dart';
 import 'package:api_mtg/widgets/user_list_display.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +66,7 @@ class SocialScreen extends StatelessWidget {
                   ],
                 ),
                 Expanded(
-                  flex: 65,
+                  flex: 70,
                   child: Container(
                     child: ListView.builder(
                       itemCount: userList.length,
@@ -82,10 +84,7 @@ class SocialScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Expanded(
-                  flex: 5,
-                  child: Container(),
-                ),
+                const NavigatorBarra(),
               ],
             ),
           );
