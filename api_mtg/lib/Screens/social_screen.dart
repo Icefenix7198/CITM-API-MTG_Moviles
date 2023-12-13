@@ -1,6 +1,6 @@
 import 'package:api_mtg/Model/Users.dart';
 import 'package:api_mtg/widgets/API_Users.dart';
-import 'package:api_mtg/widgets/UserListDisplay.dart';
+import 'package:api_mtg/widgets/user_list_display.dart';
 import 'package:flutter/material.dart';
 
 class SocialScreen extends StatelessWidget {
@@ -11,7 +11,7 @@ class SocialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(33, 30, 30, 0.965),
+      backgroundColor: const Color.fromRGBO(33, 30, 30, 0.965),
       body: FutureBuilder(
         future: apiLoadUsers(),
         builder: (
@@ -46,13 +46,13 @@ class SocialScreen extends StatelessWidget {
                     Expanded(
                       flex: 30,
                       child: Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 144, 57, 57),
                             borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(16),
                                 bottomRight: Radius.circular(16))),
-                        child: Align(
+                        child: const Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
                             "Social",
@@ -73,7 +73,7 @@ class SocialScreen extends StatelessWidget {
                       return Column(
                         children: [
                           UsersListItem(user: userList[index]),
-                          Divider(
+                          const Divider(
                             height: 0,
                             thickness: 0.12,
                           ),
