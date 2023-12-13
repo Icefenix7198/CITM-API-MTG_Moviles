@@ -12,7 +12,7 @@ class UsersListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      tileColor: Color.fromARGB(246, 33, 30, 30),
+      tileColor: Color.fromRGBO(33, 30, 30, 0.965),
       title: Text(
         "${user.firstName} ${user.secondName}",
         style: TextStyle(color: Colors.white),
@@ -26,6 +26,11 @@ class UsersListItem extends StatelessWidget {
       leading: CircleAvatar(
         backgroundImage: NetworkImage(user.avatar),
       ),
+      trailing: Icon(
+        Icons.arrow_forward_ios_rounded,
+        color: Colors.white38,
+      ),
+      isThreeLine: true,
     );
   }
 }
