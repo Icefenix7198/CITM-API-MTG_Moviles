@@ -5,11 +5,9 @@ class CardGrid extends StatelessWidget {
   const CardGrid({
     super.key,
     required this.cardList,
-  
   });
 
   final List<MtgCard> cardList;
-  
 
   Color cardColor(MtgCard card) {
     Color cardColor = Colors.yellow;
@@ -40,16 +38,19 @@ class CardGrid extends StatelessWidget {
       itemCount: cardList.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 5,
-        // crossAxisSpacing: 20,
-        // mainAxisSpacing: 20,
+        childAspectRatio: 1 / 2,
       ),
       padding: const EdgeInsets.all(20),
       itemBuilder: (context, index) {
         return Card(
           child: Container(
             color: cardColor(cardList[index]),
-            child: Center(
-              child: Text("${cardList[index].name} ${cardList[index].artist}"),
+            child: Column(
+              children: [
+                Image(image: NetworkImage(cardList[index].avatarUrl)),
+                Text(cardList[index].name),
+                Text(cardList[index].artist),
+              ],
             ),
           ),
         );
