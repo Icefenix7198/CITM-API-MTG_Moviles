@@ -21,7 +21,7 @@ class MtgCard {
         colors = json["colors"][0],
         artist = json["artist"],
         rules = json["oracle_text"],
-        cardImg = json["image_uris"]["large"],
+        cardImg = json["image_uris"]["border_crop"],
         cropImg = json["image_uris"]["art_crop"],
         moneyUSD = double.parse(json["prices"]["usd"]),
         moneyEUR = double.parse(json["prices"]["eur"]),
