@@ -27,7 +27,7 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 49, 49, 49),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(5.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -55,20 +55,28 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
                 color: Colors.white,
               ),
             ),
-            Image(image: NetworkImage(widget.cardMtg.cardImg)),
-            Container(
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 189, 187, 187)),
-              child: Text(
-                "Oracle:\n ${widget.cardMtg.rules}",
-                style: const TextStyle(color: Colors.white),
+            Image(
+              image: NetworkImage(widget.cardMtg.cardImg),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 189, 187, 187)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Oracle:\n ${widget.cardMtg.rules}",
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text("Price: "),
                     FittedBox(

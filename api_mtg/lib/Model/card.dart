@@ -26,4 +26,19 @@ class MtgCard {
         moneyUSD = double.parse(json["prices"]["usd"]),
         moneyEUR = double.parse(json["prices"]["eur"]),
         moneyTIX = double.parse(json["prices"]["tix"]);
+  
+  Map<String, dynamic> toJson() => {
+        "name":name,
+        "type_line":type,
+        "mana_cost":manaCost,
+        "cmc":convManaCost,
+        "colors":colors,
+        "artist":artist,
+        "oracle_text":rules,
+        "image_uris":cardImg,
+        "crop_image_uris":cropImg,
+        "USD":moneyUSD,
+        "EUR":moneyEUR,//TODO: wip
+        "TIX":moneyTIX,
+  };
 }
