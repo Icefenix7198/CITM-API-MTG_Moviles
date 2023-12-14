@@ -17,15 +17,18 @@ class NavigatorBarra extends StatefulWidget {
 
 class _NavigatorBarra extends State<NavigatorBarra> {
   //Parametros de la propia funcion
-  int counter = 0;
 
   // ignore: non_constant_identifier_names
   void ActualizarEstado() {
     setState(() {});
   }
 
+  NavScreens? pants;
+
   @override
   Widget build(BuildContext context) {
+    pants = widget.actualScreen;
+    if (pants == 0) {}
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -74,7 +77,9 @@ class _NavigatorBarra extends State<NavigatorBarra> {
                 if (widget.actualScreen != NavScreens.colection)
                   {Navigator.of(context).pushReplacementNamed("/home/api")}
               },
-              icon: const Icon(Icons.games_outlined),
+              icon: const Icon(
+                Icons.content_copy_sharp,
+              ),
             ),
             const Text(
               "API",
