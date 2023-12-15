@@ -1,6 +1,10 @@
 import 'package:api_mtg/Model/card.dart';
 import 'package:flutter/material.dart';
 
+const double cardWidth = 200;
+const double cardHeight = 200;
+const double cardPadding = 20;
+
 class CardGrid extends StatefulWidget {
   const CardGrid({
     super.key,
@@ -19,11 +23,8 @@ class _CardGridState extends State<CardGrid> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth > 600) {
-          return _gridBuilder(3);
-        } else {
-          return _gridBuilder(2);
-        }
+        double numberCards = constraints.maxWidth / (cardWidth+cardPadding);
+          return _gridBuilder(numberCards.round());
       },
     );
   }
@@ -56,7 +57,7 @@ class _CardGridState extends State<CardGrid> {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: axisCount,
       ),
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(cardPadding),
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
@@ -68,6 +69,8 @@ class _CardGridState extends State<CardGrid> {
           },
           child: Card(
             child: Container(
+              width: cardWidth,
+              height: cardHeight, 
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 color: _cardColor(widget.cardList[index]),
