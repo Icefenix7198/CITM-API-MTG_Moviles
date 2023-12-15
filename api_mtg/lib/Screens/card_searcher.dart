@@ -1,5 +1,6 @@
 import 'package:api_mtg/widgets/Card_grid.dart';
 import 'package:api_mtg/widgets/api_load.dart';
+import 'package:api_mtg/widgets/navigator_bar.dart';
 //import 'package:api_mtg/widgets/card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:api_mtg/Model/card.dart';
@@ -17,6 +18,7 @@ class ApiDataLoadApp extends StatelessWidget {
           BuildContext context,
           AsyncSnapshot<List<MtgCard>> snapshot,
         ) {
+          //Builder
           if (!snapshot.hasData) {
             return const Center(
               child: Column(

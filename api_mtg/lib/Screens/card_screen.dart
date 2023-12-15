@@ -95,7 +95,7 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
                   child: Text("Artist:\n ${widget.cardMtg.artist}"),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
