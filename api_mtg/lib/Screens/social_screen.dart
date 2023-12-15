@@ -43,45 +43,96 @@ class SocialScreen extends StatelessWidget {
           return Center(
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 30,
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: const BoxDecoration(
-                            color: Color.fromARGB(255, 201, 83, 81),
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(16),
-                                bottomRight: Radius.circular(16))),
-                        child: const Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Social",
-                            style: TextStyle(fontSize: 50, color: Colors.white),
+                Expanded(
+                  flex: 8,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(16),
+                                  bottomRight: Radius.circular(16))),
+                          child: const Align(
+                            alignment: Alignment.centerLeft,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text(
+                                "My Chats",
+                                style:
+                                    TextStyle(fontSize: 40, color: Colors.white),
+                              ),
+                            ),
                           ),
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 8,
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    child: Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 102, 101, 101),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular((16)))),
+                        child: Row(
+                          children: [
+                            const Spacer(flex: 2,),
+                            Expanded(
+                              flex: 10,
+                              child: Container(
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: Icon(Icons.search_rounded,
+                                        size: 40, color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 80,
+                              child: Container(
+                                padding: EdgeInsets.all(13),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: Text(
+                                      "Search Contacts",
+                                      style: TextStyle(fontSize: 20, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ],
+                  ),
                 ),
                 Expanded(
                   flex: 70,
-                  child: Container(
-                    child: ListView.builder(
-                      itemCount: userList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Column(
-                          children: [
-                            UsersListItem(user: userList[index]),
-                            const Divider(
-                              height: 0,
-                              thickness: 0.12,
-                            ),
-                          ],
-                        );
-                      },
-                    ),
+                  child: ListView.builder(
+                    itemCount: userList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Column(
+                        children: [
+                          UsersListItem(user: userList[index]),
+                          const Divider(
+                            height: 0,
+                            thickness: 0.12,
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
                 const NavigatorBarra(
