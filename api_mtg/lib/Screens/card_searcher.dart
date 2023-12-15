@@ -41,8 +41,39 @@ class ApiDataLoadApp extends StatelessWidget {
             );
           }
           final userList = snapshot.data!;
-          return CardGrid(
-            cardList: userList,
+          return Center(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 10,
+                      child: Container(
+                        padding: const EdgeInsets.all(10.0),
+                        color: Colors.orange,
+                        child: const Text(
+                          "Collection",
+                          style: TextStyle(
+                            fontSize: 50,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  flex: 70,
+                  child: Container(
+                    child: CardGrid(
+                      cardList: userList,
+                    ),
+                  ),
+                ),
+                const NavigatorBarra(
+                  actualScreen: NavScreens.colection,
+                )
+              ],
+            ),
           );
         },
       ),
