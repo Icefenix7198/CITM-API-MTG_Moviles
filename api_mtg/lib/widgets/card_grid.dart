@@ -23,8 +23,8 @@ class _CardGridState extends State<CardGrid> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        double numberCards = constraints.maxWidth / (cardWidth+cardPadding);
-          return _gridBuilder(numberCards.round());
+        double numberCards = constraints.maxWidth / (cardWidth + cardPadding);
+        return _gridBuilder(numberCards.round());
       },
     );
   }
@@ -70,7 +70,7 @@ class _CardGridState extends State<CardGrid> {
           child: Card(
             child: Container(
               width: cardWidth,
-              height: cardHeight, 
+              height: cardHeight,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 color: _cardColor(widget.cardList[index]),
@@ -81,17 +81,20 @@ class _CardGridState extends State<CardGrid> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text(widget.cardList[index].name)),
-                      FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text(widget.cardList[index].manaCost)),
+                      Text(
+                        widget.cardList[index].name,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        widget.cardList[index].manaCost,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ],
                   ),
-                  FittedBox(
-                      fit: BoxFit.contain,
-                      child: Text(widget.cardList[index].type)),
+                  Text(
+                    widget.cardList[index].type,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ),

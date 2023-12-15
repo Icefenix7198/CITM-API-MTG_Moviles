@@ -1,11 +1,23 @@
 import 'package:api_mtg/Model/card.dart';
 import 'package:flutter/material.dart';
 
-class CardScreen extends StatelessWidget {
+class CardScreen extends StatefulWidget {
   const CardScreen({super.key});
 
   @override
+  State<CardScreen> createState() => _CardScreenState();
+}
+
+class _CardScreenState extends State<CardScreen> {
+  late List<MtgCard> favoriteCards;
+
+  @override
   Widget build(BuildContext context) {
+    /*loadFavoriteList().then((loadedFavoriteList) {
+      setState(() {
+        favoriteCards = loadedFavoriteList;
+      });
+    });*/
     final cardSelected = ModalRoute.of(context)!.settings.arguments as MtgCard;
     return _ScreenImplementation(cardMtg: cardSelected);
   }
@@ -31,22 +43,7 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Align(
-                  child: IconButton(
-                    icon: const Icon(Icons.close, color: Colors.grey),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                ),
-                const Align(
-                  child: Icon(Icons.bookmark_add_outlined,
-                      color: Colors.red), //TODO: functional
-                )
-              ],
-            ),
+            const _Header(),
             Text(
               widget.cardMtg.name,
               style: const TextStyle(
@@ -99,6 +96,32 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Align(
+          child: IconButton(
+            icon: const Icon(Icons.close, color: Colors.grey),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
+        const Align(
+          child: Icon(Icons.bookmark_add_outlined,
+              color: Colors.red), //TODO: functional
+        )
+      ],
     );
   }
 }

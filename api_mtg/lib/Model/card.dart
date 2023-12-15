@@ -1,3 +1,6 @@
+import 'package:path_provider/path_provider.dart';
+import 'dart:convert';
+import 'dart:io';
 
 class MtgCard {
   String name;
@@ -26,19 +29,34 @@ class MtgCard {
         moneyUSD = double.parse(json["prices"]["usd"]),
         moneyEUR = double.parse(json["prices"]["eur"]),
         moneyTIX = double.parse(json["prices"]["tix"]);
-  
+
   Map<String, dynamic> toJson() => {
-        "name":name,
-        "type_line":type,
-        "mana_cost":manaCost,
-        "cmc":convManaCost,
-        "colors":colors,
-        "artist":artist,
-        "oracle_text":rules,
-        "image_uris":cardImg,
-        "crop_image_uris":cropImg,
-        "USD":moneyUSD,
-        "EUR":moneyEUR,//TODO: wip
-        "TIX":moneyTIX,
-  };
+        "name": name,
+        "type_line": type,
+        "mana_cost": manaCost,
+        "cmc": convManaCost,
+        "colors": colors,
+        "artist": artist,
+        "oracle_text": rules,
+        "image_uris": cardImg,
+        "crop_image_uris": cropImg,
+        "usd": moneyUSD,
+        "eur": moneyEUR, 
+        "tix": moneyTIX,
+      };
+}
+
+Future<void> saveFavortieList(List<MtgCard> favoriteList) async {
+  //final dir = await getApplicationDocumentsDirectory();
+  final jsonList = jsonEncode(favoriteList);
+  final file = File("${Directory.current.path}\\favorite-list.json");
+  await file.writeAsString(jsonList);
+}
+
+Future<List<MtgCard>> loadFavoriteList() async {
+  //final dir = await getApplicationDocumentsDirectory();
+  final file = File("${Directory.current.path}\\favorite-list.json");
+  final content = await file.readAsString();
+  final List jsonList = jsonDecode(content);
+  return jsonList.map((favoriteJson) => MtgCard.fromJson(favoriteJson)).toList();
 }
