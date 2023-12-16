@@ -11,32 +11,50 @@ class PortadaScreen extends StatelessWidget {
       //appBar: AppBar(title: const Text("Initial Screen")),
       body: Container(
         color: Colors.black,
-        child: const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("MAGIC",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold)),
-              Align(
-                alignment: Alignment(0, -1.5),
-                child: Text(
-                  "THE GATHERING",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold),
+        child: const Column(
+          children: [
+            Expanded(
+              flex: 50,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "MAGIC",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "THE GATHERING",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 50,
+              child: Align(
+                alignment: Alignment(0, 0.2),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    EnterButton(),
+                    Padding(
+                      padding: EdgeInsets.all(9.0),
+                      child: Text(
+                        "sign in",
+                        style: TextStyle(color: Colors.white, fontSize: 11),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              EnterButton(),
-              Text(
-                "sign in",
-                style: TextStyle(color: Colors.white),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
