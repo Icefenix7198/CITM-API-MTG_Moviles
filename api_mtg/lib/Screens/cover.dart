@@ -61,11 +61,16 @@ class PortadaScreen extends StatelessWidget {
   }
 }
 
-class EnterButton extends StatelessWidget {
+class EnterButton extends StatefulWidget {
   const EnterButton({
     super.key,
   });
 
+  @override
+  State<EnterButton> createState() => _EnterButtonState();
+}
+
+class _EnterButtonState extends State<EnterButton> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
