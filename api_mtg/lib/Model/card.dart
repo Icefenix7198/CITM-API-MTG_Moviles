@@ -47,15 +47,15 @@ class MtgCard {
 }
 
 Future<void> saveFavortieList(List<MtgCard> favoriteList) async {
-  //final dir = await getApplicationDocumentsDirectory();
+  final dir = await getApplicationDocumentsDirectory();
   final jsonList = jsonEncode(favoriteList);
-  final file = File("${Directory.current.path}\\favorite-list.json");
+  final file = File("${dir.absolute.path}\\favorite-list.json");
   await file.writeAsString(jsonList);
 }
 
 Future<List<MtgCard>> loadFavoriteList() async {
-  //final dir = await getApplicationDocumentsDirectory();
-  final file = File("${Directory.current.path}\\favorite-list.json");
+  final dir = await getApplicationDocumentsDirectory();
+  final file = File("${dir.absolute.path}\\favorite-list.json");
   final content = await file.readAsString();
   final List jsonList = jsonDecode(content);
   return jsonList.map((favoriteJson) => MtgCard.fromJson(favoriteJson)).toList();
