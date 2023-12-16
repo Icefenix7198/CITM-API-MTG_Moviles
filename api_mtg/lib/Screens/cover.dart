@@ -7,55 +7,63 @@ class PortadaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
+      backgroundColor: Color.fromRGBO(33, 30, 30, 0.965),
       //appBar: AppBar(title: const Text("Initial Screen")),
-      body: Container(
-        color: const Color.fromARGB(255, 24, 24, 24),
-        child: const Column(
-          children: [
-            Expanded(
-              flex: 50,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "MAGIC",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "THE GATHERING",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+      body: Stack(
+        children: [
+          Align(
+            alignment: Alignment(-0.2, -1),
+            child: Image(
+              image: AssetImage("assets/LogoImage.png"),
             ),
-            Expanded(
-              flex: 50,
-              child: Align(
-                alignment: Alignment(0, 0.2),
+          ),
+          Column(
+            children: [
+              Expanded(
+                flex: 50,
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    EnterButton(),
-                    Padding(
-                      padding: EdgeInsets.all(9.0),
-                      child: Text(
-                        "sign in",
-                        style: TextStyle(color: Colors.white, fontSize: 11),
-                      ),
+                    Text(
+                      "MAGIC",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "THE GATHERING",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
-        ),
+              Expanded(
+                flex: 50,
+                child: Align(
+                  alignment: Alignment(0, 0.2),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      EnterButton(),
+                      Padding(
+                        padding: EdgeInsets.all(9.0),
+                        child: Text(
+                          "sign in",
+                          style: TextStyle(color: Colors.white, fontSize: 11),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
