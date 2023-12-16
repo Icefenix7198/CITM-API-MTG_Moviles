@@ -10,7 +10,7 @@ class PortadaScreen extends StatelessWidget {
     return Scaffold(
       //appBar: AppBar(title: const Text("Initial Screen")),
       body: Container(
-        color: Colors.black,
+        color: const Color.fromARGB(255, 24, 24, 24),
         child: const Column(
           children: [
             Expanded(

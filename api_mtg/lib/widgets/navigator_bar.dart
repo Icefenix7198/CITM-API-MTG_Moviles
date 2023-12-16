@@ -94,7 +94,7 @@ class _NavigatorBarra extends State<NavigatorBarra> {
             IconButton(
               onPressed: () => {
                 if (widget.actualScreen != NavScreens.extra)
-                  {Navigator.of(context).pushReplacementNamed("/home")}
+                  {Navigator.of(context).pushReplacementNamed("/home/user")}
               },
               icon: const Icon(Icons.abc),
             ),
