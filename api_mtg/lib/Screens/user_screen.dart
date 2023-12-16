@@ -1,3 +1,4 @@
+import 'package:api_mtg/widgets/navigator_bar.dart';
 import 'package:flutter/material.dart';
 
 class UserScreen extends StatelessWidget {
@@ -50,6 +51,10 @@ class UserScreen extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          Spacer(),
+          NavigatorBarra(
+            actualScreen: NavScreens.user,
           )
         ],
       ),

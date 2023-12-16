@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum NavScreens { home, social, colection, extra }
+enum NavScreens { home, social, colection, user }
 
 class NavigatorBarra extends StatefulWidget {
   const NavigatorBarra({
@@ -93,7 +93,7 @@ class _NavigatorBarra extends State<NavigatorBarra> {
           children: [
             IconButton(
               onPressed: () => {
-                if (widget.actualScreen != NavScreens.extra)
+                if (widget.actualScreen != NavScreens.user)
                   {Navigator.of(context).pushReplacementNamed("/home/user")}
               },
               icon: const Icon(Icons.abc),
