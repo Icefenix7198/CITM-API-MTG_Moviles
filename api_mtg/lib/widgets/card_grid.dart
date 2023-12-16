@@ -67,7 +67,8 @@ class _CardGridState extends State<CardGrid> {
               arguments: widget.cardList[index],
             );
           },
-          child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Container(
               width: cardWidth,
               height: cardHeight,
@@ -78,19 +79,12 @@ class _CardGridState extends State<CardGrid> {
               child: Column(
                 children: [
                   Image(image: NetworkImage(widget.cardList[index].cropImg)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        widget.cardList[index].name,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        widget.cardList[index].manaCost,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+                  const SizedBox(height: 8),
+                  Text(
+                    widget.cardList[index].name,
+                    overflow: TextOverflow.ellipsis,
                   ),
+                  const SizedBox(height: 5),
                   Text(
                     widget.cardList[index].type,
                     overflow: TextOverflow.ellipsis,
