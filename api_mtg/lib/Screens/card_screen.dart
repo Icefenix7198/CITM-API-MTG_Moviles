@@ -11,6 +11,20 @@ class CardScreen extends StatefulWidget {
 class _CardScreenState extends State<CardScreen> {
   late List<MtgCard> favoriteCards;
 
+  void addCard(MtgCard favCard) {
+    setState(() {
+      favoriteCards.add(favCard);
+    });
+    saveFavortieList(favoriteCards);
+  }
+
+  void deleteCard(MtgCard favCard) {
+    setState(() {
+      favoriteCards.remove(favCard);
+    });
+    saveFavortieList(favoriteCards);
+  }
+  
   @override
   Widget build(BuildContext context) {
     /*loadFavoriteList().then((loadedFavoriteList) {
