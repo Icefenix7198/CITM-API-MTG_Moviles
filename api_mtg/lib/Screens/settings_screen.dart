@@ -12,33 +12,68 @@ class SettingsScreen extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 49, 49, 49),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 40,
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 17, 17, 17),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(16),
-                            bottomRight: Radius.circular(16))),
-                    child: const Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Settings",
-                        style: TextStyle(fontSize: 50, color: Colors.white),
+            //Cuadro negro superior
+            Container(
+              color: Colors.black,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //Flecha hacia atras
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                      alignment: Alignment.topLeft,
+                      onPressed: () => {Navigator.of(context).pop()},
+                      icon: const Icon(
+                        Icons.arrow_back_outlined,
+                        color: Colors.white,
+                        size: 34,
                       ),
                     ),
                   ),
-                ),
-                //Boton Edit Profile
-                const SettingsEditProfileBotton()
-                //Boton Account Managment
-              ],
+                  const Spacer(),
+                  //Nombre settings
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(30.0),
+                      child: Text(
+                        "Settings",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 42,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "",
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
             ),
+
+            //Columna de profile mas cosas
+            const Padding(
+              padding: EdgeInsets.all(14.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //Text profile
+                  Text(
+                    "Profile",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white54,
+                    ),
+                  ),
+                  //Botones varios
+                  SettingsEditProfileBotton(),
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -57,10 +92,26 @@ class SettingsEditProfileBotton extends StatelessWidget {
       padding: EdgeInsets.all(4.0),
       child: Row(
         children: [
-          Icon(Icons.account_circle_outlined),
-          Text("Edit Profile"),
+          Icon(
+            Icons.account_circle_outlined,
+            color: Colors.white,
+          ),
+          Padding(
+            padding: EdgeInsets.all(12.0),
+            child: Text(
+              "Edit Profile",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
           Spacer(),
-          Icon(Icons.arrow_forward_ios_rounded),
+          Icon(
+            Icons.arrow_forward_ios_rounded,
+            color: Colors.white,
+            weight: 100,
+          ),
         ],
       ),
     );

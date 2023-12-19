@@ -20,10 +20,7 @@ class UserScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: IconButton(
                       onPressed: () => {
-                        {
-                          Navigator.of(context)
-                              .pushReplacementNamed("/home/settings")
-                        }
+                        {Navigator.of(context).pushNamed("/home/settings")}
                       },
                       icon: const Icon(Icons.settings, color: Colors.white),
                     ),
