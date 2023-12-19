@@ -1,6 +1,7 @@
 import 'package:api_mtg/Screens/card_screen.dart';
+import 'package:api_mtg/Screens/settings_screen.dart';
 import 'package:api_mtg/Screens/social_screen.dart';
-import 'package:api_mtg/Screens/user_screen.dart'; 
+import 'package:api_mtg/Screens/user_screen.dart';
 import 'package:api_mtg/Screens/home.dart';
 import 'package:api_mtg/Screens/cover.dart';
 import 'package:api_mtg/Screens/card_searcher.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         "/home/social": (context) => const SocialScreen(),
         "/home/api/card": (context) => const CardScreen(),
         "/home/user": (context) => const UserScreen(),
+        "/home/settings": (context) => const SettingsScreen(),
       },
     );
   }

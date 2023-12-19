@@ -88,7 +88,7 @@ class _NavigatorBarra extends State<NavigatorBarra> {
           ],
         ),
 
-        //Pantalla A
+        //Pantalla User
         Column(
           children: [
             IconButton(
@@ -96,10 +96,10 @@ class _NavigatorBarra extends State<NavigatorBarra> {
                 if (widget.actualScreen != NavScreens.user)
                   {Navigator.of(context).pushReplacementNamed("/home/user")}
               },
-              icon: const Icon(Icons.abc),
+              icon: const Icon(Icons.person_outlined),
             ),
             const Text(
-              "Placeholder",
+              "Profile",
               style: TextStyle(color: Colors.pinkAccent),
             )
           ],
