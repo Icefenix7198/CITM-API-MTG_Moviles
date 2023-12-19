@@ -6,56 +6,79 @@ class UserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color.fromRGBO(33, 30, 30, 0.965),
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(246, 10, 10, 10),
       body: Column(
         children: [
-          Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Icon(
-                  Icons.settings,
-                  color: Colors.white60,
-                ),
-              )),
-          Icon(
-            Icons.account_circle,
-            color: Colors.white60,
-            size: 50,
-          ),
-          Text(
-            "Name",
-            style: TextStyle(color: Colors.white),
-          ),
-          Text(
-            "username",
-            style: TextStyle(
-                color: Color.fromARGB(255, 158, 158, 158), fontSize: 12),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          Expanded(
+            flex: 40,
+            child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(right: 20),
-                  child: BoxInfo(
-                    num: 10,
-                    text: "followers",
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: IconButton(
+                      onPressed: () => {
+                        {
+                          Navigator.of(context)
+                              .pushReplacementNamed("/home/settings")
+                        }
+                      },
+                      icon: const Icon(Icons.settings, color: Colors.white),
+                    ),
                   ),
                 ),
-                BoxInfo(
-                  num: 10,
-                  text: "following",
+                const Icon(
+                  Icons.account_circle,
+                  color: Colors.white60,
+                  size: 65,
+                ),
+                const Text(
+                  "Name",
+                  style: TextStyle(color: Colors.white),
+                ),
+                const Text(
+                  "username",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 158, 158, 158), fontSize: 12),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 20),
+                        child: BoxInfo(
+                          num: 10,
+                          text: "followers",
+                        ),
+                      ),
+                      BoxInfo(
+                        num: 10,
+                        text: "following",
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-          Spacer(),
-          NavigatorBarra(
-            actualScreen: NavScreens.user,
-          )
+          Expanded(
+            flex: 60,
+            child: Column(
+              children: [
+                Expanded(
+                    child: Container(
+                  color: const Color.fromARGB(255, 53, 53, 53),
+                )),
+                const NavigatorBarra(
+                  actualScreen: NavScreens.user,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
