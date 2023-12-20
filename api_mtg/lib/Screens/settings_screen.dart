@@ -149,41 +149,119 @@ class SettingsEditProfileBotton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.account_circle_outlined,
-            color: Colors.white,
-          ),
-          const Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Text(
-              "Edit Profile",
-              style: TextStyle(
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.account_circle_outlined,
                 color: Colors.white,
-                fontWeight: FontWeight.w500,
               ),
-            ),
-          ),
-          const Spacer(),
-          IconButton(
-            onPressed: onPressed,
-            icon: open
-                ? const Icon(
-                    Icons.keyboard_arrow_down_rounded,
+              const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Text(
+                  "Edit Profile",
+                  style: TextStyle(
                     color: Colors.white,
-                    weight: 100,
-                  )
-                : const Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: Colors.white,
-                    weight: 100,
+                    fontWeight: FontWeight.w500,
                   ),
+                ),
+              ),
+              const Spacer(),
+              IconButton(
+                onPressed: onPressed,
+                icon: open
+                    ? const Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: Colors.white,
+                        weight: 100,
+                      )
+                    : const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: Colors.white,
+                        weight: 100,
+                      ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        open
+            ? const Text(
+                "Profile Info",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 26,
+                    fontStyle: FontStyle.italic),
+              )
+            : Container(),
+        //Name
+        open
+            ? const Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      "Your Name:",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+                  Spacer(
+                    flex: 1,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Expanded(
+                      flex: 60,
+                      child: SizedBox(
+                        width: 200,
+                        child: TextField(
+                          style: TextStyle(color: Colors.white70, fontSize: 14),
+                          maxLength: 36,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Spacer(
+                    flex: 40,
+                  ),
+                ],
+              )
+            : Container(), //Name
+        open
+            ? const Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      "Username:",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+                  Spacer(
+                    flex: 1,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Expanded(
+                      flex: 60,
+                      child: SizedBox(
+                        width: 200,
+                        child: TextField(
+                          style: TextStyle(color: Colors.white70, fontSize: 14),
+                          maxLength: 25,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Spacer(
+                    flex: 40,
+                  ),
+                ],
+              )
+            : Container(), //usernane
+      ],
     );
   }
 }
@@ -200,41 +278,45 @@ class SettingsAccountManagmentBotton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.manage_accounts_outlined,
-            color: Colors.white,
-          ),
-          const Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Text(
-              "Account Managment",
-              style: TextStyle(
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.manage_accounts_outlined,
                 color: Colors.white,
-                fontWeight: FontWeight.w500,
               ),
-            ),
-          ),
-          const Spacer(),
-          IconButton(
-            onPressed: onPressed,
-            icon: open
-                ? const Icon(
-                    Icons.keyboard_arrow_down_rounded,
+              const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Text(
+                  "Account Managment",
+                  style: TextStyle(
                     color: Colors.white,
-                    weight: 100,
-                  )
-                : const Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: Colors.white,
-                    weight: 100,
+                    fontWeight: FontWeight.w500,
                   ),
+                ),
+              ),
+              const Spacer(),
+              IconButton(
+                onPressed: onPressed,
+                icon: open
+                    ? const Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: Colors.white,
+                        weight: 100,
+                      )
+                    : const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: Colors.white,
+                        weight: 100,
+                      ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
