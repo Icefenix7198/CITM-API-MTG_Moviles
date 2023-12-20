@@ -54,21 +54,21 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const _Header(),
+            const _CardAppBar(),
             Padding(
-              padding: const EdgeInsets.only(bottom: 15.0),
+              padding: const EdgeInsets.only(left: 15, right: 15,bottom: 15.0),
               child: Text(
                 widget.cardMtg.name,
                 style: const TextStyle(
-                  fontSize: 30,
+                  fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
             ),
             SizedBox(
-              height: 475,
-              width: 475,
+              height: 400,
+              width: 400,
               child: FittedBox(
                 child: Image(
                   image: NetworkImage(widget.cardMtg.cardImg),
@@ -104,76 +104,67 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 30, bottom: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Price: ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
-                      ),
-                      FittedBox(
-                        fit: BoxFit.contain,
-                        child: Text(
-                          "${widget.cardMtg.moneyEUR} €",
-                          style: const TextStyle(
+            Padding(
+              padding: const EdgeInsets.only(right:8.0, left: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, bottom: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Price: ",
+                          style: TextStyle(
                             color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
                           ),
                         ),
-                      ),
-                      FittedBox(
+                        FittedBox(
                           fit: BoxFit.contain,
                           child: Text(
-                            "${widget.cardMtg.moneyUSD} \$",
+                            "   ${widget.cardMtg.moneyEUR} €\n   ${widget.cardMtg.moneyUSD} \$\n   ${widget.cardMtg.moneyTIX} TIX",
                             style: const TextStyle(
                               color: Colors.white,
                             ),
-                          )),
-                      FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text(
-                            "${widget.cardMtg.moneyTIX} TIX",
-                            style: const TextStyle(
-                              color: Colors.white,
-                            ),
-                          )),
-                    ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const FittedBox(
-                      fit: BoxFit.contain,
-                      child: Text(
-                        "Artist:",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(
+                            "Artist:",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    FittedBox(
-                      fit: BoxFit.contain,
-                      child: Text(
-                        widget.cardMtg.artist,
-                        style: const TextStyle(
-                          color: Colors.white,
+                        FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(
+                            "   ${widget.cardMtg.artist}",
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -182,8 +173,8 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
   }
 }
 
-class _Header extends StatelessWidget {
-  const _Header();
+class _CardAppBar extends StatelessWidget {
+  const _CardAppBar();
 
   @override
   Widget build(BuildContext context) {
@@ -201,7 +192,7 @@ class _Header extends StatelessWidget {
         const Icon(
           Icons.bookmark_add_outlined,
           color: Colors.red,
-          size:35,
+          size: 35,
         ), //TODO: functional
       ],
     );
