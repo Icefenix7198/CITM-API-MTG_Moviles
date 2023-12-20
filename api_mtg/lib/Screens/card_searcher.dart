@@ -50,11 +50,13 @@ class ApiDataLoadApp extends StatelessWidget {
                       flex: 10,
                       child: Container(
                         padding: const EdgeInsets.all(10.0),
-                        color: Colors.orange,
+                        color: const Color.fromARGB(255, 100, 96, 96),
                         child: const Text(
-                          "Collection",
+                          "Discover",
                           style: TextStyle(
-                            fontSize: 50,
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -63,10 +65,8 @@ class ApiDataLoadApp extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 70,
-                  child: Container(
-                    child: CardGrid(
-                      cardList: userList,
-                    ),
+                  child: CardGrid(
+                    cardList: userList,
                   ),
                 ),
                 const NavigatorBarra(
