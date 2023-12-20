@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         "/home/social": (context) => const SocialScreen(),
         "/home/api/card": (context) => const CardScreen(),
         "/home/user": (context) => const UserScreen(),
-        "/home/settings": (context) => const SettingsScreen(),
+        "/home/settings": (context) => SettingsScreen(),
       },
     );
   }
