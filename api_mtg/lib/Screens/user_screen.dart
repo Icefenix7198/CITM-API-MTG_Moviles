@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:api_mtg/widgets/navigator_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -66,10 +68,13 @@ class UserScreen extends StatelessWidget {
             flex: 60,
             child: Column(
               children: [
+                const SizedBox(height: 40, width: 200,child: TabBarCards(),),
                 Expanded(
-                    child: Container(
-                  color: const Color.fromARGB(255, 53, 53, 53),
-                )),
+                  child: Container(
+                    color: const Color.fromARGB(255, 53, 53, 53),
+                   
+                  ),
+                ),
                 const NavigatorBarra(
                   actualScreen: NavScreens.user,
                 ),
@@ -78,6 +83,47 @@ class UserScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class TabBarCards extends StatefulWidget {
+  const TabBarCards({
+    super.key,
+  });
+
+  @override
+  State<TabBarCards> createState() => _TabBarCardsState();
+}
+
+class _TabBarCardsState extends State<TabBarCards>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(vsync: this, length: 2);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TabBar(
+      controller: _tabController,
+      tabs: const [
+        Tab(
+          text: "Cards",
+        ),
+        Tab(
+          text: "Decks",
+        )
+      ],
     );
   }
 }
