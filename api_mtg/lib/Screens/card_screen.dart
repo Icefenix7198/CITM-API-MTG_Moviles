@@ -24,7 +24,7 @@ class _CardScreenState extends State<CardScreen> {
     });
     saveFavortieList(favoriteCards);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     /*loadFavoriteList().then((loadedFavoriteList) {
@@ -46,64 +46,132 @@ class _ScreenImplementation extends StatefulWidget {
   State<_ScreenImplementation> createState() => __ScreenImplementationState();
 }
 
-//TO_DO: hacer bonito
 class __ScreenImplementationState extends State<_ScreenImplementation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 49, 49, 49),
-      body: Padding(
-        padding: const EdgeInsets.all(5.0),
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const _Header(),
-            Text(
-              widget.cardMtg.name,
-              style: const TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 15.0),
+              child: Text(
+                widget.cardMtg.name,
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
-            Image(
-              image: NetworkImage(widget.cardMtg.cardImg),
+            SizedBox(
+              height: 475,
+              width: 475,
+              child: FittedBox(
+                child: Image(
+                  image: NetworkImage(widget.cardMtg.cardImg),
+                ),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(20.0),
               child: Container(
                 decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 189, 187, 187)),
+                  color: Color.fromARGB(255, 100, 96, 96),
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Oracle:\n ${widget.cardMtg.rules}",
-                    style: const TextStyle(color: Colors.white),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Oracle text: ",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                      Text(
+                        widget.cardMtg.rules,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, bottom: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Price: ",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                      FittedBox(
+                        fit: BoxFit.contain,
+                        child: Text(
+                          "${widget.cardMtg.moneyEUR} €",
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(
+                            "${widget.cardMtg.moneyUSD} \$",
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          )),
+                      FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(
+                            "${widget.cardMtg.moneyTIX} TIX",
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          )),
+                    ],
+                  ),
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Price: "),
+                    const FittedBox(
+                      fit: BoxFit.contain,
+                      child: Text(
+                        "Artist:",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
                     FittedBox(
-                        fit: BoxFit.contain,
-                        child: Text("${widget.cardMtg.moneyEUR}€")),
-                    FittedBox(
-                        fit: BoxFit.contain,
-                        child: Text("${widget.cardMtg.moneyUSD}\$")),
-                    FittedBox(
-                        fit: BoxFit.contain,
-                        child: Text("${widget.cardMtg.moneyTIX}TIX")),
+                      fit: BoxFit.contain,
+                      child: Text(
+                        widget.cardMtg.artist,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ],
-                ),
-                FittedBox(
-                  fit: BoxFit.contain,
-                  child: Text("Artist:\n ${widget.cardMtg.artist}"),
                 ),
               ],
             ),
@@ -115,26 +183,26 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({
-    super.key,
-  });
+  const _Header();
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Align(
-          child: IconButton(
-            icon: const Icon(Icons.close, color: Colors.grey),
-            onPressed: () => Navigator.of(context).pop(),
+        IconButton(
+          icon: const Icon(
+            Icons.close,
+            color: Colors.grey,
+            size: 35,
           ),
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        const Align(
-          child: Icon(Icons.bookmark_add_outlined,
-              color: Colors.red), //TODO: functional
-        )
+        const Icon(
+          Icons.bookmark_add_outlined,
+          color: Colors.red,
+          size:35,
+        ), //TODO: functional
       ],
     );
   }
