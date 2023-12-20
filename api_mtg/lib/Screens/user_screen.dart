@@ -1,3 +1,4 @@
+import 'package:api_mtg/widgets/TabBarCards.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -63,13 +64,26 @@ class UserScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 60,
+            flex: 65,
             child: Column(
               children: [
+                const SizedBox(
+                  height: 40,
+                  width: 200,
+                  child: TabBarCards(
+                    tabs: [
+                      Tab(
+                        text: "Cards",
+                      ),
+                      Tab(text: "Decks"),
+                    ],
+                  ),
+                ),
                 Expanded(
-                    child: Container(
-                  color: const Color.fromARGB(255, 53, 53, 53),
-                )),
+                  child: Container(
+                    color: const Color.fromARGB(255, 53, 53, 53),
+                  ),
+                ),
                 const NavigatorBarra(
                   actualScreen: NavScreens.user,
                 ),
