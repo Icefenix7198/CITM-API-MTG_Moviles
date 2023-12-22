@@ -122,13 +122,14 @@ class _UserScreenDeckState extends State<UserScreenDeck> {
                                                   child: Stack(
                                                     children: [
                                                       Container(
+                                                        padding: EdgeInsets.all(6),
                                                         decoration:
                                                             const BoxDecoration(
                                                                 shape: BoxShape
                                                                     .circle,
                                                                 color: Colors
                                                                     .white),
-                                                        child: Text("${i - 1}"),
+                                                        child: Text("${i - 1}", style: TextStyle(color: Colors.purple),),
                                                       ),
                                                     ],
                                                   ),
