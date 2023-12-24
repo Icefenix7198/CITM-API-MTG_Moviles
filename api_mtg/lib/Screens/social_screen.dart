@@ -104,17 +104,18 @@ class _SearchableListState extends State<_SearchableList> {
                 ),
               ),
               const Expanded(
-                  flex: 30,
-                  child: Icon(
-                    Icons.chat_bubble,
-                    color: Colors.white,
-                    size: 40,
-                  )),
+                flex: 30,
+                child: Icon(
+                  Icons.chat_bubble,
+                  color: Colors.white,
+                  size: 40,
+                ),
+              ),
             ],
           ),
         ),
         Expanded(
-          flex: 8,
+          flex: 10,
           child: Container(
             padding: const EdgeInsets.all(16),
             child: Expanded(
@@ -127,16 +128,14 @@ class _SearchableListState extends State<_SearchableList> {
                     const Spacer(
                       flex: 2,
                     ),
-                    Expanded(
+                    const Expanded(
                       flex: 10,
-                      child: Container(
-                        child: const Align(
-                          alignment: Alignment.center,
-                          child: FittedBox(
-                            fit: BoxFit.contain,
-                            child: Icon(Icons.search_rounded,
-                                size: 40, color: Colors.white),
-                          ),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Icon(Icons.search_rounded,
+                              size: 40, color: Colors.white),
                         ),
                       ),
                     ),
@@ -179,7 +178,7 @@ class _SearchableListState extends State<_SearchableList> {
           ),
         ),
         Expanded(
-          flex: 70,
+          flex: 60,
           child: ListView.builder(
             itemCount: filteredList.length,
             itemBuilder: (BuildContext context, int index) {
