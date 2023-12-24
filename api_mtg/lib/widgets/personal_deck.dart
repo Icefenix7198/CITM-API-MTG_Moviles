@@ -18,26 +18,56 @@ class PersonalDeck extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    child: Image(
-                      image: NetworkImage(ListCards[CardsSelected[0]].cardImg),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Pass card reference
+                      Navigator.of(context).pushNamed(
+                        "/home/api/card",
+                        arguments: ListCards[CardsSelected[0]],
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(4),
+                      child: Image(
+                        image:
+                            NetworkImage(ListCards[CardsSelected[0]].cardImg),
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    child: Image(
-                      image: NetworkImage(ListCards[CardsSelected[1]].cardImg),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Pass card reference
+                      Navigator.of(context).pushNamed(
+                        "/home/api/card",
+                        arguments: ListCards[CardsSelected[1]],
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(4),
+                      child: Image(
+                        image:
+                            NetworkImage(ListCards[CardsSelected[1]].cardImg),
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    child: Image(
-                      image: NetworkImage(ListCards[CardsSelected[2]].cardImg),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Pass card reference
+                      Navigator.of(context).pushNamed(
+                        "/home/api/card",
+                        arguments: ListCards[CardsSelected[2]],
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(4),
+                      child: Image(
+                        image:
+                            NetworkImage(ListCards[CardsSelected[2]].cardImg),
+                      ),
                     ),
                   ),
                 ),
@@ -48,26 +78,56 @@ class PersonalDeck extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    child: Image(
-                      image: NetworkImage(ListCards[CardsSelected[3]].cardImg),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Pass card reference
+                      Navigator.of(context).pushNamed(
+                        "/home/api/card",
+                        arguments: ListCards[CardsSelected[3]],
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(4),
+                      child: Image(
+                        image:
+                            NetworkImage(ListCards[CardsSelected[3]].cardImg),
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    child: Image(
-                      image: NetworkImage(ListCards[CardsSelected[4]].cardImg),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Pass card reference
+                      Navigator.of(context).pushNamed(
+                        "/home/api/card",
+                        arguments: ListCards[CardsSelected[4]],
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(4),
+                      child: Image(
+                        image:
+                            NetworkImage(ListCards[CardsSelected[4]].cardImg),
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    child: Image(
-                      image: NetworkImage(ListCards[CardsSelected[5]].cardImg),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Pass card reference
+                      Navigator.of(context).pushNamed(
+                        "/home/api/card",
+                        arguments: ListCards[CardsSelected[5]],
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(4),
+                      child: Image(
+                        image:
+                            NetworkImage(ListCards[CardsSelected[5]].cardImg),
+                      ),
                     ),
                   ),
                 ),

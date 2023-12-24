@@ -42,9 +42,9 @@ class HomeScreen extends StatelessWidget {
             ),
             const Spacer(),
             ElevatedButton(
-              child: const Text("Go to Social"),
+              child: const Text("Go to Personal Deck"),
               onPressed: () {
-                Navigator.of(context).pushNamed("/home/social");
+                Navigator.of(context).pushNamed("/home/user/deck");
               },
             ),
             const Spacer(),
