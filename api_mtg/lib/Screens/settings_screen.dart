@@ -110,6 +110,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   SettingsAccountManagmentBotton(
                     open: openedOption == SettingsMenus.accountManagment,
+                    settings: widget.settings,
                     onPressed: () {
                       setState(() {
                         openedOption =
@@ -121,6 +122,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   SettingsVisibilityBotton(
                     open: openedOption == SettingsMenus.visibility,
+                    settings: widget.settings,
+                    update: () {
+                      setState(() {
+                        widget.settings["darkMode"] =
+                            !widget.settings["darkMode"];
+                      });
+                    },
                     onPressed: () {
                       setState(() {
                         openedOption = openedOption == SettingsMenus.visibility
@@ -129,6 +137,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       });
                     },
                   ),
+
                   SettingsNotificationsBotton(
                     open: openedOption == SettingsMenus.notifications,
                     onPressed: () {
@@ -248,7 +257,8 @@ class SettingsEditProfileBotton extends StatelessWidget {
                               fontSize: 14),
                           maxLength: 36,
                           onSubmitted: (text) {
-                            //El name de settings se vuelve lo que pongamos;
+                            //El name de settings se vuelve lo que pongamos
+                            settings["name"] = text;
                           },
                         ),
                       ),
@@ -291,7 +301,8 @@ class SettingsEditProfileBotton extends StatelessWidget {
                               fontSize: 14),
                           maxLength: 25,
                           onSubmitted: (text) {
-                            //El name de settings se vuelve lo que pongamos;
+                            //El username de settings se vuelve lo que pongamos;
+                            settings["username"] = text;
                           },
                         ),
                       ),
@@ -309,14 +320,16 @@ class SettingsEditProfileBotton extends StatelessWidget {
 }
 
 class SettingsAccountManagmentBotton extends StatelessWidget {
-  const SettingsAccountManagmentBotton({
+  SettingsAccountManagmentBotton({
     super.key,
     required this.open,
     required this.onPressed,
+    required this.settings,
   });
 
   final bool open;
   final void Function() onPressed;
+  Map<String, dynamic> settings;
 
   @override
   Widget build(BuildContext context) {
@@ -363,53 +376,76 @@ class SettingsAccountManagmentBotton extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class SettingsVisibilityBotton extends StatelessWidget {
-  const SettingsVisibilityBotton({
+  SettingsVisibilityBotton({
     super.key,
     required this.open,
     required this.onPressed,
+    required this.settings,
+    required this.update,
   });
 
   final bool open;
+  final void Function() update;
   final void Function() onPressed;
+  Map<String, dynamic> settings;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.remove_red_eye_outlined,
-            color: Colors.white,
-          ),
-          const Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Text(
-              "Visibility",
-              style: TextStyle(
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.remove_red_eye_outlined,
                 color: Colors.white,
-                fontWeight: FontWeight.w500,
               ),
-            ),
-          ),
-          const Spacer(),
-          IconButton(
-            onPressed: onPressed,
-            icon: open
-                ? const Icon(
-                    Icons.keyboard_arrow_down_rounded,
+              Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Text(
+                  "Visibility",
+                  style: TextStyle(
                     color: Colors.white,
-                    weight: 100,
-                  )
-                : const Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: Colors.white,
-                    weight: 100,
+                    fontWeight: FontWeight.w500,
                   ),
+                ),
+              ),
+              const Spacer(),
+              IconButton(
+                onPressed: onPressed,
+                icon: open
+                    ? const Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: Colors.white,
+                        weight: 100,
+                      )
+                    : const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: Colors.white,
+                        weight: 100,
+                      ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        //Texto only open
+        open
+            ? Text(
+                "Visibility Options",
+                style: TextStyle(
+                    color: (settings["darkMode"]) ? Colors.white : Colors.black,
+                    fontSize: 21,
+                    fontStyle: FontStyle.italic),
+              )
+            : Container(),
+        open
+            ? Checkbox(
+                value: settings["darkMode"], onChanged: (value) => {update})
+            : Container(),
+      ],
     );
   }
 }
@@ -426,41 +462,207 @@ class SettingsNotificationsBotton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.notifications_none,
-            color: Colors.white,
-          ),
-          const Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Text(
-              "Notifications",
-              style: TextStyle(
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.notifications_none,
                 color: Colors.white,
-                fontWeight: FontWeight.w500,
               ),
-            ),
-          ),
-          const Spacer(),
-          IconButton(
-            onPressed: onPressed,
-            icon: open
-                ? const Icon(
-                    Icons.keyboard_arrow_down_rounded,
+              const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Text(
+                  "Notifications",
+                  style: TextStyle(
                     color: Colors.white,
-                    weight: 100,
-                  )
-                : const Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: Colors.white,
-                    weight: 100,
+                    fontWeight: FontWeight.w500,
                   ),
+                ),
+              ),
+              const Spacer(),
+              IconButton(
+                onPressed: onPressed,
+                icon: open
+                    ? const Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: Colors.white,
+                        weight: 100,
+                      )
+                    : const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: Colors.white,
+                        weight: 100,
+                      ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
+    );
+  }
+}
+
+class SettingsPlantillaBotton extends StatelessWidget {
+  SettingsPlantillaBotton({
+    super.key,
+    required this.open,
+    required this.onPressed,
+    required this.settings,
+  });
+
+  final bool open;
+  final void Function() onPressed;
+  Map<String, dynamic> settings;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        //Texto base que siempre aparece
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Row(
+            children: [
+              Icon(
+                Icons.account_circle_outlined, //Icono base
+                color: (settings["darkMode"]) ? Colors.white : Colors.black,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "Edit Profile", //Nombre del boton
+                  style: TextStyle(
+                    color: (settings["darkMode"]) ? Colors.white : Colors.black,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              const Spacer(),
+              //Flechita abierto cerrado
+              IconButton(
+                onPressed: onPressed,
+                icon: open
+                    ? Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: (settings["darkMode"])
+                            ? Colors.white
+                            : Colors.black,
+                        weight: 100,
+                      )
+                    : Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: (settings["darkMode"])
+                            ? Colors.white
+                            : Colors.black,
+                        weight: 100,
+                      ),
+              ),
+            ],
+          ),
+        ),
+        //Resto de elementos que solo se han de mostrar si Open = true
+        open
+            ? Text(
+                "Profile Info",
+                style: TextStyle(
+                    color: (settings["darkMode"]) ? Colors.white : Colors.black,
+                    fontSize: 26,
+                    fontStyle: FontStyle.italic),
+              )
+            : Container(),
+        //Name
+        open
+            ? Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Your Name:",
+                      style: TextStyle(
+                          color: (settings["darkMode"])
+                              ? Colors.white
+                              : Colors.black,
+                          fontSize: 20),
+                    ),
+                  ),
+                  const Spacer(
+                    flex: 1,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Expanded(
+                      flex: 60,
+                      child: SizedBox(
+                        width: 200,
+                        child: TextField(
+                          style: TextStyle(
+                              color: (settings["darkMode"])
+                                  ? Colors.white70
+                                  : Colors.black87,
+                              fontSize: 14),
+                          maxLength: 36,
+                          onSubmitted: (text) {
+                            //El name de settings se vuelve lo que pongamos
+                            settings["name"] = text;
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Spacer(
+                    flex: 40,
+                  ),
+                ],
+              )
+            : Container(), //Name
+        open
+            ? Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Username:",
+                      style: TextStyle(
+                          color: (settings["darkMode"])
+                              ? Colors.white
+                              : Colors.black,
+                          fontSize: 20),
+                    ),
+                  ),
+                  const Spacer(
+                    flex: 1,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Expanded(
+                      flex: 60,
+                      child: SizedBox(
+                        width: 200,
+                        child: TextField(
+                          style: TextStyle(
+                              color: (settings["darkMode"])
+                                  ? Colors.white70
+                                  : Colors.black87,
+                              fontSize: 14),
+                          maxLength: 25,
+                          onSubmitted: (text) {
+                            //El username de settings se vuelve lo que pongamos;
+                            settings["username"] = text;
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Spacer(
+                    flex: 40,
+                  ),
+                ],
+              )
+            : Container(), //usernane
+      ],
     );
   }
 }
