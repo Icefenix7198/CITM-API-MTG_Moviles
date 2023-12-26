@@ -9,6 +9,7 @@ enum SettingsMenus {
   notifications,
 }
 
+// ignore: must_be_immutable
 class SettingsScreen extends StatefulWidget {
   SettingsScreen({
     super.key,
@@ -26,7 +27,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 49, 49, 49),
+      backgroundColor: (widget.settings["darkMode"])
+          ? const Color.fromARGB(255, 49, 49, 49)
+          : const Color.fromARGB(255, 223, 223, 223),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -34,7 +37,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             //Cuadro negro superior
             Container(
-              color: Colors.black,
+              color:
+                  (widget.settings["darkMode"]) ? Colors.black : Colors.white,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -44,22 +48,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     child: IconButton(
                       alignment: Alignment.topLeft,
                       onPressed: () => {Navigator.of(context).pop()},
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.arrow_back_outlined,
-                        color: Colors.white,
+                        color: (widget.settings["darkMode"])
+                            ? Colors.white
+                            : Colors.black,
                         size: 34,
                       ),
                     ),
                   ),
                   const Spacer(),
                   //Nombre settings
-                  const Center(
+                  Center(
                     child: Padding(
-                      padding: EdgeInsets.all(30.0),
+                      padding: const EdgeInsets.all(30.0),
                       child: Text(
                         "Settings",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: (widget.settings["darkMode"])
+                              ? Colors.white54
+                              : Colors.black54,
                           fontSize: 42,
                           fontWeight: FontWeight.bold,
                           fontFamily: "",
@@ -79,16 +87,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //Text profile
-                  const Text(
+                  Text(
                     "Profile",
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.white54,
+                      color: (widget.settings["darkMode"])
+                          ? Colors.white54
+                          : Colors.black54,
                     ),
                   ),
                   //Botones varios
                   SettingsEditProfileBotton(
                     open: openedOption == SettingsMenus.editProfile,
+                    settings: widget.settings,
                     onPressed: () {
                       setState(() {
                         openedOption = openedOption == SettingsMenus.editProfile
@@ -139,15 +150,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
+// ignore: must_be_immutable
 class SettingsEditProfileBotton extends StatelessWidget {
   SettingsEditProfileBotton({
     super.key,
     required this.open,
     required this.onPressed,
+    required this.settings,
   });
 
   final bool open;
   final void Function() onPressed;
+  Map<String, dynamic> settings;
 
   @override
   Widget build(BuildContext context) {
@@ -157,16 +171,16 @@ class SettingsEditProfileBotton extends StatelessWidget {
           padding: const EdgeInsets.all(4.0),
           child: Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.account_circle_outlined,
-                color: Colors.white,
+                color: (settings["darkMode"]) ? Colors.white : Colors.black,
               ),
-              const Padding(
-                padding: EdgeInsets.all(12.0),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "Edit Profile",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: (settings["darkMode"]) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -175,14 +189,18 @@ class SettingsEditProfileBotton extends StatelessWidget {
               IconButton(
                 onPressed: onPressed,
                 icon: open
-                    ? const Icon(
+                    ? Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: Colors.white,
+                        color: (settings["darkMode"])
+                            ? Colors.white
+                            : Colors.black,
                         weight: 100,
                       )
-                    : const Icon(
+                    : Icon(
                         Icons.arrow_forward_ios_rounded,
-                        color: Colors.white,
+                        color: (settings["darkMode"])
+                            ? Colors.white
+                            : Colors.black,
                         weight: 100,
                       ),
               ),
@@ -190,10 +208,10 @@ class SettingsEditProfileBotton extends StatelessWidget {
           ),
         ),
         open
-            ? const Text(
+            ? Text(
                 "Profile Info",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: (settings["darkMode"]) ? Colors.white : Colors.black,
                     fontSize: 26,
                     fontStyle: FontStyle.italic),
               )
@@ -202,11 +220,15 @@ class SettingsEditProfileBotton extends StatelessWidget {
         open
             ? Row(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "Your Name:",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: TextStyle(
+                          color: (settings["darkMode"])
+                              ? Colors.white
+                              : Colors.black,
+                          fontSize: 20),
                     ),
                   ),
                   const Spacer(
@@ -219,7 +241,11 @@ class SettingsEditProfileBotton extends StatelessWidget {
                       child: SizedBox(
                         width: 200,
                         child: TextField(
-                          style: TextStyle(color: Colors.white70, fontSize: 14),
+                          style: TextStyle(
+                              color: (settings["darkMode"])
+                                  ? Colors.white70
+                                  : Colors.black87,
+                              fontSize: 14),
                           maxLength: 36,
                           onSubmitted: (text) {
                             //El name de settings se vuelve lo que pongamos;
@@ -237,11 +263,15 @@ class SettingsEditProfileBotton extends StatelessWidget {
         open
             ? Row(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "Username:",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: TextStyle(
+                          color: (settings["darkMode"])
+                              ? Colors.white
+                              : Colors.black,
+                          fontSize: 20),
                     ),
                   ),
                   const Spacer(
@@ -254,7 +284,11 @@ class SettingsEditProfileBotton extends StatelessWidget {
                       child: SizedBox(
                         width: 200,
                         child: TextField(
-                          style: TextStyle(color: Colors.white70, fontSize: 14),
+                          style: TextStyle(
+                              color: (settings["darkMode"])
+                                  ? Colors.white70
+                                  : Colors.black87,
+                              fontSize: 14),
                           maxLength: 25,
                           onSubmitted: (text) {
                             //El name de settings se vuelve lo que pongamos;
