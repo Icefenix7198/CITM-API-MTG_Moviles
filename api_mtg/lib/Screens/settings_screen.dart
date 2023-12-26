@@ -12,8 +12,10 @@ enum SettingsMenus {
 class SettingsScreen extends StatefulWidget {
   SettingsScreen({
     super.key,
+    required this.settings,
   });
 
+  Map<String, dynamic> settings;
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
@@ -198,16 +200,16 @@ class SettingsEditProfileBotton extends StatelessWidget {
             : Container(),
         //Name
         open
-            ? const Row(
+            ? Row(
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
                       "Your Name:",
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
-                  Spacer(
+                  const Spacer(
                     flex: 1,
                   ),
                   Align(
@@ -219,27 +221,30 @@ class SettingsEditProfileBotton extends StatelessWidget {
                         child: TextField(
                           style: TextStyle(color: Colors.white70, fontSize: 14),
                           maxLength: 36,
+                          onSubmitted: (text) {
+                            //El name de settings se vuelve lo que pongamos;
+                          },
                         ),
                       ),
                     ),
                   ),
-                  Spacer(
+                  const Spacer(
                     flex: 40,
                   ),
                 ],
               )
             : Container(), //Name
         open
-            ? const Row(
+            ? Row(
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
                       "Username:",
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
-                  Spacer(
+                  const Spacer(
                     flex: 1,
                   ),
                   Align(
@@ -251,11 +256,14 @@ class SettingsEditProfileBotton extends StatelessWidget {
                         child: TextField(
                           style: TextStyle(color: Colors.white70, fontSize: 14),
                           maxLength: 25,
+                          onSubmitted: (text) {
+                            //El name de settings se vuelve lo que pongamos;
+                          },
                         ),
                       ),
                     ),
                   ),
-                  Spacer(
+                  const Spacer(
                     flex: 40,
                   ),
                 ],

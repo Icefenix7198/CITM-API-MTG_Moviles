@@ -9,12 +9,18 @@ import 'package:api_mtg/Screens/card_searcher.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
+  Map<String, dynamic> settings = {
+    "name": "Name",
+    "username": "Username",
+    "private": false,
+    "darkMode": true,
+  };
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -27,7 +33,9 @@ class MyApp extends StatelessWidget {
         "/home/api/card": (context) => const CardScreen(),
         "/home/user": (context) => const UserScreen(),
         "/home/user/deck": (context) => const UserScreenDeck(),
-        "/home/settings": (context) => SettingsScreen(),
+        "/home/settings": (context) => SettingsScreen(
+              settings: settings,
+            ),
       },
     );
   }
