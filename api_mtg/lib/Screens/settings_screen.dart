@@ -377,7 +377,7 @@ class SettingsAccountManagmentBotton extends StatelessWidget {
 }
 
 // ignore: must_be_immutable
-class SettingsVisibilityBotton extends StatelessWidget {
+class SettingsVisibilityBotton extends StatefulWidget {
   SettingsVisibilityBotton({
     super.key,
     required this.open,
@@ -392,6 +392,12 @@ class SettingsVisibilityBotton extends StatelessWidget {
   Map<String, dynamic> settings;
 
   @override
+  State<SettingsVisibilityBotton> createState() =>
+      _SettingsVisibilityBottonState();
+}
+
+class _SettingsVisibilityBottonState extends State<SettingsVisibilityBotton> {
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -404,19 +410,21 @@ class SettingsVisibilityBotton extends StatelessWidget {
                 color: Colors.white,
               ),
               Padding(
-                padding: EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "Visibility",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: (widget.settings["darkMode"])
+                        ? Colors.white
+                        : Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
               const Spacer(),
               IconButton(
-                onPressed: onPressed,
-                icon: open
+                onPressed: widget.onPressed,
+                icon: widget.open
                     ? const Icon(
                         Icons.keyboard_arrow_down_rounded,
                         color: Colors.white,
@@ -432,25 +440,37 @@ class SettingsVisibilityBotton extends StatelessWidget {
           ),
         ),
         //Texto only open
-        open
+        widget.open
             ? Text(
                 "Visibility Options",
                 style: TextStyle(
-                    color: (settings["darkMode"]) ? Colors.white : Colors.black,
+                    color: (widget.settings["darkMode"])
+                        ? Colors.white
+                        : Colors.black,
                     fontSize: 21,
                     fontStyle: FontStyle.italic),
               )
             : Container(),
-        open
+        widget.open
             ? Checkbox(
-                value: settings["darkMode"], onChanged: (value) => {update})
+                value: widget.settings["darkMode"],
+                onChanged: (value) => {
+                  setState(
+                    () {
+                      bool change = value!;
+                      value = (change) ? true : false;
+                      widget.settings["darkMode"] = value!;
+                    },
+                  )
+                },
+              )
             : Container(),
       ],
     );
   }
 }
 
-class SettingsNotificationsBotton extends StatelessWidget {
+class SettingsNotificationsBotton extends StatefulWidget {
   const SettingsNotificationsBotton({
     super.key,
     required this.open,
@@ -460,6 +480,13 @@ class SettingsNotificationsBotton extends StatelessWidget {
   final bool open;
   final void Function() onPressed;
 
+  @override
+  State<SettingsNotificationsBotton> createState() =>
+      _SettingsNotificationsBottonState();
+}
+
+class _SettingsNotificationsBottonState
+    extends State<SettingsNotificationsBotton> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -484,8 +511,8 @@ class SettingsNotificationsBotton extends StatelessWidget {
               ),
               const Spacer(),
               IconButton(
-                onPressed: onPressed,
-                icon: open
+                onPressed: widget.onPressed,
+                icon: widget.open
                     ? const Icon(
                         Icons.keyboard_arrow_down_rounded,
                         color: Colors.white,
