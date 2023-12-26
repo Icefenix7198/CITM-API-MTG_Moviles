@@ -9,6 +9,13 @@ enum SettingsMenus {
   notifications,
 }
 
+Map<String, dynamic> opciones = {
+  "name": "Name",
+  "username": "Username",
+  "private": false,
+  "darkMode": true,
+};
+
 // ignore: must_be_immutable
 class SettingsScreen extends StatefulWidget {
   SettingsScreen({
@@ -120,15 +127,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       });
                     },
                   ),
+
                   SettingsVisibilityBotton(
                     open: openedOption == SettingsMenus.visibility,
                     settings: widget.settings,
-                    update: () {
-                      setState(() {
-                        widget.settings["darkMode"] =
-                            !widget.settings["darkMode"];
-                      });
-                    },
                     onPressed: () {
                       setState(() {
                         openedOption = openedOption == SettingsMenus.visibility
@@ -149,6 +151,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       });
                     },
                   ),
+
+                  //Languaje grey text
+                  Text(
+                    "Languaje",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: (widget.settings["darkMode"])
+                          ? Colors.white54
+                          : Colors.black54,
+                    ),
+                  ),
+
+                  //Help grey text
+                  Text(
+                    "Help",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: (widget.settings["darkMode"])
+                          ? Colors.white54
+                          : Colors.black54,
+                    ),
+                  ),
                 ],
               ),
             )
@@ -160,7 +184,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 }
 
 // ignore: must_be_immutable
-class SettingsEditProfileBotton extends StatelessWidget {
+class SettingsEditProfileBotton extends StatefulWidget {
   SettingsEditProfileBotton({
     super.key,
     required this.open,
@@ -173,6 +197,12 @@ class SettingsEditProfileBotton extends StatelessWidget {
   Map<String, dynamic> settings;
 
   @override
+  State<SettingsEditProfileBotton> createState() =>
+      _SettingsEditProfileBottonState();
+}
+
+class _SettingsEditProfileBottonState extends State<SettingsEditProfileBotton> {
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -182,32 +212,35 @@ class SettingsEditProfileBotton extends StatelessWidget {
             children: [
               Icon(
                 Icons.account_circle_outlined,
-                color: (settings["darkMode"]) ? Colors.white : Colors.black,
+                color:
+                    (widget.settings["darkMode"]) ? Colors.white : Colors.black,
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  "Edit Profile",
+                  (opciones["darkMode"]) ? "Edit Profile" : "Testeo",
                   style: TextStyle(
-                    color: (settings["darkMode"]) ? Colors.white : Colors.black,
+                    color: (widget.settings["darkMode"])
+                        ? Colors.white
+                        : Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
               const Spacer(),
               IconButton(
-                onPressed: onPressed,
-                icon: open
+                onPressed: widget.onPressed,
+                icon: widget.open
                     ? Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: (settings["darkMode"])
+                        color: (widget.settings["darkMode"])
                             ? Colors.white
                             : Colors.black,
                         weight: 100,
                       )
                     : Icon(
                         Icons.arrow_forward_ios_rounded,
-                        color: (settings["darkMode"])
+                        color: (widget.settings["darkMode"])
                             ? Colors.white
                             : Colors.black,
                         weight: 100,
@@ -216,17 +249,19 @@ class SettingsEditProfileBotton extends StatelessWidget {
             ],
           ),
         ),
-        open
+        widget.open
             ? Text(
                 "Profile Info",
                 style: TextStyle(
-                    color: (settings["darkMode"]) ? Colors.white : Colors.black,
+                    color: (widget.settings["darkMode"])
+                        ? Colors.white
+                        : Colors.black,
                     fontSize: 26,
                     fontStyle: FontStyle.italic),
               )
             : Container(),
         //Name
-        open
+        widget.open
             ? Row(
                 children: [
                   Padding(
@@ -234,7 +269,7 @@ class SettingsEditProfileBotton extends StatelessWidget {
                     child: Text(
                       "Your Name:",
                       style: TextStyle(
-                          color: (settings["darkMode"])
+                          color: (widget.settings["darkMode"])
                               ? Colors.white
                               : Colors.black,
                           fontSize: 20),
@@ -251,14 +286,14 @@ class SettingsEditProfileBotton extends StatelessWidget {
                         width: 200,
                         child: TextField(
                           style: TextStyle(
-                              color: (settings["darkMode"])
+                              color: (widget.settings["darkMode"])
                                   ? Colors.white70
                                   : Colors.black87,
                               fontSize: 14),
                           maxLength: 36,
                           onSubmitted: (text) {
                             //El name de settings se vuelve lo que pongamos
-                            settings["name"] = text;
+                            widget.settings["name"] = text;
                           },
                         ),
                       ),
@@ -270,7 +305,7 @@ class SettingsEditProfileBotton extends StatelessWidget {
                 ],
               )
             : Container(), //Name
-        open
+        widget.open
             ? Row(
                 children: [
                   Padding(
@@ -278,7 +313,7 @@ class SettingsEditProfileBotton extends StatelessWidget {
                     child: Text(
                       "Username:",
                       style: TextStyle(
-                          color: (settings["darkMode"])
+                          color: (widget.settings["darkMode"])
                               ? Colors.white
                               : Colors.black,
                           fontSize: 20),
@@ -295,14 +330,14 @@ class SettingsEditProfileBotton extends StatelessWidget {
                         width: 200,
                         child: TextField(
                           style: TextStyle(
-                              color: (settings["darkMode"])
+                              color: (widget.settings["darkMode"])
                                   ? Colors.white70
                                   : Colors.black87,
                               fontSize: 14),
                           maxLength: 25,
                           onSubmitted: (text) {
                             //El username de settings se vuelve lo que pongamos;
-                            settings["username"] = text;
+                            widget.settings["username"] = text;
                           },
                         ),
                       ),
@@ -319,6 +354,7 @@ class SettingsEditProfileBotton extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class SettingsAccountManagmentBotton extends StatelessWidget {
   SettingsAccountManagmentBotton({
     super.key,
@@ -383,11 +419,9 @@ class SettingsVisibilityBotton extends StatefulWidget {
     required this.open,
     required this.onPressed,
     required this.settings,
-    required this.update,
   });
 
   final bool open;
-  final void Function() update;
   final void Function() onPressed;
   Map<String, dynamic> settings;
 
@@ -405,9 +439,10 @@ class _SettingsVisibilityBottonState extends State<SettingsVisibilityBotton> {
           padding: const EdgeInsets.all(4.0),
           child: Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.remove_red_eye_outlined,
-                color: Colors.white,
+                color:
+                    (widget.settings["darkMode"]) ? Colors.white : Colors.black,
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
@@ -425,14 +460,18 @@ class _SettingsVisibilityBottonState extends State<SettingsVisibilityBotton> {
               IconButton(
                 onPressed: widget.onPressed,
                 icon: widget.open
-                    ? const Icon(
+                    ? Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: Colors.white,
+                        color: (widget.settings["darkMode"])
+                            ? Colors.white
+                            : Colors.black,
                         weight: 100,
                       )
-                    : const Icon(
+                    : Icon(
                         Icons.arrow_forward_ios_rounded,
-                        color: Colors.white,
+                        color: (widget.settings["darkMode"])
+                            ? Colors.white
+                            : Colors.black,
                         weight: 100,
                       ),
               ),
@@ -460,6 +499,7 @@ class _SettingsVisibilityBottonState extends State<SettingsVisibilityBotton> {
                       bool change = value!;
                       value = (change) ? true : false;
                       widget.settings["darkMode"] = value!;
+                      opciones["darkMode"] = value!;
                     },
                   )
                 },
@@ -532,6 +572,7 @@ class _SettingsNotificationsBottonState
   }
 }
 
+// ignore: must_be_immutable
 class SettingsPlantillaBotton extends StatelessWidget {
   SettingsPlantillaBotton({
     super.key,
