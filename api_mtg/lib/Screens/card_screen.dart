@@ -10,19 +10,6 @@ class CardScreen extends StatefulWidget {
 
 class _CardScreenState extends State<CardScreen> {
 
-  void addCard(MtgCard favCard) {
-    setState(() {
-      favoriteCards.add(favCard);
-    });
-    saveFavoriteList(favoriteCards);
-  }
-
-  void deleteCard(MtgCard favCard) {
-    setState(() {
-      favoriteCards.remove(favCard);
-    });
-    saveFavoriteList(favoriteCards);
-  }
 
   @override
   void initState() {
@@ -75,7 +62,7 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
               width: 400,
               child: FittedBox(
                 child: Image(
-                  image: NetworkImage(widget.cardMtg.cardImg),
+                  image: NetworkImage(widget.cardMtg.imageUris.cardImg),
                 ),
               ),
             ),
@@ -130,7 +117,7 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
                         FittedBox(
                           fit: BoxFit.contain,
                           child: Text(
-                            "   ${widget.cardMtg.moneyEUR} €\n   ${widget.cardMtg.moneyUSD} \$\n   ${widget.cardMtg.moneyTIX} TIX",
+                            "   ${widget.cardMtg.prices.eur} €\n   ${widget.cardMtg.prices.usd} \$\n   ${widget.cardMtg.prices.tix} TIX",
                             style: const TextStyle(
                               color: Colors.white,
                             ),

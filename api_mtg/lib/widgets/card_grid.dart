@@ -30,7 +30,7 @@ class _CardGridState extends State<CardGrid> {
 
   Color _cardColor(MtgCard card) {
     Color cardColor = Colors.yellow;
-    switch (card.colors) {
+    switch (card.colors[0]) {
       case "W":
         cardColor = Colors.white;
         break;
@@ -64,6 +64,7 @@ class _CardGridState extends State<CardGrid> {
         return GestureDetector(
           onTap: () {
             // Pass card reference
+            addCard(widget.cardList[index]);
             Navigator.of(context).pushNamed(
               "/home/api/card",
               arguments: widget.cardList[index],
@@ -80,7 +81,7 @@ class _CardGridState extends State<CardGrid> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 5.0),
                     child: Image(
-                        image: NetworkImage(widget.cardList[index].cropImg)),
+                        image: NetworkImage(widget.cardList[index].imageUris.cropImg)),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 5.0),

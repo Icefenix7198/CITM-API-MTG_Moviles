@@ -30,7 +30,7 @@ class PersonalDeck extends StatelessWidget {
                       padding: EdgeInsets.all(4),
                       child: Image(
                         image:
-                            NetworkImage(ListCards[CardsSelected[0]].cardImg),
+                            NetworkImage(ListCards[CardsSelected[0]].imageUris.cardImg),
                       ),
                     ),
                   ),
@@ -48,7 +48,7 @@ class PersonalDeck extends StatelessWidget {
                       padding: EdgeInsets.all(4),
                       child: Image(
                         image:
-                            NetworkImage(ListCards[CardsSelected[1]].cardImg),
+                            NetworkImage(ListCards[CardsSelected[1]].imageUris.cardImg),
                       ),
                     ),
                   ),
@@ -66,7 +66,7 @@ class PersonalDeck extends StatelessWidget {
                       padding: EdgeInsets.all(4),
                       child: Image(
                         image:
-                            NetworkImage(ListCards[CardsSelected[2]].cardImg),
+                            NetworkImage(ListCards[CardsSelected[2]].imageUris.cardImg),
                       ),
                     ),
                   ),
@@ -90,7 +90,7 @@ class PersonalDeck extends StatelessWidget {
                       padding: EdgeInsets.all(4),
                       child: Image(
                         image:
-                            NetworkImage(ListCards[CardsSelected[3]].cardImg),
+                            NetworkImage(ListCards[CardsSelected[3]].imageUris.cardImg),
                       ),
                     ),
                   ),
@@ -108,7 +108,7 @@ class PersonalDeck extends StatelessWidget {
                       padding: EdgeInsets.all(4),
                       child: Image(
                         image:
-                            NetworkImage(ListCards[CardsSelected[4]].cardImg),
+                            NetworkImage(ListCards[CardsSelected[4]].imageUris.cardImg),
                       ),
                     ),
                   ),
@@ -126,7 +126,7 @@ class PersonalDeck extends StatelessWidget {
                       padding: EdgeInsets.all(4),
                       child: Image(
                         image:
-                            NetworkImage(ListCards[CardsSelected[5]].cardImg),
+                            NetworkImage(ListCards[CardsSelected[5]].imageUris.cardImg),
                       ),
                     ),
                   ),

@@ -10,55 +10,105 @@ class MtgCard {
   String artist;
   String manaCost;
   num convManaCost;
-  String colors;
+  List<String> colors;
   String rules;
-  String cardImg;
-  String cropImg;
-  num moneyUSD;
-  num moneyEUR;
-  num moneyTIX;
+  ImageUris imageUris;
+  Prices prices;
 
   MtgCard.fromJson(Map<String, dynamic> json)
       : name = json["name"],
         type = json["type_line"],
         manaCost = json["mana_cost"],
         convManaCost = json["cmc"],
-        colors = json["colors"][0],
+        colors = List<String>.from(json["colors"].map((x) => x)),
         artist = json["artist"],
         rules = json["oracle_text"],
-        cardImg = json["image_uris"]["border_crop"],
-        cropImg = json["image_uris"]["art_crop"],
-        moneyUSD = double.parse(json["prices"]["usd"]),
-        moneyEUR = double.parse(json["prices"]["eur"]),
-        moneyTIX = double.parse(json["prices"]["tix"]);
+        imageUris = ImageUris.fromJson(json["image_uris"]),
+        prices = Prices.fromJson(json["prices"]);
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "type_line": type,
         "mana_cost": manaCost,
         "cmc": convManaCost,
-        "colors": colors,
+        "colors": List<dynamic>.from(colors.map((x) => x)),
         "artist": artist,
         "oracle_text": rules,
-        "image_uris": cardImg,
-        "crop_image_uris": cropImg,
-        "usd": moneyUSD,
-        "eur": moneyEUR, 
-        "tix": moneyTIX,
+        "image_uris": imageUris.toJson(),
+        "prices": prices.toJson(),
       };
 }
 
 Future<void> saveFavoriteList(List<MtgCard> favoriteList) async {
   final dir = await getApplicationDocumentsDirectory();
   final jsonList = jsonEncode(favoriteList);
-  final file = File("${dir.absolute.path}/favorite-list.json");
+  final file = File("${dir.absolute.path}\\favorite-list.json");
   await file.writeAsString(jsonList);
 }
 
 Future<List<MtgCard>> loadFavoriteList() async {
   final dir = await getApplicationDocumentsDirectory();
-  final file = File("${dir.absolute.path}/favorite-list.json");
+  final file = File("${dir.absolute.path}\\favorite-list.json");
   final content = await file.readAsString();
   final List jsonList = jsonDecode(content);
-  return jsonList.map((favoriteJson) => MtgCard.fromJson(favoriteJson)).toList();
+  return jsonList
+      .map((favoriteJson) => MtgCard.fromJson(favoriteJson))
+      .toList();
+}
+
+void addCard(MtgCard favCard) {
+  favoriteCards.add(favCard);
+
+  saveFavoriteList(favoriteCards);
+}
+
+void deleteCard(MtgCard favCard) {
+  favoriteCards.remove(favCard);
+
+  saveFavoriteList(favoriteCards);
+}
+
+
+class ImageUris {
+    String cardImg;
+    String cropImg;
+
+    ImageUris({
+        required this.cardImg,
+        required this.cropImg,
+    });
+
+    factory ImageUris.fromJson(Map<String, dynamic> json) => ImageUris(
+        cardImg: json["border_crop"],
+        cropImg: json["art_crop"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "border_crop": cardImg,
+        "art_crop": cropImg,
+    };
+}
+
+class Prices {
+    num  usd;
+    num  eur;
+    num  tix;
+
+    Prices({
+        required this.usd,
+        required this.eur,
+        required this.tix,
+    });
+
+    factory Prices.fromJson(Map<String, dynamic> json) => Prices(
+        usd: double.parse(json["usd"].toString()),
+        eur: double.parse(json["eur"].toString()),
+        tix: double.parse(json["tix"].toString()),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "usd": usd,
+        "eur": eur,
+        "tix": tix,
+    };
 }
