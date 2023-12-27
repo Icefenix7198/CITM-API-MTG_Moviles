@@ -15,7 +15,7 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  Map<String, dynamic> settings = {
+  final Map<String, dynamic> settings = {
     "name": "Name",
     "username": "Username",
     "private": false,

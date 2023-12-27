@@ -9,29 +9,33 @@ class CardScreen extends StatefulWidget {
 }
 
 class _CardScreenState extends State<CardScreen> {
-  late List<MtgCard> favoriteCards;
 
   void addCard(MtgCard favCard) {
     setState(() {
       favoriteCards.add(favCard);
     });
-    saveFavortieList(favoriteCards);
+    saveFavoriteList(favoriteCards);
   }
 
   void deleteCard(MtgCard favCard) {
     setState(() {
       favoriteCards.remove(favCard);
     });
-    saveFavortieList(favoriteCards);
+    saveFavoriteList(favoriteCards);
+  }
+
+  @override
+  void initState() {
+    loadFavoriteList().then((loadedFavoriteList) {
+      setState(() {
+        favoriteCards = loadedFavoriteList;
+      });
+    });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    /*loadFavoriteList().then((loadedFavoriteList) {
-      setState(() {
-        favoriteCards = loadedFavoriteList;
-      });
-    });*/
     final cardSelected = ModalRoute.of(context)!.settings.arguments as MtgCard;
     return _ScreenImplementation(cardMtg: cardSelected);
   }
@@ -56,7 +60,7 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
           children: [
             const _CardAppBar(),
             Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15,bottom: 15.0),
+              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15.0),
               child: Text(
                 widget.cardMtg.name,
                 style: const TextStyle(
@@ -105,7 +109,7 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right:8.0, left: 8.0),
+              padding: const EdgeInsets.only(right: 8.0, left: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,

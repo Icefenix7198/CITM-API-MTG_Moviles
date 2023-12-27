@@ -2,6 +2,8 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
 import 'dart:io';
 
+List<MtgCard> favoriteCards = [];
+
 class MtgCard {
   String name;
   String type;
@@ -46,16 +48,16 @@ class MtgCard {
       };
 }
 
-Future<void> saveFavortieList(List<MtgCard> favoriteList) async {
+Future<void> saveFavoriteList(List<MtgCard> favoriteList) async {
   final dir = await getApplicationDocumentsDirectory();
   final jsonList = jsonEncode(favoriteList);
-  final file = File("${dir.absolute.path}\\favorite-list.json");
+  final file = File("${dir.absolute.path}/favorite-list.json");
   await file.writeAsString(jsonList);
 }
 
 Future<List<MtgCard>> loadFavoriteList() async {
   final dir = await getApplicationDocumentsDirectory();
-  final file = File("${dir.absolute.path}\\favorite-list.json");
+  final file = File("${dir.absolute.path}/favorite-list.json");
   final content = await file.readAsString();
   final List jsonList = jsonDecode(content);
   return jsonList.map((favoriteJson) => MtgCard.fromJson(favoriteJson)).toList();
