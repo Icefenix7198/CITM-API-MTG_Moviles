@@ -14,6 +14,7 @@ class MtgCard {
   String rules;
   ImageUris imageUris;
   Prices prices;
+  bool isFav;
 
   MtgCard.fromJson(Map<String, dynamic> json)
       : name = json["name"],
@@ -24,7 +25,8 @@ class MtgCard {
         artist = json["artist"],
         rules = json["oracle_text"],
         imageUris = ImageUris.fromJson(json["image_uris"]),
-        prices = Prices.fromJson(json["prices"]);
+        prices = Prices.fromJson(json["prices"]),
+        isFav = json["isFav"] ?? false;
 
   Map<String, dynamic> toJson() => {
         "name": name,
@@ -36,6 +38,7 @@ class MtgCard {
         "oracle_text": rules,
         "image_uris": imageUris.toJson(),
         "prices": prices.toJson(),
+        "isFav": isFav,
       };
 }
 
@@ -58,57 +61,54 @@ Future<List<MtgCard>> loadFavoriteList() async {
 
 void addCard(MtgCard favCard) {
   favoriteCards.add(favCard);
-
   saveFavoriteList(favoriteCards);
 }
 
 void deleteCard(MtgCard favCard) {
-  favoriteCards.remove(favCard);
-
+  favoriteCards.removeWhere((element) => element.name == favCard.name);
   saveFavoriteList(favoriteCards);
 }
 
-
 class ImageUris {
-    String cardImg;
-    String cropImg;
+  String cardImg;
+  String cropImg;
 
-    ImageUris({
-        required this.cardImg,
-        required this.cropImg,
-    });
+  ImageUris({
+    required this.cardImg,
+    required this.cropImg,
+  });
 
-    factory ImageUris.fromJson(Map<String, dynamic> json) => ImageUris(
+  factory ImageUris.fromJson(Map<String, dynamic> json) => ImageUris(
         cardImg: json["border_crop"],
         cropImg: json["art_crop"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "border_crop": cardImg,
         "art_crop": cropImg,
-    };
+      };
 }
 
 class Prices {
-    num  usd;
-    num  eur;
-    num  tix;
+  num usd;
+  num eur;
+  num tix;
 
-    Prices({
-        required this.usd,
-        required this.eur,
-        required this.tix,
-    });
+  Prices({
+    required this.usd,
+    required this.eur,
+    required this.tix,
+  });
 
-    factory Prices.fromJson(Map<String, dynamic> json) => Prices(
+  factory Prices.fromJson(Map<String, dynamic> json) => Prices(
         usd: double.parse(json["usd"].toString()),
         eur: double.parse(json["eur"].toString()),
         tix: double.parse(json["tix"].toString()),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "usd": usd,
         "eur": eur,
         "tix": tix,
-    };
+      };
 }

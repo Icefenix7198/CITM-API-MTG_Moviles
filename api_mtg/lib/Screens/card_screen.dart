@@ -1,5 +1,6 @@
 import 'package:api_mtg/Model/card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CardScreen extends StatefulWidget {
   const CardScreen({super.key});
@@ -12,26 +13,17 @@ class _CardScreenState extends State<CardScreen> {
 
 
   @override
-  void initState() {
-    loadFavoriteList().then((loadedFavoriteList) {
-      setState(() {
-        favoriteCards = loadedFavoriteList;
-      });
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final cardSelected = ModalRoute.of(context)!.settings.arguments as MtgCard;
-    return _ScreenImplementation(cardMtg: cardSelected);
+    return Provider.value(
+      value: cardSelected,
+      child: const _ScreenImplementation(),
+    );
   }
 }
 
 class _ScreenImplementation extends StatefulWidget {
-  const _ScreenImplementation({required this.cardMtg});
-
-  final MtgCard cardMtg;
+  const _ScreenImplementation();
 
   @override
   State<_ScreenImplementation> createState() => __ScreenImplementationState();
@@ -40,6 +32,7 @@ class _ScreenImplementation extends StatefulWidget {
 class __ScreenImplementationState extends State<_ScreenImplementation> {
   @override
   Widget build(BuildContext context) {
+    final MtgCard cardMtg = context.read<MtgCard>();
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 49, 49, 49),
       body: SingleChildScrollView(
@@ -49,7 +42,7 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
             Padding(
               padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15.0),
               child: Text(
-                widget.cardMtg.name,
+                cardMtg.name,
                 style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -62,7 +55,7 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
               width: 400,
               child: FittedBox(
                 child: Image(
-                  image: NetworkImage(widget.cardMtg.imageUris.cardImg),
+                  image: NetworkImage(cardMtg.imageUris.cardImg),
                 ),
               ),
             ),
@@ -87,7 +80,7 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
                         ),
                       ),
                       Text(
-                        widget.cardMtg.rules,
+                        cardMtg.rules,
                         style: const TextStyle(color: Colors.white),
                       ),
                     ],
@@ -117,7 +110,7 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
                         FittedBox(
                           fit: BoxFit.contain,
                           child: Text(
-                            "   ${widget.cardMtg.prices.eur} €\n   ${widget.cardMtg.prices.usd} \$\n   ${widget.cardMtg.prices.tix} TIX",
+                            "   ${cardMtg.prices.eur} €\n   ${cardMtg.prices.usd} \$\n   ${cardMtg.prices.tix} TIX",
                             style: const TextStyle(
                               color: Colors.white,
                             ),
@@ -145,7 +138,7 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
                         FittedBox(
                           fit: BoxFit.contain,
                           child: Text(
-                            "   ${widget.cardMtg.artist}",
+                            "   ${cardMtg.artist}",
                             style: const TextStyle(
                               color: Colors.white,
                             ),
@@ -164,11 +157,17 @@ class __ScreenImplementationState extends State<_ScreenImplementation> {
   }
 }
 
-class _CardAppBar extends StatelessWidget {
+class _CardAppBar extends StatefulWidget {
   const _CardAppBar();
 
   @override
+  State<_CardAppBar> createState() => _CardAppBarState();
+}
+
+class _CardAppBarState extends State<_CardAppBar> {
+  @override
   Widget build(BuildContext context) {
+    final MtgCard cardMtg = context.read<MtgCard>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -176,15 +175,28 @@ class _CardAppBar extends StatelessWidget {
           icon: const Icon(
             Icons.close,
             color: Colors.grey,
-            size: 35,
+            size: 40,
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        const Icon(
-          Icons.bookmark_add_outlined,
-          color: Colors.red,
-          size: 35,
-        ), //TODO: functional
+        IconButton(
+          onPressed: () {
+            setState(() {
+              if (cardMtg.isFav) {
+                cardMtg.isFav = false;
+                deleteCard(cardMtg);
+              } else {
+                cardMtg.isFav = true;
+                addCard(cardMtg);
+              }
+            });
+          },
+          icon: Icon(
+            cardMtg.isFav ? Icons.bookmark_add : Icons.bookmark_add_outlined,
+            color: const Color.fromARGB(255, 187, 41, 30),
+            size: 40,
+          ),
+        ),
       ],
     );
   }

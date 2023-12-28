@@ -1,12 +1,26 @@
 import 'package:api_mtg/widgets/Card_grid.dart';
 import 'package:api_mtg/widgets/api_load.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
-//import 'package:api_mtg/widgets/card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:api_mtg/Model/card.dart';
 
-class ApiDataLoadApp extends StatelessWidget {
+class ApiDataLoadApp extends StatefulWidget {
   const ApiDataLoadApp({super.key});
+
+  @override
+  State<ApiDataLoadApp> createState() => _ApiDataLoadAppState();
+}
+
+class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
+  @override
+  void initState() {
+    loadFavoriteList().then((loadedFavoriteList) {
+      setState(() {
+        favoriteCards = loadedFavoriteList;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +54,14 @@ class ApiDataLoadApp extends StatelessWidget {
               ),
             );
           }
-          final userList = snapshot.data!;
+          final oneList = snapshot.data!;
+          for (int i = 0; i < oneList.length; i++) {
+            for (int j = 0; j < favoriteCards.length; j++) {
+              if (oneList[i].name == favoriteCards[j].name) {
+                oneList[i].isFav = true;
+              }
+            }
+          }
           return Center(
             child: Column(
               children: [
@@ -66,7 +87,7 @@ class ApiDataLoadApp extends StatelessWidget {
                 Expanded(
                   flex: 70,
                   child: CardGrid(
-                    cardList: userList,
+                    cardList: oneList,
                   ),
                 ),
                 const NavigatorBarra(

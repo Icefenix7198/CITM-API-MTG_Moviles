@@ -64,7 +64,6 @@ class _CardGridState extends State<CardGrid> {
         return GestureDetector(
           onTap: () {
             // Pass card reference
-            addCard(widget.cardList[index]);
             Navigator.of(context).pushNamed(
               "/home/api/card",
               arguments: widget.cardList[index],

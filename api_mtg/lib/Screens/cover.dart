@@ -1,7 +1,7 @@
+import 'dart:io';
 import 'package:api_mtg/Model/card.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 
 class PortadaScreen extends StatelessWidget {
   const PortadaScreen({
@@ -102,7 +102,8 @@ class _EnterButtonState extends State<EnterButton> {
         onPressed: () async {
           Navigator.of(context).pushNamed("/home");
           final dir = await getApplicationDocumentsDirectory();
-          final file = File("${dir.absolute.path}/favorite-list.json");//TODO: check if favorite list json exists
+          final file = File(
+              "${dir.absolute.path}/favorite-list.json"); //Check if favorite list json exists, if it does not, create an empty one
           if (!await file.exists()) {
             saveFavoriteList(favoriteCards);
           }
