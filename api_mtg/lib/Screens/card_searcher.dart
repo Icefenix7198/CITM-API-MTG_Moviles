@@ -1,6 +1,7 @@
 import 'package:api_mtg/widgets/Card_grid.dart';
 import 'package:api_mtg/widgets/api_load.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:api_mtg/Model/card.dart';
 
@@ -156,6 +157,10 @@ class _CardFilterState extends State<_CardFilter> {
               ),
             ),
           ),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: PrefetchImageDemo(),
+          ),
           Expanded(
             flex: 70,
             child: CardGrid(
@@ -167,6 +172,50 @@ class _CardFilterState extends State<_CardFilter> {
           )
         ],
       ),
+    );
+  }
+}
+
+class PrefetchImageDemo extends StatefulWidget {
+  const PrefetchImageDemo({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return _PrefetchImageDemoState();
+  }
+}
+
+class _PrefetchImageDemoState extends State<PrefetchImageDemo> {
+  final List<String> images = [
+    "assets/one.jpg",
+    "assets/mom.jpg",
+    "assets/woe.png",
+    "assets/lci.jpg",
+  ];
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      for (var imageUrl in images) {
+        precacheImage(AssetImage(imageUrl), context);
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CarouselSlider.builder(
+      itemCount: images.length,
+      options: CarouselOptions(
+        autoPlay: false,
+        aspectRatio: 2.0,
+        enlargeCenterPage: true,
+      ),
+      itemBuilder: (context, index, realIdx) {
+        return Center(
+            child: Image.asset(images[index], fit: BoxFit.cover, width: 1000));
+      },
     );
   }
 }
