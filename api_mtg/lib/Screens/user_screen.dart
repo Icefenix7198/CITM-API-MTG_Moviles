@@ -84,7 +84,7 @@ class UserScreen extends StatelessWidget {
                     color: const Color.fromARGB(255, 53, 53, 53),
                   ),
                 ),
-                const NavigatorBarra(
+                const NavigatorBar(
                   actualScreen: NavScreens.user,
                 ),
               ],

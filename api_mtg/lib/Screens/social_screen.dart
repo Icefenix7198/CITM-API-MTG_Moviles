@@ -194,7 +194,7 @@ class _SearchableListState extends State<_SearchableList> {
             },
           ),
         ),
-        const NavigatorBarra(
+        const NavigatorBar(
           actualScreen: NavScreens.social,
         ),
       ],

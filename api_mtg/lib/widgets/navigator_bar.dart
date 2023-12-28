@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 enum NavScreens { home, social, colection, user }
 
-class NavigatorBarra extends StatefulWidget {
-  const NavigatorBarra({
+class NavigatorBar extends StatefulWidget {
+  const NavigatorBar({
     super.key,
     this.actualScreen = NavScreens.home,
   });
@@ -12,10 +12,10 @@ class NavigatorBarra extends StatefulWidget {
   final NavScreens actualScreen;
 
   @override
-  State<NavigatorBarra> createState() => _NavigatorBarra();
+  State<NavigatorBar> createState() => _NavigatorBarra();
 }
 
-class _NavigatorBarra extends State<NavigatorBarra> {
+class _NavigatorBarra extends State<NavigatorBar> {
   //Parametros de la propia funcion
 
   // ignore: non_constant_identifier_names

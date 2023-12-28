@@ -62,41 +62,110 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
               }
             }
           }
-          return Center(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 10,
-                      child: Container(
-                        padding: const EdgeInsets.all(10.0),
-                        color: const Color.fromARGB(255, 100, 96, 96),
-                        child: const Text(
-                          "Discover",
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+          return _CardFilter(cardList: oneList);
+        },
+      ),
+    );
+  }
+}
+
+class _CardFilter extends StatefulWidget {
+  const _CardFilter({
+    required this.cardList,
+  });
+  final List<MtgCard> cardList;
+
+  @override
+  State<_CardFilter> createState() => _CardFilterState();
+}
+
+class _CardFilterState extends State<_CardFilter> {
+  final controller = TextEditingController();
+  late List<MtgCard> oneListFiltered;
+
+  @override
+  void initState() {
+    oneListFiltered = List.from(widget.cardList);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                flex: 10,
+                child: Container(
+                  padding: const EdgeInsets.all(20.0),
+                  child: const Text(
+                    "Discover",
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                  ],
-                ),
-                Expanded(
-                  flex: 70,
-                  child: CardGrid(
-                    cardList: oneList,
                   ),
                 ),
-                const NavigatorBarra(
-                  actualScreen: NavScreens.colection,
-                )
-              ],
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 15),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                border: Border.all(
+                  color: Colors.white,
+                  width: 2,
+                ),
+              ),
+              padding: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+              child: Align(
+                alignment: Alignment.center,
+                child: TextField(
+                  controller: controller,
+                  onChanged: (_) {
+                    setState(() {
+                      final search = controller.text.toLowerCase();
+                      oneListFiltered = widget.cardList
+                          .where((cardMtg) =>
+                              cardMtg.name.toLowerCase().contains(search) ||
+                              cardMtg.type.toLowerCase().contains(search))
+                          .toList();
+                    });
+                  },
+                  cursorColor: Colors.white,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    prefixIconColor: Colors.white,
+                    hintText: "Search Cards",
+                    hintStyle:
+                        TextStyle(color: Color.fromARGB(255, 155, 153, 153)),
+                  ),
+                ),
+              ),
             ),
-          );
-        },
+          ),
+          Expanded(
+            flex: 70,
+            child: CardGrid(
+              cardList: oneListFiltered,
+            ),
+          ),
+          const NavigatorBar(
+            actualScreen: NavScreens.colection,
+          )
+        ],
       ),
     );
   }
