@@ -18,7 +18,7 @@ class _UserScreenDeckState extends State<UserScreenDeck> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(33, 30, 30, 0.965),
       body: FutureBuilder(
-        future: apiLoadUsers(),
+        future: apiLoadTSP(),
         builder: (
           BuildContext context,
           AsyncSnapshot<List<MtgCard>> snapshot,

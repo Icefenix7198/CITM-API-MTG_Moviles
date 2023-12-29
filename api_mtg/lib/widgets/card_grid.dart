@@ -16,7 +16,7 @@ class CardGrid extends StatefulWidget {
   State<CardGrid> createState() => _CardGridState();
 }
 
-//TO_DO: hacer bonito
+//TODO: hacer bonito
 class _CardGridState extends State<CardGrid> {
   @override
   Widget build(BuildContext context) {
@@ -30,22 +30,28 @@ class _CardGridState extends State<CardGrid> {
 
   Color _cardColor(MtgCard card) {
     Color cardColor = Colors.yellow;
-    switch (card.colors[0]) {
-      case "W":
-        cardColor = Colors.white;
-        break;
-      case "U":
-        cardColor = Colors.blue;
-        break;
-      case "B":
-        cardColor = const Color.fromARGB(255, 103, 5, 121);
-        break;
-      case "R":
-        cardColor = Colors.red;
-        break;
-      case "G":
-        cardColor = Colors.green;
-        break;
+    if (card.colors.isEmpty) {
+      cardColor = const Color.fromARGB(255, 121, 117, 117);
+    } else if (card.colors.length == 1) {
+      switch (card.colors[0]) {
+        case "W":
+          cardColor = Colors.white;
+          break;
+        case "U":
+          cardColor = Colors.blue;
+          break;
+        case "B":
+          cardColor = const Color.fromARGB(255, 103, 5, 121);
+          break;
+        case "R":
+          cardColor = Colors.red;
+          break;
+        case "G":
+          cardColor = Colors.green;
+          break;
+      }
+    } else {
+      cardColor = const Color.fromARGB(255, 219, 166, 7);
     }
     return cardColor;
   }
@@ -80,7 +86,8 @@ class _CardGridState extends State<CardGrid> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 5.0),
                     child: Image(
-                        image: NetworkImage(widget.cardList[index].imageUris.cropImg)),
+                        image: NetworkImage(
+                            widget.cardList[index].imageUris.cropImg)),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 5.0),

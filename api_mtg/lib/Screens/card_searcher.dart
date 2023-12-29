@@ -17,10 +17,20 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
   void initState() {
     loadFavoriteList().then((loadedFavoriteList) {
       setState(() {
-        favoriteCards = loadedFavoriteList;
+        favoriteCards = loadedFavoriteList; //TODO: poner en home carga api
       });
     });
     super.initState();
+  }
+
+  void checkFavourites(List<MtgCard> collectionList) {
+    for (int i = 0; i < collectionList.length; i++) {
+      for (int j = 0; j < favoriteCards.length; j++) {
+        if (collectionList[i].name == favoriteCards[j].name) {
+          collectionList[i].isFav = true;
+        }
+      }
+    }
   }
 
   @override
@@ -28,10 +38,11 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(33, 30, 30, 0.965),
       body: FutureBuilder(
-        future: apiLoadUsers(),
+        future: Future.wait(
+            [apiLoadTSP(), apiLoadLRW(), apiLoadALA(), apiLoadNPH()]),
         builder: (
           BuildContext context,
-          AsyncSnapshot<List<MtgCard>> snapshot,
+          AsyncSnapshot<List<List<MtgCard>>> snapshot,
         ) {
           //Builder
           if (!snapshot.hasData) {
@@ -55,14 +66,14 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
               ),
             );
           }
-          final oneList = snapshot.data!;
-          for (int i = 0; i < oneList.length; i++) {
-            for (int j = 0; j < favoriteCards.length; j++) {
-              if (oneList[i].name == favoriteCards[j].name) {
-                oneList[i].isFav = true;
-              }
-            }
-          }
+          final oneList = snapshot.data![0];
+          final momList = snapshot.data![1];
+          final listo3 = snapshot.data![2];
+          final listo4 = snapshot.data![3];
+          checkFavourites(oneList);
+          checkFavourites(momList);
+          checkFavourites(listo3);
+          checkFavourites(listo4);
           return _CardFilter(cardList: oneList);
         },
       ),
@@ -120,7 +131,7 @@ class _CardFilterState extends State<_CardFilter> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 15),
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
@@ -157,10 +168,7 @@ class _CardFilterState extends State<_CardFilter> {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: PrefetchImageDemo(),
-          ),
+          const PrefetchImageDemo(),
           Expanded(
             flex: 70,
             child: CardGrid(
@@ -187,10 +195,10 @@ class PrefetchImageDemo extends StatefulWidget {
 
 class _PrefetchImageDemoState extends State<PrefetchImageDemo> {
   final List<String> images = [
-    "assets/one.jpg",
-    "assets/mom.jpg",
-    "assets/woe.png",
-    "assets/lci.jpg",
+    "assets/tsp.png",
+    "assets/lrw.png",
+    "assets/ala.png",
+    "assets/nph.png",
   ];
 
   @override
@@ -208,13 +216,12 @@ class _PrefetchImageDemoState extends State<PrefetchImageDemo> {
     return CarouselSlider.builder(
       itemCount: images.length,
       options: CarouselOptions(
-        autoPlay: false,
-        aspectRatio: 2.0,
         enlargeCenterPage: true,
       ),
       itemBuilder: (context, index, realIdx) {
-        return Center(
-            child: Image.asset(images[index], fit: BoxFit.cover, width: 1000));
+        return SizedBox(
+            width: 600,
+            child: Image.asset(images[index], fit: BoxFit.contain));
       },
     );
   }
