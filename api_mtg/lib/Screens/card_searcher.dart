@@ -66,15 +66,15 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
               ),
             );
           }
-          final oneList = snapshot.data![0];
-          final momList = snapshot.data![1];
-          final listo3 = snapshot.data![2];
-          final listo4 = snapshot.data![3];
-          checkFavourites(oneList);
-          checkFavourites(momList);
-          checkFavourites(listo3);
-          checkFavourites(listo4);
-          return _CardFilter(cardList: oneList);
+          final tspList = snapshot.data![0];
+          final lrwList = snapshot.data![1];
+          final alaList = snapshot.data![2];
+          final nphList = snapshot.data![3];
+          checkFavourites(tspList);
+          checkFavourites(lrwList);
+          checkFavourites(alaList);
+          checkFavourites(nphList);
+          return _CardFilter(cardList: tspList);
         },
       ),
     );
@@ -168,7 +168,7 @@ class _CardFilterState extends State<_CardFilter> {
               ),
             ),
           ),
-          const PrefetchImageDemo(),
+          const CollectionCarousel(),
           Expanded(
             flex: 70,
             child: CardGrid(
@@ -184,16 +184,16 @@ class _CardFilterState extends State<_CardFilter> {
   }
 }
 
-class PrefetchImageDemo extends StatefulWidget {
-  const PrefetchImageDemo({super.key});
+class CollectionCarousel extends StatefulWidget {
+  const CollectionCarousel({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return _PrefetchImageDemoState();
+    return _CollectionCarouselState();
   }
 }
 
-class _PrefetchImageDemoState extends State<PrefetchImageDemo> {
+class _CollectionCarouselState extends State<CollectionCarousel> {
   final List<String> images = [
     "assets/tsp.png",
     "assets/lrw.png",
