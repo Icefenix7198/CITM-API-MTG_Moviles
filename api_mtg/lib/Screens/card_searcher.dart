@@ -23,7 +23,7 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
   void initState() {
     loadFavoriteList().then((loadedFavoriteList) {
       setState(() {
-        favoriteCards = loadedFavoriteList; //TODO: poner en home carga api
+        favoriteCards = loadedFavoriteList; //TODO: poner en home carga api?
       });
     });
     super.initState();
@@ -88,7 +88,8 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
   }
 }
 
-class _CardFilter extends StatefulWidget {
+// ignore: must_be_immutable
+class _CardFilter extends StatefulWidget {//TODO: mirar d'arreglar això
   _CardFilter({
     required this.cardListSearch,
   });
@@ -128,98 +129,9 @@ class _CardFilterState extends State<_CardFilter> {
     return Center(
       child: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 10,
-                child: Container(
-                  padding: const EdgeInsets.all(20.0),
-                  child: const Text(
-                    "Discover",
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2,
-                ),
-              ),
-              padding: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
-              child: Align(
-                alignment: Alignment.center,
-                child: TextField(
-                  controller: controller,
-                  onChanged: (_) {
-                    setState(() {
-                      final search = controller.text.toLowerCase();
-                      listFiltered = widget.cardListSearch
-                          .where((cardMtg) =>
-                              cardMtg.name.toLowerCase().contains(search) ||
-                              cardMtg.type.toLowerCase().contains(search))
-                          .toList();
-                    });
-                  },
-                  cursorColor: Colors.white,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    prefixIconColor: Colors.white,
-                    hintText: "Search Cards",
-                    hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 155, 153, 153)),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          CarouselSlider.builder(
-            itemCount: images.length,
-            options: CarouselOptions(
-              enlargeCenterPage: true,
-            ),
-            itemBuilder: (context, index, realIdx) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    switch (index) {
-                      case 0:
-                        widget.cardListSearch = List.from(tspList);
-                        break;
-                      case 1:
-                        widget.cardListSearch = List.from(lrwList);
-                        break;
-                      case 2:
-                        widget.cardListSearch = List.from(alaList);
-                        break;
-                      case 3:
-                        widget.cardListSearch = List.from(nphList);
-                        break;
-                    }
-                    listFiltered = List.from(widget.cardListSearch);
-                    controller.clear();
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SizedBox(
-                      width: 600,
-                      child: Image.asset(images[index], fit: BoxFit.contain)),
-                ),
-              );
-            },
-          ),
+          const _Header(),
+          searcher(),
+          carousel(),
           Expanded(
             flex: 70,
             child: CardGrid(
@@ -231,6 +143,118 @@ class _CardFilterState extends State<_CardFilter> {
           )
         ],
       ),
+    );
+  }
+
+  Padding searcher() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
+          border: Border.all(
+            color: Colors.white,
+            width: 2,
+          ),
+        ),
+        padding: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+        child: Align(
+          alignment: Alignment.center,
+          child: TextField(
+            controller: controller,
+            onChanged: (_) {
+              setState(() {
+                final search = controller.text.toLowerCase();
+                listFiltered = widget.cardListSearch
+                    .where((cardMtg) =>
+                        cardMtg.name.toLowerCase().contains(search) ||
+                        cardMtg.type.toLowerCase().contains(search))
+                    .toList();
+              });
+            },
+            cursorColor: Colors.white,
+            style: const TextStyle(color: Colors.white),
+            decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.search),
+              prefixIconColor: Colors.white,
+              hintText: "Search Cards",
+              hintStyle: TextStyle(color: Color.fromARGB(255, 155, 153, 153)),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  CarouselSlider carousel() {
+    return CarouselSlider.builder(
+      itemCount: images.length,
+      options: CarouselOptions(
+        enlargeCenterPage: true,
+      ),
+      itemBuilder: (context, index, realIdx) {
+        return GestureDetector(
+          onTap: () {
+            setState(() {
+              switch (index) {
+                case 0:
+                  widget.cardListSearch = List.from(tspList);
+                  break;
+                case 1:
+                  widget.cardListSearch = List.from(lrwList);
+                  break;
+                case 2:
+                  widget.cardListSearch = List.from(alaList);
+                  break;
+                case 3:
+                  widget.cardListSearch = List.from(nphList);
+                  break;
+              }
+              listFiltered = List.from(widget.cardListSearch);
+              controller.clear();
+            });
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Container(
+                width: 600,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 7.5,
+                    color: const Color.fromARGB(255, 97, 94, 94),
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                ),
+                child: Image.asset(images[index], fit: BoxFit.fill)),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 10,
+          child: Container(
+            padding: const EdgeInsets.all(20.0),
+            child: const Text(
+              "Discover",
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
