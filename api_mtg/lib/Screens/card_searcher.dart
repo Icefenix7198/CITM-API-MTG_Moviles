@@ -4,6 +4,13 @@ import 'package:api_mtg/widgets/navigator_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:api_mtg/Model/card.dart';
+import 'package:provider/provider.dart';
+
+List<MtgCard> tspList = [];
+List<MtgCard> lrwList = [];
+List<MtgCard> alaList = [];
+List<MtgCard> nphList = [];
+List<MtgCard> displayedList = [];
 
 class ApiDataLoadApp extends StatefulWidget {
   const ApiDataLoadApp({super.key});
@@ -13,6 +20,8 @@ class ApiDataLoadApp extends StatefulWidget {
 }
 
 class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
+  List<MtgCard> displayedList = [];
+
   @override
   void initState() {
     loadFavoriteList().then((loadedFavoriteList) {
@@ -66,15 +75,19 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
               ),
             );
           }
-          final tspList = snapshot.data![0];
-          final lrwList = snapshot.data![1];
-          final alaList = snapshot.data![2];
-          final nphList = snapshot.data![3];
+          tspList = snapshot.data![0];
+          lrwList = snapshot.data![1];
+          alaList = snapshot.data![2];
+          nphList = snapshot.data![3];
+          displayedList = tspList;
           checkFavourites(tspList);
           checkFavourites(lrwList);
           checkFavourites(alaList);
           checkFavourites(nphList);
-          return _CardFilter(cardList: tspList);
+          return Provider.value(
+            value: displayedList,
+            child: const _CardFilter(),
+          );
         },
       ),
     );
@@ -82,10 +95,7 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
 }
 
 class _CardFilter extends StatefulWidget {
-  const _CardFilter({
-    required this.cardList,
-  });
-  final List<MtgCard> cardList;
+  const _CardFilter();
 
   @override
   State<_CardFilter> createState() => _CardFilterState();
@@ -93,11 +103,12 @@ class _CardFilter extends StatefulWidget {
 
 class _CardFilterState extends State<_CardFilter> {
   final controller = TextEditingController();
-  late List<MtgCard> oneListFiltered;
+  late List<MtgCard> listFiltered;
 
   @override
   void initState() {
-    oneListFiltered = List.from(widget.cardList);
+    List<MtgCard> cardList = context.read<List<MtgCard>>();
+    listFiltered = List.from(cardList);
     super.initState();
   }
 
@@ -109,6 +120,7 @@ class _CardFilterState extends State<_CardFilter> {
 
   @override
   Widget build(BuildContext context) {
+    List<MtgCard> cardList = context.read<List<MtgCard>>();
     return Center(
       child: Column(
         children: [
@@ -130,6 +142,50 @@ class _CardFilterState extends State<_CardFilter> {
               ),
             ],
           ),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    cardList = List.from(tspList);
+                    listFiltered = List.from(cardList);
+                    controller.clear();
+                  });
+                },
+                child: const Text('ESPIRAL'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    cardList = List.from(lrwList);
+                    listFiltered = List.from(cardList);
+                    controller.clear();
+                  });
+                },
+                child: const Text('LORW'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    cardList = List.from(alaList);
+                    listFiltered = List.from(cardList);
+                    controller.clear();
+                  });
+                },
+                child: const Text('ALARA'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    cardList = List.from(nphList);
+                    listFiltered = List.from(cardList);
+                    controller.clear();
+                  });
+                },
+                child: const Text('PHY'),
+              ),
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
             child: Container(
@@ -148,7 +204,7 @@ class _CardFilterState extends State<_CardFilter> {
                   onChanged: (_) {
                     setState(() {
                       final search = controller.text.toLowerCase();
-                      oneListFiltered = widget.cardList
+                      listFiltered = cardList
                           .where((cardMtg) =>
                               cardMtg.name.toLowerCase().contains(search) ||
                               cardMtg.type.toLowerCase().contains(search))
@@ -168,11 +224,12 @@ class _CardFilterState extends State<_CardFilter> {
               ),
             ),
           ),
-          const CollectionCarousel(),
+
+          //CollectionCarousel(listCards: cardList, listFilter: listFiltered, controller: controller),
           Expanded(
             flex: 70,
             child: CardGrid(
-              cardList: oneListFiltered,
+              cardList: listFiltered,
             ),
           ),
           const NavigatorBar(
@@ -185,7 +242,15 @@ class _CardFilterState extends State<_CardFilter> {
 }
 
 class CollectionCarousel extends StatefulWidget {
-  const CollectionCarousel({super.key});
+  CollectionCarousel(
+      {super.key,
+      required this.listCards,
+      required this.listFilter,
+      required this.controller});
+
+  List<MtgCard> listCards;
+  List<MtgCard> listFilter;
+  TextEditingController controller;
 
   @override
   State<StatefulWidget> createState() {
@@ -219,9 +284,31 @@ class _CollectionCarouselState extends State<CollectionCarousel> {
         enlargeCenterPage: true,
       ),
       itemBuilder: (context, index, realIdx) {
-        return SizedBox(
-            width: 600,
-            child: Image.asset(images[index], fit: BoxFit.contain));
+        return GestureDetector(
+          onTap: () {
+            setState(() {
+              switch (index) {
+                case 0:
+                  widget.listCards = List.from(tspList);
+                  break;
+                case 1:
+                  widget.listCards = List.from(lrwList);
+                  break;
+                case 2:
+                  widget.listCards = List.from(alaList);
+                  break;
+                case 3:
+                  widget.listCards = List.from(nphList);
+                  break;
+              }
+              widget.listFilter = List.from(widget.listCards);
+              widget.controller.clear();
+            });
+          },
+          child: SizedBox(
+              width: 600,
+              child: Image.asset(images[index], fit: BoxFit.contain)),
+        );
       },
     );
   }
