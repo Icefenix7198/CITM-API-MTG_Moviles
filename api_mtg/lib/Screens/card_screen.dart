@@ -10,8 +10,6 @@ class CardScreen extends StatefulWidget {
 }
 
 class _CardScreenState extends State<CardScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     final cardSelected = ModalRoute.of(context)!.settings.arguments as MtgCard;
@@ -32,123 +30,27 @@ class _ScreenImplementation extends StatefulWidget {
 class __ScreenImplementationState extends State<_ScreenImplementation> {
   @override
   Widget build(BuildContext context) {
-    final MtgCard cardMtg = context.read<MtgCard>();
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 49, 49, 49),
+    return const Scaffold(
+      backgroundColor: Color.fromARGB(255, 49, 49, 49),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const _CardAppBar(),
+            _CardAppBar(),
             Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15.0),
-              child: Text(
-                cardMtg.name,
-                style: const TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 400,
-              width: 400,
-              child: FittedBox(
-                child: Image(
-                  image: NetworkImage(cardMtg.imageUris.cardImg),
-                ),
-              ),
+              padding: EdgeInsets.only(left: 15, right: 15),
+              child: _CardTitle(),
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 100, 96, 96),
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Oracle text: ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
-                      ),
-                      Text(
-                        cardMtg.rules,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              padding: EdgeInsets.all(20.0),
+              child: _CardImage(),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, bottom: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Price: ",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                          ),
-                        ),
-                        FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text(
-                            "   ${cardMtg.prices.eur} €\n   ${cardMtg.prices.usd} \$\n   ${cardMtg.prices.tix} TIX",
-                            style: const TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text(
-                            "Artist:",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                            ),
-                          ),
-                        ),
-                        FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text(
-                            "   ${cardMtg.artist}",
-                            style: const TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              padding: EdgeInsets.only(left: 15, right: 15),
+              child: _CardOracle(),
+            ),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: _CardLowerInfo(),
             ),
           ],
         ),
@@ -195,6 +97,153 @@ class _CardAppBarState extends State<_CardAppBar> {
             cardMtg.isFav ? Icons.bookmark_add : Icons.bookmark_add_outlined,
             color: const Color.fromARGB(255, 187, 41, 30),
             size: 40,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _CardImage extends StatelessWidget {
+  const _CardImage();
+
+  @override
+  Widget build(BuildContext context) {
+    final MtgCard cardMtg = context.read<MtgCard>();
+
+    return Image(
+      image: NetworkImage(cardMtg.imageUris.cardImg),
+    );
+  }
+}
+
+class _CardTitle extends StatelessWidget {
+  const _CardTitle();
+
+  @override
+  Widget build(BuildContext context) {
+    final MtgCard cardMtg = context.read<MtgCard>();
+
+    return Text(
+      cardMtg.name,
+      style: const TextStyle(
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
+    );
+  }
+}
+
+class _CardOracle extends StatelessWidget {
+  const _CardOracle();
+
+  @override
+  Widget build(BuildContext context) {
+    final MtgCard cardMtg = context.read<MtgCard>();
+
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 100, 96, 96),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Oracle text: ",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+              ),
+            ),
+            Text(
+              cardMtg.rules,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CardLowerInfo extends StatelessWidget {
+  const _CardLowerInfo();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: 15, bottom: 15),
+          child: _CardPrice(),
+        ),
+        Padding(
+          padding: EdgeInsets.only(right: 15.0),
+          child: _CardArtist(),
+        ),
+      ],
+    );
+  }
+}
+
+class _CardArtist extends StatelessWidget {
+  const _CardArtist();
+
+  @override
+  Widget build(BuildContext context) {
+    final MtgCard cardMtg = context.read<MtgCard>();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Artist:",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
+        ),
+        Text(
+          "   ${cardMtg.artist}",
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _CardPrice extends StatelessWidget {
+  const _CardPrice();
+
+  @override
+  Widget build(BuildContext context) {
+    final MtgCard cardMtg = context.read<MtgCard>();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Price: ",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
+        ),
+        Text(
+          "   ${cardMtg.prices.eur} €\n   ${cardMtg.prices.usd} \$\n   ${cardMtg.prices.tix} TIX",//TODO: columna o fila?
+          style: const TextStyle(
+            color: Colors.white,
           ),
         ),
       ],
