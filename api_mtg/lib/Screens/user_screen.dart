@@ -69,7 +69,7 @@ class UserScreen extends StatelessWidget {
               children: [
                 const SizedBox(
                   height: 40,
-                  width: 200,
+                  width: 150,
                   child: TabBarCards(
                     tabs: [
                       Tab(
