@@ -11,12 +11,12 @@ class PortadaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Color.fromARGB(246, 10, 10, 10),
+      backgroundColor: Color.fromARGB(255, 26, 26, 26),
       //appBar: AppBar(title: const Text("Initial Screen")),
       body: Stack(
         children: [
           Align(
-            alignment: Alignment(-0.2, -1),
+            alignment: Alignment(0, -0.8),
             child: Image(
               image: AssetImage("assets/LogoImage.png"),
             ),
