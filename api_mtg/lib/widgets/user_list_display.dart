@@ -26,7 +26,7 @@ class UsersListItem extends StatelessWidget {
       leading: CircleAvatar(
         backgroundImage: NetworkImage(user.avatar),
       ),
-      trailing: ElevatedButton(
+      /*trailing: ElevatedButton(
         style: ElevatedButton.styleFrom(
           primary: const Color.fromARGB(255, 53, 50, 50),
         ),
@@ -37,7 +37,7 @@ class UsersListItem extends StatelessWidget {
           Icons.arrow_forward_ios_rounded,
           color: Colors.white38,
         ),
-      ),
+      ),*/
       isThreeLine: true,
     );
   }
