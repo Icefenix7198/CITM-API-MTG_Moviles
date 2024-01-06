@@ -12,18 +12,19 @@ class UserScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            flex: 40,
+            flex: 42,
             child: Column(
               children: [
                 Align(
                   alignment: Alignment.topRight,
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(7.0),
                     child: IconButton(
                       onPressed: () => {
                         {Navigator.of(context).pushNamed("/home/settings")}
                       },
-                      icon: const Icon(Icons.settings, color: Colors.white),
+                      icon: const Icon(Icons.settings,
+                          color: Colors.white, size: 25),
                     ),
                   ),
                 ),
@@ -42,7 +43,7 @@ class UserScreen extends StatelessWidget {
                       color: Color.fromARGB(255, 158, 158, 158), fontSize: 12),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(top: 20),
+                  padding: EdgeInsets.only(top: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -64,30 +65,45 @@ class UserScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 65,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 40,
-                  width: 150,
-                  child: TabBarCards(
-                    tabs: [
-                      Tab(
-                        text: "Cards",
+            flex: 58,
+            child: DefaultTabController(
+              length: 2,
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 7),
+                    child: SizedBox(
+                      height: 35,
+                      width: 150,
+                      child: TabBar(
+                        labelColor: Colors.white,
+                        indicator: UnderlineTabIndicator(
+                          borderSide: BorderSide(width: 3, color: Colors.red),
+                        ),
+                        indicatorColor: Colors.red,
+                        tabs: [Tab(text: "Cards"), Tab(text: "Decks")],
                       ),
-                      Tab(text: "Decks"),
-                    ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Container(
-                    color: const Color.fromARGB(255, 53, 53, 53),
+                  Expanded(
+                    child: Container(
+                      color: const Color.fromARGB(255, 53, 53, 53),
+                      child: const TabBarView(
+                        children: <Widget>[
+                          Text(
+                            "Wee",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Text(
+                            "Woo",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-                const NavigatorBar(
-                  actualScreen: NavScreens.user,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
@@ -109,7 +125,7 @@ class BoxInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 65,
-      height: 60,
+      height: 53,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 53, 53, 53),
         borderRadius: BorderRadius.circular(10),
@@ -120,7 +136,7 @@ class BoxInfo extends StatelessWidget {
             alignment: const Alignment(0, -0.5),
             child: Text(
               "$num",
-              style: const TextStyle(color: Colors.white, fontSize: 20),
+              style: const TextStyle(color: Colors.white, fontSize: 18),
             ),
           ),
           Align(
@@ -135,3 +151,4 @@ class BoxInfo extends StatelessWidget {
     );
   }
 }
+

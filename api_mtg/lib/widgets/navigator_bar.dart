@@ -18,11 +18,6 @@ class NavigatorBar extends StatefulWidget {
 class _NavigatorBarra extends State<NavigatorBar> {
   //Parametros de la propia funcion
 
-  // ignore: non_constant_identifier_names
-  void ActualizarEstado() {
-    setState(() {});
-  }
-
   NavScreens? pants;
 
   @override

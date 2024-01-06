@@ -1,33 +1,20 @@
 import 'package:flutter/material.dart';
 
 class TabBarCards extends StatefulWidget {
-  const TabBarCards({
+   TabBarCards({
     super.key,
     required this.tabs,
+    required this.tabController,
   });
 
   final List<Tab> tabs;
+  var tabController; 
 
   @override
   State<TabBarCards> createState() => _TabBarCardsState();
 }
 
-class _TabBarCardsState extends State<TabBarCards>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(vsync: this, length: widget.tabs.length);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
+class _TabBarCardsState extends State<TabBarCards> {
   @override
   Widget build(BuildContext context) {
     return TabBar(
@@ -36,7 +23,7 @@ class _TabBarCardsState extends State<TabBarCards>
         borderSide: BorderSide(width: 3, color: Colors.red),
       ),
       indicatorColor: Colors.red,
-      controller: _tabController,
+      controller: widget.tabController,
       tabs: widget.tabs,
     );
   }
