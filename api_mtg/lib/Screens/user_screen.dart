@@ -1,6 +1,9 @@
+import 'package:api_mtg/Screens/card_searcher.dart';
 import 'package:api_mtg/widgets/TabBarCards.dart';
+import 'package:api_mtg/widgets/card_grid.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:api_mtg/Model/card.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
@@ -8,7 +11,7 @@ class UserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(246, 10, 10, 10),
+      backgroundColor: const Color.fromRGBO(33, 30, 30, 0.965),
       body: Column(
         children: [
           Expanded(
@@ -43,7 +46,7 @@ class UserScreen extends StatelessWidget {
                       color: Color.fromARGB(255, 158, 158, 158), fontSize: 12),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.only(top: 12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -88,25 +91,74 @@ class UserScreen extends StatelessWidget {
                   Expanded(
                     child: Container(
                       color: const Color.fromARGB(255, 53, 53, 53),
-                      child: const TabBarView(
+                      child: TabBarView(
                         children: <Widget>[
-                          Text(
-                            "Wee",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            "Woo",
-                            style: TextStyle(color: Colors.white),
-                          ),
+                          Cards(),
+                          GridView.count(
+                            crossAxisCount: 2,
+                            children: [
+                              Decks(),
+                            ],
+                          )
                         ],
                       ),
                     ),
                   ),
+                  const NavigatorBar(),
                 ],
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class Cards extends StatefulWidget {
+  const Cards({
+    super.key,
+  });
+
+  @override
+  State<Cards> createState() => _CardsState();
+}
+
+class _CardsState extends State<Cards> {
+  @override
+  void initState() {
+    loadFavoriteList().then((loadedFavoriteList) {
+      setState(() {
+        favoriteCards = loadedFavoriteList; //TODO: poner en home carga api?
+      });
+    });
+    super.initState();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return CardGrid(cardList: favoriteCards);
+  }
+}
+
+class Decks extends StatefulWidget {
+  const Decks({
+    super.key,
+  });
+
+  @override
+  State<Decks> createState() => _DecksState();
+}
+
+class _DecksState extends State<Decks> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.red,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pushNamed("/home/user/deck");
+        },
       ),
     );
   }
@@ -127,7 +179,7 @@ class BoxInfo extends StatelessWidget {
       width: 65,
       height: 53,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 53, 53, 53),
+        color: const Color.fromARGB(255, 46, 46, 46),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Stack(
@@ -151,4 +203,3 @@ class BoxInfo extends StatelessWidget {
     );
   }
 }
-
