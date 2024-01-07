@@ -1,4 +1,3 @@
-import 'package:api_mtg/Screens/card_searcher.dart';
 import 'package:api_mtg/widgets/TabBarCards.dart';
 import 'package:api_mtg/widgets/card_grid.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
@@ -31,10 +30,32 @@ class UserScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Icon(
-                  Icons.account_circle,
-                  color: Colors.white60,
-                  size: 65,
+                const Stack(
+                  children: [
+                    Center(
+                      child: SizedBox(
+                        height: 100,
+                        width: 300,
+                        child: Image(
+                          image: AssetImage("assets/emry.jpg"),
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: SizedBox(
+                        height: 100,
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Icon(
+                            Icons.account_circle,
+                            color: Colors.white60,
+                            size: 65,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const Text(
                   "Name",
@@ -78,13 +99,11 @@ class UserScreen extends StatelessWidget {
                     child: SizedBox(
                       height: 35,
                       width: 150,
-                      child: TabBar(
-                        labelColor: Colors.white,
-                        indicator: UnderlineTabIndicator(
-                          borderSide: BorderSide(width: 3, color: Colors.red),
-                        ),
-                        indicatorColor: Colors.red,
-                        tabs: [Tab(text: "Cards"), Tab(text: "Decks")],
+                      child: TabBarCards(
+                        tabs: [
+                          Tab(text: "Cards"),
+                          Tab(text: "Decks"),
+                        ],
                       ),
                     ),
                   ),
@@ -93,10 +112,10 @@ class UserScreen extends StatelessWidget {
                       color: const Color.fromARGB(255, 53, 53, 53),
                       child: TabBarView(
                         children: <Widget>[
-                          Cards(),
+                          const Cards(),
                           GridView.count(
                             crossAxisCount: 2,
-                            children: [
+                            children: const [
                               Decks(),
                             ],
                           )
@@ -129,12 +148,12 @@ class _CardsState extends State<Cards> {
   void initState() {
     loadFavoriteList().then((loadedFavoriteList) {
       setState(() {
-        favoriteCards = loadedFavoriteList; //TODO: poner en home carga api?
+        favoriteCards = loadedFavoriteList;
       });
     });
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return CardGrid(cardList: favoriteCards);
