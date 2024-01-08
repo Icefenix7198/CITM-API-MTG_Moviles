@@ -188,7 +188,15 @@ class Decks extends StatefulWidget {
 }
 
 class _DecksState extends State<Decks> {
-  var num = 1;
+  var num = 0;
+  bool showText = false;
+  final textController = TextEditingController();
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -197,16 +205,28 @@ class _DecksState extends State<Decks> {
         Container(
           height: 40,
           color: Colors.cyan,
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  num = num + 1;
-                });
-              },
-              child: Icon(CupertinoIcons.plus),
-            ),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              SizedBox(
+                width: 100,
+                height: 20,
+                child: showText
+                    ? TextField(
+                        controller: textController,
+                      )
+                    : null,
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    showText = true;
+                    num = num + 1;
+                  });
+                },
+                child: const Icon(CupertinoIcons.plus),
+              ),
+            ],
           ),
         ),
         Expanded(
@@ -221,7 +241,7 @@ class _DecksState extends State<Decks> {
                   onTap: () {
                     Navigator.of(context).pushNamed("/home/user/deck");
                   },
-                  child: DeckUnit(),
+                  child: DeckUnit(deckname: textController.text),
                 ),
             ],
           ),
@@ -234,7 +254,10 @@ class _DecksState extends State<Decks> {
 class DeckUnit extends StatelessWidget {
   const DeckUnit({
     super.key,
+    this.deckname = "Deck Name",
   });
+
+  final String deckname;
 
   @override
   Widget build(BuildContext context) {
@@ -245,12 +268,12 @@ class DeckUnit extends StatelessWidget {
           flex: 29,
           child: Container(
             color: const Color.fromARGB(255, 53, 53, 53),
-            child: const Align(
+            child: Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
                 padding: EdgeInsets.only(bottom: 4),
                 child: Text(
-                  "Deck Name",
+                  deckname,
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
