@@ -1,6 +1,7 @@
 import 'package:api_mtg/widgets/TabBarCards.dart';
 import 'package:api_mtg/widgets/card_grid.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:api_mtg/Model/card.dart';
 
@@ -110,9 +111,9 @@ class UserScreen extends StatelessWidget {
                   Expanded(
                     child: Container(
                       color: const Color.fromARGB(255, 53, 53, 53),
-                      child: TabBarView(
+                      child: const TabBarView(
                         children: <Widget>[
-                          const Cards(),
+                          Cards(),
                           DecksView(),
                           /*GridView.count(
                             crossAxisCount: 2,
@@ -177,42 +178,104 @@ class _DecksViewState extends State<DecksView> {
   }
 }
 
-class Decks extends StatelessWidget {
-  const Decks({
+class Decks extends StatefulWidget {
+  Decks({
     super.key,
   });
+
+  @override
+  State<Decks> createState() => _DecksState();
+}
+
+class _DecksState extends State<Decks> {
+  var num = 1;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(height: 40, color: Colors.cyan),
+        Container(
+          height: 40,
+          color: Colors.cyan,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  num = num + 1;
+                });
+              },
+              child: Icon(CupertinoIcons.plus),
+            ),
+          ),
+        ),
         Expanded(
           child: GridView.count(
             crossAxisCount: 2,
-            crossAxisSpacing: 10,
+            padding: const EdgeInsets.all(10),
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 10,
             children: [
-              Container(
-                color: Colors.red,
-                child: GestureDetector(
+              for (int i = 0; i < num; i++)
+                GestureDetector(
                   onTap: () {
                     Navigator.of(context).pushNamed("/home/user/deck");
                   },
+                  child: DeckUnit(),
                 ),
-              ),
-              Container(
-                color: Colors.red,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushNamed("/home/user/deck");
-                  },
-                ),
-              ),
             ],
           ),
         ),
       ],
     );
+  }
+}
+
+class DeckUnit extends StatelessWidget {
+  const DeckUnit({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        child: Column(
+      children: [
+        Expanded(
+          flex: 29,
+          child: Container(
+            color: const Color.fromARGB(255, 53, 53, 53),
+            child: const Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 4),
+                child: Text(
+                  "Deck Name",
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 55,
+          child: Container(color: Colors.blue),
+        ),
+        Expanded(
+          flex: 15,
+          child: Container(
+            color: const Color.fromARGB(255, 53, 53, 53),
+            child: const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "num cards",
+                style: TextStyle(color: Colors.white70, fontSize: 12),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ));
   }
 }
 
@@ -240,14 +303,14 @@ class BoxInfo extends StatelessWidget {
             alignment: const Alignment(0, -0.5),
             child: Text(
               "$num",
-              style: const TextStyle(color: Colors.white, fontSize: 18),
+              style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
           ),
           Align(
             alignment: const Alignment(0, 0.5),
             child: Text(
               text,
-              style: const TextStyle(color: Colors.white, fontSize: 12),
+              style: const TextStyle(color: Colors.white, fontSize: 11),
             ),
           ),
         ],
