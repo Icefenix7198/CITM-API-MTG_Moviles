@@ -14,7 +14,7 @@ class UserScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            flex: 42,
+            flex: 50,
             child: Column(
               children: [
                 Align(
@@ -67,7 +67,7 @@ class UserScreen extends StatelessWidget {
                       color: Color.fromARGB(255, 158, 158, 158), fontSize: 12),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(top: 12),
+                  padding: EdgeInsets.only(top: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -89,7 +89,7 @@ class UserScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 58,
+            flex: 50,
             child: DefaultTabController(
               length: 2,
               child: Column(
@@ -97,7 +97,7 @@ class UserScreen extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(bottom: 7),
                     child: SizedBox(
-                      height: 35,
+                      height: 25,
                       width: 150,
                       child: TabBarCards(
                         tabs: [
@@ -113,12 +113,13 @@ class UserScreen extends StatelessWidget {
                       child: TabBarView(
                         children: <Widget>[
                           const Cards(),
-                          GridView.count(
+                          DecksView(),
+                          /*GridView.count(
                             crossAxisCount: 2,
                             children: const [
-                              Decks(),
+                             
                             ],
-                          )
+                          )*/
                         ],
                       ),
                     ),
@@ -160,25 +161,57 @@ class _CardsState extends State<Cards> {
   }
 }
 
-class Decks extends StatefulWidget {
+class DecksView extends StatefulWidget {
+  const DecksView({
+    super.key,
+  });
+
+  @override
+  State<DecksView> createState() => _DecksViewState();
+}
+
+class _DecksViewState extends State<DecksView> {
+  @override
+  Widget build(BuildContext context) {
+    return Decks();
+  }
+}
+
+class Decks extends StatelessWidget {
   const Decks({
     super.key,
   });
 
   @override
-  State<Decks> createState() => _DecksState();
-}
-
-class _DecksState extends State<Decks> {
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).pushNamed("/home/user/deck");
-        },
-      ),
+    return Column(
+      children: [
+        Container(height: 40, color: Colors.cyan),
+        Expanded(
+          child: GridView.count(
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            children: [
+              Container(
+                color: Colors.red,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed("/home/user/deck");
+                  },
+                ),
+              ),
+              Container(
+                color: Colors.red,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed("/home/user/deck");
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
