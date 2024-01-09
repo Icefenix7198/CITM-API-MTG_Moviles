@@ -1,5 +1,4 @@
 import 'package:api_mtg/Model/providerThing.dart';
-import 'package:api_mtg/main.dart';
 import 'package:api_mtg/widgets/TabBarCards.dart';
 import 'package:api_mtg/widgets/card_grid.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
@@ -71,8 +70,11 @@ class UserScreen extends StatelessWidget {
                 ),
                 Text(
                   globalInfo.username,
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 158, 158, 158), fontSize: 12),
+                  style: TextStyle(
+                      color: (globalInfo.darkMode)
+                            ? const Color.fromARGB(255, 158, 158, 158)
+                            : const Color.fromARGB(255, 56, 56, 56),  
+                            fontSize: 12),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 10),
@@ -117,7 +119,9 @@ class UserScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
-                      color: const Color.fromARGB(255, 53, 53, 53),
+                      color: (globalInfo.darkMode)
+                            ? const Color.fromARGB(255, 53, 53, 53)
+                            : const Color.fromARGB(255, 156, 156, 156),
                       child: const TabBarView(
                         children: <Widget>[
                           Cards(),
@@ -132,7 +136,7 @@ class UserScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const NavigatorBar(),
+                  const NavigatorBar(actualScreen: NavScreens.user,),
                 ],
               ),
             ),
@@ -268,20 +272,24 @@ class DeckUnit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
     return SizedBox(
         child: Column(
       children: [
         Expanded(
           flex: 29,
           child: Container(
-            color: const Color.fromARGB(255, 53, 53, 53),
+            color: (globalInfo.darkMode)
+                            ? const Color.fromARGB(255, 53, 53, 53)
+                            : const Color.fromARGB(255, 156, 156, 156),
             child: Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
                 padding: EdgeInsets.only(bottom: 4),
                 child: Text(
                   deckname,
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  style: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black,
+                   fontSize: 18),
                 ),
               ),
             ),
@@ -295,11 +303,11 @@ class DeckUnit extends StatelessWidget {
           flex: 15,
           child: Container(
             color: const Color.fromARGB(255, 53, 53, 53),
-            child: const Align(
+            child: Align(
               alignment: Alignment.topLeft,
               child: Text(
                 "num cards",
-                style: TextStyle(color: Colors.white70, fontSize: 12),
+                style: TextStyle(color: (globalInfo.darkMode) ? Colors.white70 : Colors.black87, fontSize: 12),
               ),
             ),
           ),
@@ -320,11 +328,12 @@ class BoxInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
     return Container(
       width: 65,
       height: 53,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 46, 46, 46),
+        color: (globalInfo.darkMode) ? const Color.fromARGB(255, 46, 46, 46) : const Color.fromARGB(255, 196, 196, 196),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Stack(
@@ -333,14 +342,14 @@ class BoxInfo extends StatelessWidget {
             alignment: const Alignment(0, -0.5),
             child: Text(
               "$num",
-              style: const TextStyle(color: Colors.white, fontSize: 16),
+              style: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black, fontSize: 16),
             ),
           ),
           Align(
             alignment: const Alignment(0, 0.5),
             child: Text(
               text,
-              style: const TextStyle(color: Colors.white, fontSize: 11),
+              style: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black, fontSize: 11),
             ),
           ),
         ],

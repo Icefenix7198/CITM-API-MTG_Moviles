@@ -1,9 +1,11 @@
+import 'package:api_mtg/Model/providerThing.dart';
 import 'package:api_mtg/widgets/Card_grid.dart';
 import 'package:api_mtg/widgets/api_load.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:api_mtg/Model/card.dart';
+import 'package:provider/provider.dart';
 
 List<MtgCard> tspList = [];
 List<MtgCard> lrwList = [];
@@ -41,8 +43,9 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(33, 30, 30, 0.965),
+      backgroundColor: (globalInfo.darkMode) ?const Color.fromRGBO(33, 30, 30, 0.965) : Color.fromARGB(246, 227, 207, 207),
       body: FutureBuilder(
         future: Future.wait(
             [apiLoadTSP(), apiLoadLRW(), apiLoadALA(), apiLoadNPH()]),
@@ -52,11 +55,11 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
         ) {
           //Builder
           if (!snapshot.hasData) {
-            return const Center(
+            return  Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(
+                  const CircularProgressIndicator(
                     color: Colors.white,
                   ),
                   Padding(
@@ -64,7 +67,7 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
                     child: Text(
                       "Loading API",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                       ),
                     ),
                   )
@@ -147,13 +150,14 @@ class _CardFilterState extends State<_CardFilter> {
   }
 
   Padding searcher() {
+    final globalInfo = context.watch<GlobalInfo>();
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(15)),
           border: Border.all(
-            color: Colors.white,
+            color: (globalInfo.darkMode) ? Colors.white : Colors.black,
             width: 2,
           ),
         ),
@@ -172,13 +176,13 @@ class _CardFilterState extends State<_CardFilter> {
                     .toList();
               });
             },
-            cursorColor: Colors.white,
-            style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              prefixIconColor: Colors.white,
+            cursorColor: (globalInfo.darkMode) ? Colors.white : Colors.black,
+            style: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black,),
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.search, color: (globalInfo.darkMode) ? Colors.white : Colors.black,),
+              prefixIconColor: (globalInfo.darkMode) ? Colors.white : Colors.black,
               hintText: "Search Cards",
-              hintStyle: TextStyle(color: Color.fromARGB(255, 155, 153, 153)),
+              hintStyle: TextStyle(color: (globalInfo.darkMode) ? const Color.fromARGB(255, 155, 153, 153) : const Color.fromARGB(255, 75, 74, 74), ),
             ),
           ),
         ),
@@ -187,6 +191,7 @@ class _CardFilterState extends State<_CardFilter> {
   }
 
   CarouselSlider carousel() {
+    final globalInfo = context.watch<GlobalInfo>();
     return CarouselSlider.builder(
       itemCount: images.length,
       options: CarouselOptions(
@@ -221,7 +226,7 @@ class _CardFilterState extends State<_CardFilter> {
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 7.5,
-                    color: const Color.fromARGB(255, 97, 94, 94),
+                    color: (globalInfo.darkMode) ? const Color.fromARGB(255, 97, 94, 94) : const Color.fromARGB(255, 169, 164, 164),
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                 ),
@@ -238,18 +243,19 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
     return Row(
       children: [
         Expanded(
           flex: 10,
           child: Container(
             padding: const EdgeInsets.all(20.0),
-            child: const Text(
+            child: Text(
               "Discover",
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: (globalInfo.darkMode) ?Colors.white : Colors.black,
               ),
             ),
           ),

@@ -1,6 +1,5 @@
 import 'package:api_mtg/Model/Users.dart';
 import 'package:api_mtg/Model/providerThing.dart';
-import 'package:api_mtg/main.dart';
 import 'package:api_mtg/widgets/api_users.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
 //import 'package:api_mtg/widgets/api_users.dart';
@@ -28,18 +27,19 @@ class SocialScreen extends StatelessWidget {
           AsyncSnapshot<List<User>> snapshot,
         ) {
           if (!snapshot.hasData) {
-            return const Center(
+            final globalInfo = context.watch<GlobalInfo>(); 
+            return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircularProgressIndicator(
-                    color: Colors.white,
+                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                   ),
                   Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Text(
                       "Loading API",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black),
                     ),
                   )
                 ],
@@ -84,6 +84,7 @@ class _SearchableListState extends State<_SearchableList> {
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
     return Column(
       children: [
         Expanded(
@@ -98,23 +99,23 @@ class _SearchableListState extends State<_SearchableList> {
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(16),
                           bottomRight: Radius.circular(16))),
-                  child: const Align(
+                  child: Align(
                     alignment: Alignment.centerLeft,
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: Text(
                         "My Chats",
-                        style: TextStyle(fontSize: 40, color: Colors.white),
+                        style: TextStyle(fontSize: 40, color: (globalInfo.darkMode) ? Colors.white : Colors.black),
                       ),
                     ),
                   ),
                 ),
               ),
-              const Expanded(
+              Expanded(
                 flex: 30,
                 child: Icon(
                   Icons.chat_bubble,
-                  color: Colors.white,
+                  color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                   size: 40,
                 ),
               ),
@@ -127,22 +128,22 @@ class _SearchableListState extends State<_SearchableList> {
             padding: const EdgeInsets.all(16),
             child: Expanded(
               child: Container(
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 102, 101, 101),
-                    borderRadius: BorderRadius.all(Radius.circular((16)))),
+                decoration: BoxDecoration(
+                    color: (globalInfo.darkMode) ? Color.fromARGB(255, 101, 101, 101) : Color.fromARGB(255, 161, 161, 161),
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
                 child: Row(
                   children: [
                     const Spacer(
                       flex: 2,
                     ),
-                    const Expanded(
+                    Expanded(
                       flex: 10,
                       child: Align(
                         alignment: Alignment.center,
                         child: FittedBox(
                           fit: BoxFit.contain,
                           child: Icon(Icons.search_rounded,
-                              size: 40, color: Colors.white),
+                              size: 40, color: (globalInfo.darkMode) ? Colors.white : Colors.black),
                         ),
                       ),
                     ),
@@ -168,11 +169,11 @@ class _SearchableListState extends State<_SearchableList> {
                                     .toList();
                               });
                             },
-                            cursorColor: Colors.white,
-                            style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
+                            cursorColor: (globalInfo.darkMode) ? Colors.white : Colors.black,
+                            style:  TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black),
+                            decoration: InputDecoration(
                               hintText: "Search Contacts",
-                              hintStyle: TextStyle(color: Colors.white),
+                              hintStyle: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black),
                             ),
                           ),
                         ),

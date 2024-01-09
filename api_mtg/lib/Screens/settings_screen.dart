@@ -1,6 +1,5 @@
 // ignore: file_names
 import 'package:api_mtg/Model/providerThing.dart';
-import 'package:api_mtg/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
