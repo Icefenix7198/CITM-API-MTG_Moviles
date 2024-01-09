@@ -1,5 +1,7 @@
 // ignore: file_names
 import 'package:api_mtg/Model/providerThing.dart';
+import 'package:api_mtg/widgets/api_load.dart';
+import 'package:api_mtg/widgets/card_grid_home.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,8 +44,13 @@ class HomeScreen extends StatelessWidget {
             ),
 
             //Lista cartas?
-
-            const ListImages(),
+            IconButton(
+              onPressed: () => {
+                {Navigator.of(context).pushNamed("/home2")}
+              },
+              icon: const Icon(Icons.home_outlined),
+            ),
+            //CardGridHome(cardList: [],)
 
             const Spacer(),
             const NavigatorBar(
@@ -53,18 +60,5 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class ListImages extends StatelessWidget {
-  const ListImages({
-    super.key,
-  });
-
-  //Variables por paramentro del widget, se acceden mediante widget.nombre
-
-  @override
-  Placeholder build(BuildContext context) {
-    return const Placeholder(); //Aqui dentro va toda la funcion
   }
 }

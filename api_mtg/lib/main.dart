@@ -1,4 +1,5 @@
 import 'package:api_mtg/Model/providerThing.dart';
+import 'package:api_mtg/Screens/HomeWIP.dart';
 import 'package:api_mtg/Screens/card_screen.dart';
 import 'package:api_mtg/Screens/settings_screen.dart';
 import 'package:api_mtg/Screens/social_screen.dart';
@@ -33,12 +34,13 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         routes: {
           "/": (context) => const PortadaScreen(),
-          "/home": (context) =>  HomeScreen(),
-          "/home/api": (_) =>  ApiDataLoadApp(),
-          "/home/social": (context) =>  SocialScreen(),
-          "/home/api/card": (context) =>  CardScreen(),
-          "/home/user": (context) =>  UserScreen(),
-          "/home/user/deck": (context) =>  UserScreenDeck(),
+          "/home": (context) => HomeScreen(),
+          "/home2": (context) => Home2(),
+          "/home/api": (_) => ApiDataLoadApp(),
+          "/home/social": (context) => SocialScreen(),
+          "/home/api/card": (context) => CardScreen(),
+          "/home/user": (context) => UserScreen(),
+          "/home/user/deck": (context) => UserScreenDeck(),
           "/home/settings": (context) => SettingsScreen(),
         },
       ),

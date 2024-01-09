@@ -15,7 +15,7 @@ enum SettingsMenus {
 
 // ignore: must_be_immutable
 class SettingsScreen extends StatefulWidget {
-  SettingsScreen({
+  const SettingsScreen({
     super.key,
   });
 
@@ -93,7 +93,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   //Text profile
                   Text(
-                    "Profile",
+                    (globalInfo.language == Idioma.spanish)
+                        ? "Perfil"
+                        : (globalInfo.language == Idioma.catalan)
+                            ? "Perfil"
+                            : "Profile",
                     style: TextStyle(
                       fontSize: 20,
                       color: (globalInfo.darkMode)
@@ -816,4 +820,3 @@ class HelpBotton extends StatelessWidget {
     );
   }
 }
-

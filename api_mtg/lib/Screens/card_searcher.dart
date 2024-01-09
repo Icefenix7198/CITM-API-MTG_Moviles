@@ -43,51 +43,54 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
       backgroundColor: (globalInfo.darkMode)
           ? const Color.fromRGBO(33, 30, 30, 0.965)
           : const Color.fromARGB(246, 227, 207, 207),
-      body: FutureBuilder(
-        future: Future.wait(
-            [apiLoadTSP(), apiLoadLRW(), apiLoadALA(), apiLoadNPH()]),
-        builder: (
-          BuildContext context,
-          AsyncSnapshot<List<List<MtgCard>>> snapshot,
-        ) {
-          //Builder
-          if (!snapshot.hasData) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const CircularProgressIndicator(
-                    color: Colors.white,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      "Loading API",
-                      style: TextStyle(
-                        color:
-                            (globalInfo.darkMode) ? Colors.white : Colors.black,
-                      ),
+      body: (globalInfo.displayedList.isEmpty)
+          ? FutureBuilder(
+              future: Future.wait(
+                  [apiLoadTSP(), apiLoadLRW(), apiLoadALA(), apiLoadNPH()]),
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<List<List<MtgCard>>> snapshot,
+              ) {
+                //Builder
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            "Loading API",
+                            style: TextStyle(
+                              color: (globalInfo.darkMode)
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  )
-                ],
-              ),
-            );
-          }
-          globalInfo.tspList = snapshot.data![0];
-          globalInfo.lrwList = snapshot.data![1];
-          globalInfo.alaList = snapshot.data![2];
-          globalInfo.nphList = snapshot.data![3];
-          globalInfo.displayedList = List.from(globalInfo.tspList);
-          checkFavourites(
-              globalInfo.favoriteCards,
-              globalInfo
-                  .tspList); //Check all the favourite cards when loading APIs, that information is not retrieved from the API
-          checkFavourites(globalInfo.favoriteCards, globalInfo.lrwList);
-          checkFavourites(globalInfo.favoriteCards, globalInfo.alaList);
-          checkFavourites(globalInfo.favoriteCards, globalInfo.nphList);
-          return _CardFilter(cardListSearch: globalInfo.displayedList);
-        },
-      ),
+                  );
+                }
+                globalInfo.tspList = snapshot.data![0];
+                globalInfo.lrwList = snapshot.data![1];
+                globalInfo.alaList = snapshot.data![2];
+                globalInfo.nphList = snapshot.data![3];
+                globalInfo.displayedList = List.from(globalInfo.tspList);
+                checkFavourites(
+                    globalInfo.favoriteCards,
+                    globalInfo
+                        .tspList); //Check all the favourite cards when loading APIs, that information is not retrieved from the API
+                checkFavourites(globalInfo.favoriteCards, globalInfo.lrwList);
+                checkFavourites(globalInfo.favoriteCards, globalInfo.alaList);
+                checkFavourites(globalInfo.favoriteCards, globalInfo.nphList);
+                return _CardFilter(cardListSearch: globalInfo.displayedList);
+              },
+            )
+          : _CardFilter(cardListSearch: globalInfo.displayedList),
     );
   }
 }
