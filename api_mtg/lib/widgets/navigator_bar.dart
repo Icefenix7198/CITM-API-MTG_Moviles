@@ -23,7 +23,6 @@ class _NavigatorBarra extends State<NavigatorBar> {
   @override
   Widget build(BuildContext context) {
     pants = widget.actualScreen;
-    if (pants == 0) {}
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -38,7 +37,10 @@ class _NavigatorBarra extends State<NavigatorBar> {
                 if (widget.actualScreen != NavScreens.home)
                   {Navigator.of(context).pushReplacementNamed("/home")}
               },
-              icon: const Icon(Icons.home_outlined),
+              icon: Icon(Icons.home_outlined,
+                  color: (widget.actualScreen == NavScreens.home)
+                      ? Colors.blueAccent
+                      : null),
             ),
             const Text(
               "Home",
@@ -55,7 +57,10 @@ class _NavigatorBarra extends State<NavigatorBar> {
                 if (widget.actualScreen != NavScreens.social)
                   {Navigator.of(context).pushReplacementNamed("/home/social")}
               },
-              icon: const Icon(Icons.chat_bubble_outline),
+              icon: Icon(Icons.chat_bubble_outline,
+                  color: (widget.actualScreen == NavScreens.social)
+                      ? Colors.blueAccent
+                      : null),
             ),
             const Text(
               "Social",
@@ -72,12 +77,13 @@ class _NavigatorBarra extends State<NavigatorBar> {
                 if (widget.actualScreen != NavScreens.colection)
                   {Navigator.of(context).pushReplacementNamed("/home/api")}
               },
-              icon: const Icon(
-                Icons.content_copy_sharp,
-              ),
+              icon: Icon(Icons.content_copy_sharp,
+                  color: (widget.actualScreen == NavScreens.colection)
+                      ? Colors.blueAccent
+                      : null),
             ),
             const Text(
-              "API",
+              "Collection",
               style: TextStyle(color: Colors.pinkAccent),
             )
           ],
@@ -91,7 +97,10 @@ class _NavigatorBarra extends State<NavigatorBar> {
                 if (widget.actualScreen != NavScreens.user)
                   {Navigator.of(context).pushReplacementNamed("/home/user")}
               },
-              icon: const Icon(Icons.person_outlined),
+              icon: Icon(Icons.person_outlined,
+                  color: (widget.actualScreen == NavScreens.user)
+                      ? Colors.blueAccent
+                      : null),
             ),
             const Text(
               "Profile",
