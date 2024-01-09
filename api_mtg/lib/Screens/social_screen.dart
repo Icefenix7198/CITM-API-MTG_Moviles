@@ -38,7 +38,11 @@ class SocialScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Text(
-                      "Loading API",
+                      (globalInfo.language == Idioma.spanish)
+                      ? "Cargando API"
+                      : (globalInfo.language == Idioma.catalan)
+                          ? "Carregant API"
+                          : "Loading API",
                       style: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black),
                     ),
                   )
@@ -104,7 +108,11 @@ class _SearchableListState extends State<_SearchableList> {
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: Text(
-                        "My Chats",
+                        (globalInfo.language == Idioma.spanish)
+                      ? "Conversaciones"
+                      : (globalInfo.language == Idioma.catalan)
+                          ? "Conversas"
+                          : "My Chats",
                         style: TextStyle(fontSize: 40, color: (globalInfo.darkMode) ? Colors.white : Colors.black),
                       ),
                     ),
@@ -172,7 +180,11 @@ class _SearchableListState extends State<_SearchableList> {
                             cursorColor: (globalInfo.darkMode) ? Colors.white : Colors.black,
                             style:  TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black),
                             decoration: InputDecoration(
-                              hintText: "Search Contacts",
+                              hintText: (globalInfo.language == Idioma.spanish)
+                      ? "Buscar Contactos"
+                      : (globalInfo.language == Idioma.catalan)
+                          ? "Buscar Contactes"
+                          : "Search Contacts",
                               hintStyle: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black),
                             ),
                           ),
