@@ -112,17 +112,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       });
                     },
                   ),
-                  SettingsAccountManagmentBotton(
-                    open: openedOption == SettingsMenus.accountManagment,
-                    onPressed: () {
-                      setState(() {
-                        openedOption =
-                            openedOption == SettingsMenus.accountManagment
-                                ? SettingsMenus.none
-                                : SettingsMenus.accountManagment;
-                      });
-                    },
-                  ),
 
                   SettingsVisibilityBotton(
                     open: openedOption == SettingsMenus.visibility,
@@ -135,17 +124,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     },
                   ),
 
-                  SettingsNotificationsBotton(
-                    open: openedOption == SettingsMenus.notifications,
-                    onPressed: () {
-                      setState(() {
-                        openedOption =
-                            openedOption == SettingsMenus.notifications
-                                ? SettingsMenus.none
-                                : SettingsMenus.notifications;
-                      });
-                    },
-                  ),
+                  // SettingsNotificationsBotton(
+                  //   open: openedOption == SettingsMenus.notifications,
+                  //   onPressed: () {
+                  //     setState(() {
+                  //       openedOption =
+                  //           openedOption == SettingsMenus.notifications
+                  //               ? SettingsMenus.none
+                  //               : SettingsMenus.notifications;
+                  //     });
+                  //   },
+                  // ),
 
                   //Languaje grey text
                   Text(
@@ -485,27 +474,33 @@ class _SettingsVisibilityBottonState extends State<SettingsVisibilityBotton> {
         ),
         //Texto only open
         widget.open
-            ? Text(
-                "Dark Mode",
-                style: TextStyle(
-                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
-                    fontSize: 21,
-                    fontStyle: FontStyle.italic),
-              )
-            : Container(),
-        widget.open
-            ? Checkbox(
-                value: globalInfo.darkMode,
-                onChanged: (value) => {
+            ? Row(
+              children: [
+              Text(( (globalInfo.darkMode) ? "Dark Mode" : "Brigth Mode"),style: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black,),),
+              IconButton(
+                onPressed: () => {
                   setState(
                     () {
-                      bool change = value!;
-                      value = (change) ? true : false;
-                      globalInfo.darkMode = value!;
-                      globalInfo.darkMode = value!;
+                      bool change = (globalInfo.darkMode) ? false : true;
+                      globalInfo.setDarkMode(change);
                     },
                   )
                 },
+                icon: globalInfo.darkMode
+                    ? Icon(
+                        Icons.sunny,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
+                        weight: 100,
+                      )
+                    : Icon(
+                        Icons.nightlight,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
+                        weight: 100,
+                      ),
+                )
+              ],
               )
             : Container(),
       ],

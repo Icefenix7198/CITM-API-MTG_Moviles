@@ -21,9 +21,9 @@ class GlobalInfo extends ChangeNotifier {
     required this.language,
   });
 
-  void setDarkMode(bool newValue) {
+  setDarkMode(bool newValue) {
     darkMode = newValue;
-    notifyListeners();
+    notifyListeners(); //Update Real Time
   }
 
   void setName(String newName) {
