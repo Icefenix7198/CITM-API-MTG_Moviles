@@ -1,5 +1,4 @@
 import 'package:api_mtg/Model/providerThing.dart';
-import 'package:api_mtg/Screens/HomeWIP.dart';
 import 'package:api_mtg/Screens/card_screen.dart';
 import 'package:api_mtg/Screens/settings_screen.dart';
 import 'package:api_mtg/Screens/social_screen.dart';
@@ -35,7 +34,6 @@ class MyApp extends StatelessWidget {
         routes: {
           "/": (context) => const PortadaScreen(),
           "/home": (context) => HomeScreen(),
-          "/home2": (context) => Home2(),
           "/home/api": (_) => ApiDataLoadApp(),
           "/home/social": (context) => SocialScreen(),
           "/home/api/card": (context) => CardScreen(),

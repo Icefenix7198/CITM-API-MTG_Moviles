@@ -33,11 +33,11 @@ class _CardGridHomeState extends State<CardGridHome> {
       itemCount: widget.cardList.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: axisCount,
-        mainAxisSpacing: 20.0,
-        crossAxisSpacing: 20.0,
-        childAspectRatio: 1,
+        mainAxisSpacing: cardPadding,
+        crossAxisSpacing: cardPadding,
+        childAspectRatio: 0.65,
       ),
-      padding: const EdgeInsets.all(cardPadding),
+      //padding: const EdgeInsets.all(cardPadding),
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
@@ -48,40 +48,14 @@ class _CardGridHomeState extends State<CardGridHome> {
             );
           },
           child: Container(
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              color: Colors.amber,
-            ),
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 5.0),
+                    padding: const EdgeInsets.only(bottom: 2.0),
                     child: Image(
                         image: NetworkImage(
-                            widget.cardList[index].imageUris.cropImg)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5.0),
-                    child: Text(
-                      widget.cardList[index].name,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5.0),
-                    child: Text(
-                      widget.cardList[index].type,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                      ),
-                    ),
+                            widget.cardList[index].imageUris.cardImg)),
                   ),
                 ],
               ),
