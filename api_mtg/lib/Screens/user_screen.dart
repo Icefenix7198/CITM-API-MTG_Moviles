@@ -2,10 +2,10 @@ import 'package:api_mtg/Model/providerThing.dart';
 import 'package:api_mtg/widgets/TabBarCards.dart';
 import 'package:api_mtg/widgets/card_grid.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:api_mtg/Model/card.dart';
 import 'package:provider/provider.dart';
+import 'package:api_mtg/Model/deck.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
@@ -204,7 +204,7 @@ class Decks extends StatefulWidget {
 }
 
 class _DecksState extends State<Decks> {
-  var num = 0;
+  var num = 2;
   bool showText = false;
   final textController = TextEditingController();
 
@@ -240,7 +240,7 @@ class _DecksState extends State<Decks> {
                     num = num + 1;
                   });
                 },
-                child: const Icon(CupertinoIcons.plus),
+                child: const Icon(Icons.add),
               ),
             ],
           ),
@@ -268,12 +268,10 @@ class _DecksState extends State<Decks> {
 }
 
 class DeckUnit extends StatelessWidget {
-  const DeckUnit({
-    super.key,
-    this.deckname = "Deck Name",
-  });
+  DeckUnit({super.key, this.deckname = "Deck Name"});
 
   final String deckname;
+  //Decks deck;
 
   @override
   Widget build(BuildContext context) {
