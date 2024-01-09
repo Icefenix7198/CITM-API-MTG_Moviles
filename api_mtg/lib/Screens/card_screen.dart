@@ -241,7 +241,7 @@ class _CardPrice extends StatelessWidget {
           ),
         ),
         Text(
-          "   ${cardMtg.prices.eur} €\n   ${cardMtg.prices.usd} \$\n   ${cardMtg.prices.tix} TIX",//TODO: columna o fila?
+          "   ${cardMtg.prices.eur} €\n   ${cardMtg.prices.usd} \$\n   ${cardMtg.prices.tix} TIX",
           style: const TextStyle(
             color: Colors.white,
           ),

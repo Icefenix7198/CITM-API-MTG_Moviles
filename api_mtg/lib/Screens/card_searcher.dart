@@ -23,7 +23,7 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
   void initState() {
     loadFavoriteList().then((loadedFavoriteList) {
       setState(() {
-        favoriteCards = loadedFavoriteList; //TODO: poner en home carga api?
+        favoriteCards = loadedFavoriteList; 
       });
     });
     super.initState();
@@ -77,7 +77,7 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
           alaList = snapshot.data![2];
           nphList = snapshot.data![3];
           displayedList = List.from(tspList);
-          checkFavourites(tspList);
+          checkFavourites(tspList);//Check all the favourite cards when loading APIs, that information is not retrieved from the API
           checkFavourites(lrwList);
           checkFavourites(alaList);
           checkFavourites(nphList);
@@ -89,7 +89,7 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
 }
 
 // ignore: must_be_immutable
-class _CardFilter extends StatefulWidget {//TODO: mirar d'arreglar això
+class _CardFilter extends StatefulWidget {
   _CardFilter({
     required this.cardListSearch,
   });
