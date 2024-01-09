@@ -7,6 +7,8 @@ enum SettingsMenus {
   accountManagment,
   visibility,
   notifications,
+  language,
+  help,
 }
 
 Map<String, dynamic> opciones = {
@@ -163,6 +165,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
 
+                  LanguageBotton(
+                   open: openedOption == SettingsMenus.language,
+                   settings: widget.settings,
+                    onPressed: () {
+                      setState(() {
+                        openedOption =
+                            openedOption == SettingsMenus.language
+                                ? SettingsMenus.none
+                                : SettingsMenus.language;
+                      });
+                    },
+                  ),
                   //Help grey text
                   Text(
                     "Help",
@@ -173,6 +187,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           : Colors.black54,
                     ),
                   ),
+
+                  HelpBotton(
+                    open: openedOption == SettingsMenus.help,
+                    settings: widget.settings,
+                    onPressed: () {
+                      setState(() {
+                        openedOption =
+                            openedOption == SettingsMenus.help
+                                ? SettingsMenus.none
+                                : SettingsMenus.help;
+                      });
+                    },)
                 ],
               ),
             )
@@ -567,6 +593,185 @@ class _SettingsNotificationsBottonState
             ],
           ),
         ),
+      ],
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class LanguageBotton extends StatefulWidget {
+  LanguageBotton({
+    super.key,
+    required this.open,
+    required this.onPressed,
+    required this.settings,
+  });
+
+  final bool open;
+  final void Function() onPressed;
+  Map<String, dynamic> settings;
+
+  @override
+  State<LanguageBotton> createState() =>
+      _LanguageBottonState();
+}
+
+class _LanguageBottonState extends State<LanguageBotton> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Row(
+            children: [
+              Icon(
+                Icons.remove_red_eye_outlined,
+                color:
+                    (widget.settings["darkMode"]) ? Colors.white : Colors.black,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "Language",
+                  style: TextStyle(
+                    color: (widget.settings["darkMode"])
+                        ? Colors.white
+                        : Colors.black,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              const Spacer(),
+              IconButton(
+                onPressed: widget.onPressed,
+                icon: widget.open
+                    ? Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: (widget.settings["darkMode"])
+                            ? Colors.white
+                            : Colors.black,
+                        weight: 100,
+                      )
+                    : Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: (widget.settings["darkMode"])
+                            ? Colors.white
+                            : Colors.black,
+                        weight: 100,
+                      ),
+              ),
+            ],
+          ),
+        ),
+        //Texto only open
+        widget.open
+            ? Text(
+                "English:",
+                style: TextStyle(
+                    color: (widget.settings["darkMode"])
+                        ? Colors.white
+                        : Colors.black,
+                    fontSize: 21,
+                    fontStyle: FontStyle.italic),
+              )
+            : Container(),
+        widget.open
+            ? Checkbox(
+                value: widget.settings["darkMode"],
+                onChanged: (value) => {
+                  setState(
+                    () {
+                      bool change = value!;
+                      value = (change) ? true : false;
+                      widget.settings["darkMode"] = value!;
+                      opciones["darkMode"] = value!;
+                    },
+                  )
+                },
+              )
+            : Container(),
+      ],
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class HelpBotton extends StatelessWidget {
+  HelpBotton({
+    super.key,
+    required this.open,
+    required this.onPressed,
+    required this.settings,
+  });
+
+  final bool open;
+  final void Function() onPressed;
+  Map<String, dynamic> settings;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        //Texto base que siempre aparece
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Row(
+            children: [
+              Icon(
+                Icons.account_circle_outlined, //Icono base
+                color: (settings["darkMode"]) ? Colors.white : Colors.black,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "Edit Profile", //Nombre del boton
+                  style: TextStyle(
+                    color: (settings["darkMode"]) ? Colors.white : Colors.black,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              const Spacer(),
+              //Flechita abierto cerrado
+              IconButton(
+                onPressed: onPressed,
+                icon: open
+                    ? Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: (settings["darkMode"])
+                            ? Colors.white
+                            : Colors.black,
+                        weight: 100,
+                      )
+                    : Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: (settings["darkMode"])
+                            ? Colors.white
+                            : Colors.black,
+                        weight: 100,
+                      ),
+              ),
+            ],
+          ),
+        ),
+        open
+            ? Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Username:",
+                      style: TextStyle(
+                          color: (settings["darkMode"])
+                              ? Colors.white
+                              : Colors.black,
+                          fontSize: 20),
+                    ),
+                  ),
+                ],
+              )
+            : Container(), //usernane
       ],
     );
   }
