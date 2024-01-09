@@ -138,7 +138,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                   //Languaje grey text
                   Text(
-                    "Languaje",
+                    (globalInfo.language == Idioma.spanish)
+                        ? "Idioma"
+                        : (globalInfo.language == Idioma.catalan)
+                            ? "Llengua"
+                            : "Language",
                     style: TextStyle(
                       fontSize: 20,
                       color: (globalInfo.darkMode)
@@ -159,7 +163,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   //Help grey text
                   Text(
-                    "Help",
+                    (globalInfo.language == Idioma.spanish)
+                        ? "Ayuda"
+                        : (globalInfo.language == Idioma.catalan)
+                            ? "Ajuda"
+                            : "Help",
                     style: TextStyle(
                       fontSize: 20,
                       color: (globalInfo.darkMode)
@@ -221,7 +229,11 @@ class _SettingsEditProfileBottonState extends State<SettingsEditProfileBotton> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  (globalInfo.darkMode) ? "Edit Profile" : "Testeo",
+                  (globalInfo.language == Idioma.spanish)
+                      ? "Editar Perfil"
+                      : (globalInfo.language == Idioma.catalan)
+                          ? "Editar Perfil"
+                          : "Edit Profile",
                   style: TextStyle(
                     color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w500,
@@ -250,7 +262,11 @@ class _SettingsEditProfileBottonState extends State<SettingsEditProfileBotton> {
         ),
         widget.open
             ? Text(
-                "Profile Info",
+                (globalInfo.language == Idioma.spanish)
+                    ? "Info. perfil"
+                    : (globalInfo.language == Idioma.catalan)
+                        ? "Info. perfil"
+                        : "Profile Info.",
                 style: TextStyle(
                     color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontSize: 26,
@@ -264,7 +280,11 @@ class _SettingsEditProfileBottonState extends State<SettingsEditProfileBotton> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Your Name:",
+                      (globalInfo.language == Idioma.spanish)
+                          ? "Nombre:"
+                          : (globalInfo.language == Idioma.catalan)
+                              ? "Nom:"
+                              : "Your Name:",
                       style: TextStyle(
                           color: (globalInfo.darkMode)
                               ? Colors.white
@@ -445,7 +465,11 @@ class _SettingsVisibilityBottonState extends State<SettingsVisibilityBotton> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  "Visibility",
+                  (globalInfo.language == Idioma.spanish)
+                      ? "Visibilidad"
+                      : (globalInfo.language == Idioma.catalan)
+                          ? "Visibilitat"
+                          : "Visibility",
                   style: TextStyle(
                     color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w500,
@@ -475,32 +499,40 @@ class _SettingsVisibilityBottonState extends State<SettingsVisibilityBotton> {
         //Texto only open
         widget.open
             ? Row(
-              children: [
-              Text(( (globalInfo.darkMode) ? "Dark Mode" : "Brigth Mode"),style: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black,),),
-              IconButton(
-                onPressed: () => {
-                  setState(
-                    () {
-                      bool change = (globalInfo.darkMode) ? false : true;
-                      globalInfo.setDarkMode(change);
-                    },
-                  )
-                },
-                icon: globalInfo.darkMode
-                    ? Icon(
-                        Icons.sunny,
-                        color:
-                            (globalInfo.darkMode) ? Colors.white : Colors.black,
-                        weight: 100,
+                children: [
+                  Text(
+                    ((globalInfo.darkMode) ? "Dark Mode" : "Brigth Mode"),
+                    style: TextStyle(
+                      color:
+                          (globalInfo.darkMode) ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => {
+                      setState(
+                        () {
+                          bool change = (globalInfo.darkMode) ? false : true;
+                          globalInfo.setDarkMode(change);
+                        },
                       )
-                    : Icon(
-                        Icons.nightlight,
-                        color:
-                            (globalInfo.darkMode) ? Colors.white : Colors.black,
-                        weight: 100,
-                      ),
-                )
-              ],
+                    },
+                    icon: globalInfo.darkMode
+                        ? Icon(
+                            Icons.sunny,
+                            color: (globalInfo.darkMode)
+                                ? Colors.white
+                                : Colors.black,
+                            weight: 100,
+                          )
+                        : Icon(
+                            Icons.nightlight,
+                            color: (globalInfo.darkMode)
+                                ? Colors.white
+                                : Colors.black,
+                            weight: 100,
+                          ),
+                  )
+                ],
               )
             : Container(),
       ],
@@ -601,13 +633,17 @@ class _LanguageBottonState extends State<LanguageBotton> {
           child: Row(
             children: [
               Icon(
-                Icons.remove_red_eye_outlined,
+                Icons.abc_outlined,
                 color: (globalInfo.darkMode) ? Colors.white : Colors.black,
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  "Language",
+                  (globalInfo.language == Idioma.spanish)
+                      ? "Idiomas"
+                      : (globalInfo.language == Idioma.catalan)
+                          ? "Llenguas"
+                          : "Languagues",
                   style: TextStyle(
                     color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w500,
@@ -636,26 +672,70 @@ class _LanguageBottonState extends State<LanguageBotton> {
         ),
         //Texto only open
         widget.open
-            ? Text(
-                "English:",
-                style: TextStyle(
-                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
-                    fontSize: 21,
-                    fontStyle: FontStyle.italic),
-              )
-            : Container(),
-        widget.open
-            ? Checkbox(
-                value: globalInfo.darkMode,
-                onChanged: (value) => {
-                  setState(
-                    () {
-                      bool change = value!;
-                      value = (change) ? true : false;
-                      globalInfo.darkMode = value!;
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                    onPressed: () => {
+                      setState(
+                        () {
+                          globalInfo.setLanguage(Idioma.spanish);
+                        },
+                      )
                     },
-                  )
-                },
+                    child: Text(
+                      "Español",
+                      style: TextStyle(
+                          color: (globalInfo.language == Idioma.spanish)
+                              ? Colors.blue
+                              : (globalInfo.darkMode)
+                                  ? Colors.white
+                                  : Colors.black,
+                          fontSize: 21,
+                          fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => {
+                      setState(
+                        () {
+                          globalInfo.setLanguage(Idioma.catalan);
+                        },
+                      )
+                    },
+                    child: Text(
+                      "Catala",
+                      style: TextStyle(
+                          color: (globalInfo.language == Idioma.catalan)
+                              ? Colors.blue
+                              : (globalInfo.darkMode)
+                                  ? Colors.white
+                                  : Colors.black,
+                          fontSize: 21,
+                          fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => {
+                      setState(
+                        () {
+                          globalInfo.setLanguage(Idioma.english);
+                        },
+                      )
+                    },
+                    child: Text(
+                      "English",
+                      style: TextStyle(
+                          color: (globalInfo.language == Idioma.english)
+                              ? Colors.blue
+                              : (globalInfo.darkMode)
+                                  ? Colors.white
+                                  : Colors.black,
+                          fontSize: 21,
+                          fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                ],
               )
             : Container(),
       ],
@@ -692,7 +772,11 @@ class HelpBotton extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  "Edit Profile", //Nombre del boton
+                  (globalInfo.language == Idioma.spanish)
+                      ? "Preguntas y Soporte"
+                      : (globalInfo.language == Idioma.catalan)
+                          ? "Preguntes i Suport"
+                          : "FAQ and Support", //Nombre del boton
                   style: TextStyle(
                     color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w500,
@@ -720,187 +804,16 @@ class HelpBotton extends StatelessWidget {
             ],
           ),
         ),
-        open
-            ? Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Username:",
-                      style: TextStyle(
-                          color: (globalInfo.darkMode)
-                              ? Colors.white
-                              : Colors.black,
-                          fontSize: 20),
-                    ),
-                  ),
-                ],
-              )
-            : Container(), //usernane
-      ],
-    );
-  }
-}
-
-// ignore: must_be_immutable
-class SettingsPlantillaBotton extends StatelessWidget {
-  SettingsPlantillaBotton({
-    super.key,
-    required this.open,
-    required this.onPressed,
-    required this.settings,
-  });
-
-  final bool open;
-  final void Function() onPressed;
-  Map<String, dynamic> settings;
-
-  @override
-  Widget build(BuildContext context) {
-    final globalInfo = context.watch<GlobalInfo>();
-
-    return Column(
-      children: [
-        //Texto base que siempre aparece
-        Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Row(
-            children: [
-              Icon(
-                Icons.account_circle_outlined, //Icono base
-                color: (globalInfo.darkMode) ? Colors.white : Colors.black,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  "Edit Profile", //Nombre del boton
-                  style: TextStyle(
-                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              const Spacer(),
-              //Flechita abierto cerrado
-              IconButton(
-                onPressed: onPressed,
-                icon: open
-                    ? Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color:
-                            (globalInfo.darkMode) ? Colors.white : Colors.black,
-                        weight: 100,
-                      )
-                    : Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color:
-                            (globalInfo.darkMode) ? Colors.white : Colors.black,
-                        weight: 100,
-                      ),
-              ),
-            ],
-          ),
-        ),
-        //Resto de elementos que solo se han de mostrar si Open = true
         open
             ? Text(
-                "Profile Info",
+                "Muuuuuucho texto:",
                 style: TextStyle(
                     color: (globalInfo.darkMode) ? Colors.white : Colors.black,
-                    fontSize: 26,
-                    fontStyle: FontStyle.italic),
-              )
-            : Container(),
-        //Name
-        open
-            ? Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Your Name:",
-                      style: TextStyle(
-                          color: (globalInfo.darkMode)
-                              ? Colors.white
-                              : Colors.black,
-                          fontSize: 20),
-                    ),
-                  ),
-                  const Spacer(
-                    flex: 1,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Expanded(
-                      flex: 60,
-                      child: SizedBox(
-                        width: 200,
-                        child: TextField(
-                          style: TextStyle(
-                              color: (globalInfo.darkMode)
-                                  ? Colors.white70
-                                  : Colors.black87,
-                              fontSize: 14),
-                          maxLength: 36,
-                          onSubmitted: (text) {
-                            //El name de settings se vuelve lo que pongamos
-                            settings["name"] = text;
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Spacer(
-                    flex: 40,
-                  ),
-                ],
-              )
-            : Container(), //Name
-        open
-            ? Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Username:",
-                      style: TextStyle(
-                          color: (globalInfo.darkMode)
-                              ? Colors.white
-                              : Colors.black,
-                          fontSize: 20),
-                    ),
-                  ),
-                  const Spacer(
-                    flex: 1,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Expanded(
-                      flex: 60,
-                      child: SizedBox(
-                        width: 200,
-                        child: TextField(
-                          style: TextStyle(
-                              color: (globalInfo.darkMode)
-                                  ? Colors.white70
-                                  : Colors.black87,
-                              fontSize: 14),
-                          maxLength: 25,
-                          onSubmitted: (text) {
-                            //El username de settings se vuelve lo que pongamos;
-                            settings["username"] = text;
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Spacer(
-                    flex: 40,
-                  ),
-                ],
+                    fontSize: 20),
               )
             : Container(), //usernane
       ],
     );
   }
 }
+

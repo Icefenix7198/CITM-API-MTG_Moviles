@@ -35,4 +35,9 @@ class GlobalInfo extends ChangeNotifier {
     username = text;
     notifyListeners();
   }
+
+  void setLanguage(Idioma newIdioma) {
+    language = newIdioma;
+    notifyListeners();
+  }
 }
