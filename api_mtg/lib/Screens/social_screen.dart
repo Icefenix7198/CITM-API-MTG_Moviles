@@ -179,25 +179,88 @@ class _SearchableListState extends State<_SearchableList> {
         ),
         Expanded(
           flex: 60,
-          child: ListView.builder(
-            itemCount: filteredList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Column(
-                children: [
-                  UsersListItem(user: filteredList[index]),
-                  const Divider(
-                    height: 0,
-                    thickness: 0.12,
+          child: Stack(
+            children: [
+              ListView.builder(
+                itemCount: filteredList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    children: [
+                      UsersListItem(user: filteredList[index]),
+                      const Divider(
+                        height: 0,
+                        thickness: 0.12,
+                      ),
+                    ],
+                  );
+                },
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      color: Colors.red.shade400, shape: BoxShape.circle),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.add,
+                      color: Colors.black,
+                      size: 40,
+                    ),
+                    onPressed: () {
+                      setState(
+                        () {
+                          OpenPopup(context);
+                        },
+                      );
+                    },
                   ),
-                ],
-              );
-            },
+                ),
+              ),
+            ],
           ),
         ),
         const NavigatorBar(
           actualScreen: NavScreens.social,
         ),
       ],
+    );
+  }
+
+  // ignore: non_constant_identifier_names
+  Future<String?> OpenPopup(BuildContext context) {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Add User'),
+        content: const Column(
+          children: [
+            Text('Fill user Data'),
+            TextField(
+              /*onChanged: (change) {
+                setState(
+                  () {
+                    final search = change;
+                  },
+                );
+              },*/
+              decoration: InputDecoration(
+                labelText: 'Name',
+              ),
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Cancel'),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Create'),
+            child: const Text('Create'),
+          ),
+        ],
+      ),
     );
   }
 }
