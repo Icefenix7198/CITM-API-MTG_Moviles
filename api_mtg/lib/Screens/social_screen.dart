@@ -1,9 +1,12 @@
 import 'package:api_mtg/Model/Users.dart';
+import 'package:api_mtg/Model/providerThing.dart';
+import 'package:api_mtg/main.dart';
 import 'package:api_mtg/widgets/api_users.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
 //import 'package:api_mtg/widgets/api_users.dart';
 import 'package:api_mtg/widgets/user_list_display.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SocialScreen extends StatelessWidget {
   const SocialScreen({
@@ -12,8 +15,12 @@ class SocialScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
+
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(33, 30, 30, 0.965),
+      backgroundColor: (globalInfo.darkMode)
+          ? const Color.fromARGB(255, 49, 49, 49)
+          : const Color.fromARGB(255, 223, 223, 223),
       body: FutureBuilder(
         future: apiLoadUsers(),
         builder: (

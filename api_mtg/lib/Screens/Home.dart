@@ -1,6 +1,8 @@
 // ignore: file_names
+import 'package:api_mtg/Model/providerThing.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -9,7 +11,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
+
     return Scaffold(
+      backgroundColor: (globalInfo.darkMode)
+          ? const Color.fromARGB(255, 49, 49, 49)
+          : const Color.fromARGB(255, 223, 223, 223),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -33,20 +40,11 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const Spacer(),
-            ElevatedButton(
-              child: const Text("Go API"),
-              onPressed: () {
-                Navigator.of(context).pushNamed("/home/api");
-              },
-            ),
-            const Spacer(),
-            ElevatedButton(
-              child: const Text("Go to Personal Deck"),
-              onPressed: () {
-                Navigator.of(context).pushNamed("/home/user/deck");
-              },
-            ),
+
+            //Lista cartas?
+
+            const ListImages(),
+
             const Spacer(),
             const NavigatorBar(
               actualScreen: NavScreens.home,
@@ -55,5 +53,18 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class ListImages extends StatelessWidget {
+  const ListImages({
+    super.key,
+  });
+
+  //Variables por paramentro del widget, se acceden mediante widget.nombre
+
+  @override
+  Placeholder build(BuildContext context) {
+    return const Placeholder(); //Aqui dentro va toda la funcion
   }
 }

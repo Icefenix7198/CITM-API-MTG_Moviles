@@ -1,7 +1,9 @@
 import 'package:api_mtg/Model/card.dart';
+import 'package:api_mtg/Model/providerThing.dart';
 import 'package:api_mtg/widgets/api_load.dart';
 import 'package:api_mtg/widgets/personal_deck.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserScreenDeck extends StatefulWidget {
   const UserScreenDeck({super.key});
@@ -15,8 +17,12 @@ class _UserScreenDeckState extends State<UserScreenDeck> {
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
+
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(33, 30, 30, 0.965),
+      backgroundColor: (globalInfo.darkMode)
+          ? const Color.fromARGB(255, 49, 49, 49)
+          : const Color.fromARGB(255, 223, 223, 223),
       body: FutureBuilder(
         future: apiLoadTSP(),
         builder: (
