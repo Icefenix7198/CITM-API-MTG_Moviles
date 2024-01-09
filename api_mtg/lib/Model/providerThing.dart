@@ -18,6 +18,7 @@ class GlobalInfo extends ChangeNotifier {
   List<MtgCard> alaList = [];
   List<MtgCard> nphList = [];
   List<MtgCard> displayedList = [];
+  List<MtgCard> favoriteCards = [];
   
   GlobalInfo({
     required this.name,
@@ -30,11 +31,6 @@ class GlobalInfo extends ChangeNotifier {
   setDarkMode(bool newValue) {
     darkMode = newValue;
     notifyListeners(); //Update Real Time
-  }
-
-  setList(List<MtgCard> listCards, List<MtgCard> newListCards){
-    listCards = newListCards;
-    notifyListeners();
   }
 
   void setName(String newName) {

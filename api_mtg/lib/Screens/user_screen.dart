@@ -72,9 +72,9 @@ class UserScreen extends StatelessWidget {
                   globalInfo.username,
                   style: TextStyle(
                       color: (globalInfo.darkMode)
-                            ? const Color.fromARGB(255, 158, 158, 158)
-                            : const Color.fromARGB(255, 56, 56, 56),  
-                            fontSize: 12),
+                          ? const Color.fromARGB(255, 158, 158, 158)
+                          : const Color.fromARGB(255, 56, 56, 56),
+                      fontSize: 12),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 10),
@@ -120,8 +120,8 @@ class UserScreen extends StatelessWidget {
                   Expanded(
                     child: Container(
                       color: (globalInfo.darkMode)
-                            ? const Color.fromARGB(255, 53, 53, 53)
-                            : const Color.fromARGB(255, 156, 156, 156),
+                          ? const Color.fromARGB(255, 53, 53, 53)
+                          : const Color.fromARGB(255, 156, 156, 156),
                       child: const TabBarView(
                         children: <Widget>[
                           Cards(),
@@ -136,7 +136,9 @@ class UserScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const NavigatorBar(actualScreen: NavScreens.user,),
+                  const NavigatorBar(
+                    actualScreen: NavScreens.user,
+                  ),
                 ],
               ),
             ),
@@ -159,9 +161,11 @@ class Cards extends StatefulWidget {
 class _CardsState extends State<Cards> {
   @override
   void initState() {
+    final globalInfo = Provider.of<GlobalInfo>(context, listen: false);
+
     loadFavoriteList().then((loadedFavoriteList) {
       setState(() {
-        favoriteCards = loadedFavoriteList;
+        globalInfo.favoriteCards = loadedFavoriteList;
       });
     });
     super.initState();
@@ -169,7 +173,8 @@ class _CardsState extends State<Cards> {
 
   @override
   Widget build(BuildContext context) {
-    return CardGrid(cardList: favoriteCards);
+    final globalInfo = context.watch<GlobalInfo>();
+    return CardGrid(cardList: globalInfo.favoriteCards);
   }
 }
 
@@ -280,16 +285,18 @@ class DeckUnit extends StatelessWidget {
           flex: 29,
           child: Container(
             color: (globalInfo.darkMode)
-                            ? const Color.fromARGB(255, 53, 53, 53)
-                            : const Color.fromARGB(255, 156, 156, 156),
+                ? const Color.fromARGB(255, 53, 53, 53)
+                : const Color.fromARGB(255, 156, 156, 156),
             child: Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
                 padding: EdgeInsets.only(bottom: 4),
                 child: Text(
                   deckname,
-                  style: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black,
-                   fontSize: 18),
+                  style: TextStyle(
+                      color:
+                          (globalInfo.darkMode) ? Colors.white : Colors.black,
+                      fontSize: 18),
                 ),
               ),
             ),
@@ -307,7 +314,10 @@ class DeckUnit extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Text(
                 "num cards",
-                style: TextStyle(color: (globalInfo.darkMode) ? Colors.white70 : Colors.black87, fontSize: 12),
+                style: TextStyle(
+                    color:
+                        (globalInfo.darkMode) ? Colors.white70 : Colors.black87,
+                    fontSize: 12),
               ),
             ),
           ),
@@ -333,7 +343,9 @@ class BoxInfo extends StatelessWidget {
       width: 65,
       height: 53,
       decoration: BoxDecoration(
-        color: (globalInfo.darkMode) ? const Color.fromARGB(255, 46, 46, 46) : const Color.fromARGB(255, 196, 196, 196),
+        color: (globalInfo.darkMode)
+            ? const Color.fromARGB(255, 46, 46, 46)
+            : const Color.fromARGB(255, 196, 196, 196),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Stack(
@@ -342,14 +354,18 @@ class BoxInfo extends StatelessWidget {
             alignment: const Alignment(0, -0.5),
             child: Text(
               "$num",
-              style: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black, fontSize: 16),
+              style: TextStyle(
+                  color: (globalInfo.darkMode) ? Colors.white : Colors.black,
+                  fontSize: 16),
             ),
           ),
           Align(
             alignment: const Alignment(0, 0.5),
             child: Text(
               text,
-              style: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black, fontSize: 11),
+              style: TextStyle(
+                  color: (globalInfo.darkMode) ? Colors.white : Colors.black,
+                  fontSize: 11),
             ),
           ),
         ],

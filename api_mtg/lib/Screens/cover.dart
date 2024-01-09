@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:api_mtg/Model/card.dart';
+import 'package:api_mtg/Model/providerThing.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 
 class PortadaScreen extends StatelessWidget {
   const PortadaScreen({
@@ -84,6 +86,7 @@ class EnterButton extends StatefulWidget {
 class _EnterButtonState extends State<EnterButton> {
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
     return SizedBox(
       width: 140.0,
       height: 40.0,
@@ -105,7 +108,7 @@ class _EnterButtonState extends State<EnterButton> {
           final file = File(
               "${dir.absolute.path}/favorite-list.json"); //Check if favorite list json exists, if it does not, create an empty one
           if (!await file.exists()) {
-            saveFavoriteList(favoriteCards);
+            saveFavoriteList(globalInfo.favoriteCards);
           }
         },
       ),

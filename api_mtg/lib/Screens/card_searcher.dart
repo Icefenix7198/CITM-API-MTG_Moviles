@@ -17,18 +17,19 @@ class ApiDataLoadApp extends StatefulWidget {
 class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
   @override
   void initState() {
+    final globalInfo = Provider.of<GlobalInfo>(context, listen: false);
     loadFavoriteList().then((loadedFavoriteList) {
       setState(() {
-        favoriteCards = loadedFavoriteList;
+        globalInfo.favoriteCards = loadedFavoriteList;
       });
     });
     super.initState();
   }
 
-  void checkFavourites(List<MtgCard> collectionList) {
+  void checkFavourites(List<MtgCard> favList, List<MtgCard> collectionList) {
     for (int i = 0; i < collectionList.length; i++) {
-      for (int j = 0; j < favoriteCards.length; j++) {
-        if (collectionList[i].name == favoriteCards[j].name) {
+      for (int j = 0; j < favList.length; j++) {
+        if (collectionList[i].name == favList[j].name) {
           collectionList[i].isFav = true;
         }
       }
@@ -77,11 +78,13 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
           globalInfo.alaList = snapshot.data![2];
           globalInfo.nphList = snapshot.data![3];
           globalInfo.displayedList = List.from(globalInfo.tspList);
-          checkFavourites(globalInfo
-              .tspList); //Check all the favourite cards when loading APIs, that information is not retrieved from the API
-          checkFavourites(globalInfo.lrwList);
-          checkFavourites(globalInfo.alaList);
-          checkFavourites(globalInfo.nphList);
+          checkFavourites(
+              globalInfo.favoriteCards,
+              globalInfo
+                  .tspList); //Check all the favourite cards when loading APIs, that information is not retrieved from the API
+          checkFavourites(globalInfo.favoriteCards, globalInfo.lrwList);
+          checkFavourites(globalInfo.favoriteCards, globalInfo.alaList);
+          checkFavourites(globalInfo.favoriteCards, globalInfo.nphList);
           return _CardFilter(cardListSearch: globalInfo.displayedList);
         },
       ),
@@ -136,7 +139,8 @@ class _CardFilterState extends State<_CardFilter> {
           Expanded(
             flex: 70,
             child: CardGrid(
-              cardList: listFiltered.isEmpty ? widget.cardListSearch : listFiltered,
+              cardList:
+                  listFiltered.isEmpty ? widget.cardListSearch : listFiltered,
             ),
           ),
           const NavigatorBar(

@@ -1,8 +1,9 @@
+
 import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
 import 'dart:io';
 
-List<MtgCard> favoriteCards = [];
+
 
 class MtgCard {
   String name;
@@ -59,14 +60,14 @@ Future<List<MtgCard>> loadFavoriteList() async {
       .toList();
 }
 
-void addCard(MtgCard favCard) {
-  favoriteCards.add(favCard);
-  saveFavoriteList(favoriteCards);
+void addCard(List<MtgCard> listCards, MtgCard favCard) {
+  listCards.add(favCard);
+  saveFavoriteList(listCards);
 }
 
-void deleteCard(MtgCard favCard) {
-  favoriteCards.removeWhere((element) => element.name == favCard.name);
-  saveFavoriteList(favoriteCards);
+void deleteCard(List<MtgCard> listCards,MtgCard favCard) {
+  listCards.removeWhere((element) => element.name == favCard.name);
+  saveFavoriteList(listCards);
 }
 
 class ImageUris {

@@ -1,4 +1,6 @@
+
 import 'package:api_mtg/Model/card.dart';
+import 'package:api_mtg/Model/providerThing.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -69,6 +71,7 @@ class _CardAppBar extends StatefulWidget {
 class _CardAppBarState extends State<_CardAppBar> {
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
     final MtgCard cardMtg = context.read<MtgCard>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,10 +89,10 @@ class _CardAppBarState extends State<_CardAppBar> {
             setState(() {
               if (cardMtg.isFav) {
                 cardMtg.isFav = false;
-                deleteCard(cardMtg);
+                deleteCard(globalInfo.favoriteCards, cardMtg);
               } else {
                 cardMtg.isFav = true;
-                addCard(cardMtg);
+                addCard(globalInfo.favoriteCards, cardMtg);
               }
             });
           },
