@@ -1,17 +1,24 @@
+import 'package:api_mtg/Model/providerThing.dart';
+import 'package:api_mtg/main.dart';
 import 'package:api_mtg/widgets/TabBarCards.dart';
 import 'package:api_mtg/widgets/card_grid.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:api_mtg/Model/card.dart';
+import 'package:provider/provider.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
+
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(33, 30, 30, 0.965),
+      backgroundColor: (globalInfo.darkMode)
+          ? const Color.fromARGB(255, 49, 49, 49)
+          : const Color.fromARGB(255, 223, 223, 223),
       body: Column(
         children: [
           Expanded(
@@ -58,13 +65,13 @@ class UserScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Text(
-                  "Name",
-                  style: TextStyle(color: Colors.white),
+                Text(
+                  globalInfo.name,
+                  style: const TextStyle(color: Colors.white),
                 ),
-                const Text(
-                  "username",
-                  style: TextStyle(
+                Text(
+                  globalInfo.username,
+                  style: const TextStyle(
                       color: Color.fromARGB(255, 158, 158, 158), fontSize: 12),
                 ),
                 const Padding(

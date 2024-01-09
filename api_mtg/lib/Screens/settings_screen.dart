@@ -1,5 +1,8 @@
 // ignore: file_names
+import 'package:api_mtg/Model/providerThing.dart';
+import 'package:api_mtg/main.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum SettingsMenus {
   none,
@@ -11,21 +14,12 @@ enum SettingsMenus {
   help,
 }
 
-Map<String, dynamic> opciones = {
-  "name": "Name",
-  "username": "Username",
-  "private": false,
-  "darkMode": true,
-};
-
 // ignore: must_be_immutable
 class SettingsScreen extends StatefulWidget {
   SettingsScreen({
     super.key,
-    required this.settings,
   });
 
-  Map<String, dynamic> settings;
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
@@ -35,8 +29,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
     return Scaffold(
-      backgroundColor: (widget.settings["darkMode"])
+      backgroundColor: (globalInfo.darkMode)
           ? const Color.fromARGB(255, 49, 49, 49)
           : const Color.fromARGB(255, 223, 223, 223),
       body: Center(
@@ -46,8 +41,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             //Cuadro negro superior
             Container(
-              color:
-                  (widget.settings["darkMode"]) ? Colors.black : Colors.white,
+              color: (globalInfo.darkMode) ? Colors.black : Colors.white,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -59,9 +53,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       onPressed: () => {Navigator.of(context).pop()},
                       icon: Icon(
                         Icons.arrow_back_outlined,
-                        color: (widget.settings["darkMode"])
-                            ? Colors.white
-                            : Colors.black,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         size: 34,
                       ),
                     ),
@@ -72,9 +65,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(30.0),
                       child: Text(
-                        "Settings",
+                        (globalInfo.language == Idioma.spanish)
+                            ? "Ajustes"
+                            : (globalInfo.language == Idioma.catalan)
+                                ? "Configuracio"
+                                : "Settings",
                         style: TextStyle(
-                          color: (widget.settings["darkMode"])
+                          color: (globalInfo.darkMode)
                               ? Colors.white54
                               : Colors.black54,
                           fontSize: 42,
@@ -100,7 +97,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     "Profile",
                     style: TextStyle(
                       fontSize: 20,
-                      color: (widget.settings["darkMode"])
+                      color: (globalInfo.darkMode)
                           ? Colors.white54
                           : Colors.black54,
                     ),
@@ -108,7 +105,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   //Botones varios
                   SettingsEditProfileBotton(
                     open: openedOption == SettingsMenus.editProfile,
-                    settings: widget.settings,
                     onPressed: () {
                       setState(() {
                         openedOption = openedOption == SettingsMenus.editProfile
@@ -119,7 +115,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   SettingsAccountManagmentBotton(
                     open: openedOption == SettingsMenus.accountManagment,
-                    settings: widget.settings,
                     onPressed: () {
                       setState(() {
                         openedOption =
@@ -132,7 +127,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                   SettingsVisibilityBotton(
                     open: openedOption == SettingsMenus.visibility,
-                    settings: widget.settings,
                     onPressed: () {
                       setState(() {
                         openedOption = openedOption == SettingsMenus.visibility
@@ -159,21 +153,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     "Languaje",
                     style: TextStyle(
                       fontSize: 20,
-                      color: (widget.settings["darkMode"])
+                      color: (globalInfo.darkMode)
                           ? Colors.white54
                           : Colors.black54,
                     ),
                   ),
 
                   LanguageBotton(
-                   open: openedOption == SettingsMenus.language,
-                   settings: widget.settings,
+                    open: openedOption == SettingsMenus.language,
                     onPressed: () {
                       setState(() {
-                        openedOption =
-                            openedOption == SettingsMenus.language
-                                ? SettingsMenus.none
-                                : SettingsMenus.language;
+                        openedOption = openedOption == SettingsMenus.language
+                            ? SettingsMenus.none
+                            : SettingsMenus.language;
                       });
                     },
                   ),
@@ -182,7 +174,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     "Help",
                     style: TextStyle(
                       fontSize: 20,
-                      color: (widget.settings["darkMode"])
+                      color: (globalInfo.darkMode)
                           ? Colors.white54
                           : Colors.black54,
                     ),
@@ -190,15 +182,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                   HelpBotton(
                     open: openedOption == SettingsMenus.help,
-                    settings: widget.settings,
                     onPressed: () {
                       setState(() {
-                        openedOption =
-                            openedOption == SettingsMenus.help
-                                ? SettingsMenus.none
-                                : SettingsMenus.help;
+                        openedOption = openedOption == SettingsMenus.help
+                            ? SettingsMenus.none
+                            : SettingsMenus.help;
                       });
-                    },)
+                    },
+                  )
                 ],
               ),
             )
@@ -211,16 +202,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
 // ignore: must_be_immutable
 class SettingsEditProfileBotton extends StatefulWidget {
-  SettingsEditProfileBotton({
+  const SettingsEditProfileBotton({
     super.key,
     required this.open,
     required this.onPressed,
-    required this.settings,
   });
 
   final bool open;
   final void Function() onPressed;
-  Map<String, dynamic> settings;
 
   @override
   State<SettingsEditProfileBotton> createState() =>
@@ -230,6 +219,7 @@ class SettingsEditProfileBotton extends StatefulWidget {
 class _SettingsEditProfileBottonState extends State<SettingsEditProfileBotton> {
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
     return Column(
       children: [
         Padding(
@@ -238,17 +228,14 @@ class _SettingsEditProfileBottonState extends State<SettingsEditProfileBotton> {
             children: [
               Icon(
                 Icons.account_circle_outlined,
-                color:
-                    (widget.settings["darkMode"]) ? Colors.white : Colors.black,
+                color: (globalInfo.darkMode) ? Colors.white : Colors.black,
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  (opciones["darkMode"]) ? "Edit Profile" : "Testeo",
+                  (globalInfo.darkMode) ? "Edit Profile" : "Testeo",
                   style: TextStyle(
-                    color: (widget.settings["darkMode"])
-                        ? Colors.white
-                        : Colors.black,
+                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -259,16 +246,14 @@ class _SettingsEditProfileBottonState extends State<SettingsEditProfileBotton> {
                 icon: widget.open
                     ? Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: (widget.settings["darkMode"])
-                            ? Colors.white
-                            : Colors.black,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       )
                     : Icon(
                         Icons.arrow_forward_ios_rounded,
-                        color: (widget.settings["darkMode"])
-                            ? Colors.white
-                            : Colors.black,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       ),
               ),
@@ -279,9 +264,7 @@ class _SettingsEditProfileBottonState extends State<SettingsEditProfileBotton> {
             ? Text(
                 "Profile Info",
                 style: TextStyle(
-                    color: (widget.settings["darkMode"])
-                        ? Colors.white
-                        : Colors.black,
+                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontSize: 26,
                     fontStyle: FontStyle.italic),
               )
@@ -295,7 +278,7 @@ class _SettingsEditProfileBottonState extends State<SettingsEditProfileBotton> {
                     child: Text(
                       "Your Name:",
                       style: TextStyle(
-                          color: (widget.settings["darkMode"])
+                          color: (globalInfo.darkMode)
                               ? Colors.white
                               : Colors.black,
                           fontSize: 20),
@@ -312,14 +295,14 @@ class _SettingsEditProfileBottonState extends State<SettingsEditProfileBotton> {
                         width: 200,
                         child: TextField(
                           style: TextStyle(
-                              color: (widget.settings["darkMode"])
+                              color: (globalInfo.darkMode)
                                   ? Colors.white70
                                   : Colors.black87,
                               fontSize: 14),
                           maxLength: 36,
                           onSubmitted: (text) {
                             //El name de settings se vuelve lo que pongamos
-                            widget.settings["name"] = text;
+                            globalInfo.setName(text);
                           },
                         ),
                       ),
@@ -339,7 +322,7 @@ class _SettingsEditProfileBottonState extends State<SettingsEditProfileBotton> {
                     child: Text(
                       "Username:",
                       style: TextStyle(
-                          color: (widget.settings["darkMode"])
+                          color: (globalInfo.darkMode)
                               ? Colors.white
                               : Colors.black,
                           fontSize: 20),
@@ -356,14 +339,14 @@ class _SettingsEditProfileBottonState extends State<SettingsEditProfileBotton> {
                         width: 200,
                         child: TextField(
                           style: TextStyle(
-                              color: (widget.settings["darkMode"])
+                              color: (globalInfo.darkMode)
                                   ? Colors.white70
                                   : Colors.black87,
                               fontSize: 14),
                           maxLength: 25,
                           onSubmitted: (text) {
                             //El username de settings se vuelve lo que pongamos;
-                            widget.settings["username"] = text;
+                            globalInfo.setUserName(text);
                           },
                         ),
                       ),
@@ -386,31 +369,31 @@ class SettingsAccountManagmentBotton extends StatelessWidget {
     super.key,
     required this.open,
     required this.onPressed,
-    required this.settings,
   });
 
   final bool open;
   final void Function() onPressed;
-  Map<String, dynamic> settings;
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
+
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.all(4.0),
           child: Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.manage_accounts_outlined,
-                color: Colors.white,
+                color: (globalInfo.darkMode) ? Colors.white : Colors.black,
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(12.0),
                 child: Text(
                   "Account Managment",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -419,14 +402,16 @@ class SettingsAccountManagmentBotton extends StatelessWidget {
               IconButton(
                 onPressed: onPressed,
                 icon: open
-                    ? const Icon(
+                    ? Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: Colors.white,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       )
-                    : const Icon(
+                    : Icon(
                         Icons.arrow_forward_ios_rounded,
-                        color: Colors.white,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       ),
               ),
@@ -444,12 +429,10 @@ class SettingsVisibilityBotton extends StatefulWidget {
     super.key,
     required this.open,
     required this.onPressed,
-    required this.settings,
   });
 
   final bool open;
   final void Function() onPressed;
-  Map<String, dynamic> settings;
 
   @override
   State<SettingsVisibilityBotton> createState() =>
@@ -459,6 +442,8 @@ class SettingsVisibilityBotton extends StatefulWidget {
 class _SettingsVisibilityBottonState extends State<SettingsVisibilityBotton> {
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
+
     return Column(
       children: [
         Padding(
@@ -467,17 +452,14 @@ class _SettingsVisibilityBottonState extends State<SettingsVisibilityBotton> {
             children: [
               Icon(
                 Icons.remove_red_eye_outlined,
-                color:
-                    (widget.settings["darkMode"]) ? Colors.white : Colors.black,
+                color: (globalInfo.darkMode) ? Colors.white : Colors.black,
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "Visibility",
                   style: TextStyle(
-                    color: (widget.settings["darkMode"])
-                        ? Colors.white
-                        : Colors.black,
+                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -488,16 +470,14 @@ class _SettingsVisibilityBottonState extends State<SettingsVisibilityBotton> {
                 icon: widget.open
                     ? Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: (widget.settings["darkMode"])
-                            ? Colors.white
-                            : Colors.black,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       )
                     : Icon(
                         Icons.arrow_forward_ios_rounded,
-                        color: (widget.settings["darkMode"])
-                            ? Colors.white
-                            : Colors.black,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       ),
               ),
@@ -507,25 +487,23 @@ class _SettingsVisibilityBottonState extends State<SettingsVisibilityBotton> {
         //Texto only open
         widget.open
             ? Text(
-                "Visibility Options",
+                "Dark Mode",
                 style: TextStyle(
-                    color: (widget.settings["darkMode"])
-                        ? Colors.white
-                        : Colors.black,
+                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontSize: 21,
                     fontStyle: FontStyle.italic),
               )
             : Container(),
         widget.open
             ? Checkbox(
-                value: widget.settings["darkMode"],
+                value: globalInfo.darkMode,
                 onChanged: (value) => {
                   setState(
                     () {
                       bool change = value!;
                       value = (change) ? true : false;
-                      widget.settings["darkMode"] = value!;
-                      opciones["darkMode"] = value!;
+                      globalInfo.darkMode = value!;
+                      globalInfo.darkMode = value!;
                     },
                   )
                 },
@@ -555,22 +533,24 @@ class _SettingsNotificationsBottonState
     extends State<SettingsNotificationsBotton> {
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
+
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.all(4.0),
           child: Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.notifications_none,
-                color: Colors.white,
+                color: (globalInfo.darkMode) ? Colors.white : Colors.black,
               ),
-              const Padding(
-                padding: EdgeInsets.all(12.0),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "Notifications",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -579,14 +559,16 @@ class _SettingsNotificationsBottonState
               IconButton(
                 onPressed: widget.onPressed,
                 icon: widget.open
-                    ? const Icon(
+                    ? Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: Colors.white,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       )
-                    : const Icon(
+                    : Icon(
                         Icons.arrow_forward_ios_rounded,
-                        color: Colors.white,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       ),
               ),
@@ -604,21 +586,20 @@ class LanguageBotton extends StatefulWidget {
     super.key,
     required this.open,
     required this.onPressed,
-    required this.settings,
   });
 
   final bool open;
   final void Function() onPressed;
-  Map<String, dynamic> settings;
 
   @override
-  State<LanguageBotton> createState() =>
-      _LanguageBottonState();
+  State<LanguageBotton> createState() => _LanguageBottonState();
 }
 
 class _LanguageBottonState extends State<LanguageBotton> {
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
+
     return Column(
       children: [
         Padding(
@@ -627,17 +608,14 @@ class _LanguageBottonState extends State<LanguageBotton> {
             children: [
               Icon(
                 Icons.remove_red_eye_outlined,
-                color:
-                    (widget.settings["darkMode"]) ? Colors.white : Colors.black,
+                color: (globalInfo.darkMode) ? Colors.white : Colors.black,
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "Language",
                   style: TextStyle(
-                    color: (widget.settings["darkMode"])
-                        ? Colors.white
-                        : Colors.black,
+                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -648,16 +626,14 @@ class _LanguageBottonState extends State<LanguageBotton> {
                 icon: widget.open
                     ? Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: (widget.settings["darkMode"])
-                            ? Colors.white
-                            : Colors.black,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       )
                     : Icon(
                         Icons.arrow_forward_ios_rounded,
-                        color: (widget.settings["darkMode"])
-                            ? Colors.white
-                            : Colors.black,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       ),
               ),
@@ -669,23 +645,20 @@ class _LanguageBottonState extends State<LanguageBotton> {
             ? Text(
                 "English:",
                 style: TextStyle(
-                    color: (widget.settings["darkMode"])
-                        ? Colors.white
-                        : Colors.black,
+                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontSize: 21,
                     fontStyle: FontStyle.italic),
               )
             : Container(),
         widget.open
             ? Checkbox(
-                value: widget.settings["darkMode"],
+                value: globalInfo.darkMode,
                 onChanged: (value) => {
                   setState(
                     () {
                       bool change = value!;
                       value = (change) ? true : false;
-                      widget.settings["darkMode"] = value!;
-                      opciones["darkMode"] = value!;
+                      globalInfo.darkMode = value!;
                     },
                   )
                 },
@@ -702,15 +675,15 @@ class HelpBotton extends StatelessWidget {
     super.key,
     required this.open,
     required this.onPressed,
-    required this.settings,
   });
 
   final bool open;
   final void Function() onPressed;
-  Map<String, dynamic> settings;
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
+
     return Column(
       children: [
         //Texto base que siempre aparece
@@ -720,14 +693,14 @@ class HelpBotton extends StatelessWidget {
             children: [
               Icon(
                 Icons.account_circle_outlined, //Icono base
-                color: (settings["darkMode"]) ? Colors.white : Colors.black,
+                color: (globalInfo.darkMode) ? Colors.white : Colors.black,
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "Edit Profile", //Nombre del boton
                   style: TextStyle(
-                    color: (settings["darkMode"]) ? Colors.white : Colors.black,
+                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -739,16 +712,14 @@ class HelpBotton extends StatelessWidget {
                 icon: open
                     ? Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: (settings["darkMode"])
-                            ? Colors.white
-                            : Colors.black,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       )
                     : Icon(
                         Icons.arrow_forward_ios_rounded,
-                        color: (settings["darkMode"])
-                            ? Colors.white
-                            : Colors.black,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       ),
               ),
@@ -763,7 +734,7 @@ class HelpBotton extends StatelessWidget {
                     child: Text(
                       "Username:",
                       style: TextStyle(
-                          color: (settings["darkMode"])
+                          color: (globalInfo.darkMode)
                               ? Colors.white
                               : Colors.black,
                           fontSize: 20),
@@ -792,6 +763,8 @@ class SettingsPlantillaBotton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
+
     return Column(
       children: [
         //Texto base que siempre aparece
@@ -801,14 +774,14 @@ class SettingsPlantillaBotton extends StatelessWidget {
             children: [
               Icon(
                 Icons.account_circle_outlined, //Icono base
-                color: (settings["darkMode"]) ? Colors.white : Colors.black,
+                color: (globalInfo.darkMode) ? Colors.white : Colors.black,
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "Edit Profile", //Nombre del boton
                   style: TextStyle(
-                    color: (settings["darkMode"]) ? Colors.white : Colors.black,
+                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -820,16 +793,14 @@ class SettingsPlantillaBotton extends StatelessWidget {
                 icon: open
                     ? Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: (settings["darkMode"])
-                            ? Colors.white
-                            : Colors.black,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       )
                     : Icon(
                         Icons.arrow_forward_ios_rounded,
-                        color: (settings["darkMode"])
-                            ? Colors.white
-                            : Colors.black,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                         weight: 100,
                       ),
               ),
@@ -841,7 +812,7 @@ class SettingsPlantillaBotton extends StatelessWidget {
             ? Text(
                 "Profile Info",
                 style: TextStyle(
-                    color: (settings["darkMode"]) ? Colors.white : Colors.black,
+                    color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontSize: 26,
                     fontStyle: FontStyle.italic),
               )
@@ -855,7 +826,7 @@ class SettingsPlantillaBotton extends StatelessWidget {
                     child: Text(
                       "Your Name:",
                       style: TextStyle(
-                          color: (settings["darkMode"])
+                          color: (globalInfo.darkMode)
                               ? Colors.white
                               : Colors.black,
                           fontSize: 20),
@@ -872,7 +843,7 @@ class SettingsPlantillaBotton extends StatelessWidget {
                         width: 200,
                         child: TextField(
                           style: TextStyle(
-                              color: (settings["darkMode"])
+                              color: (globalInfo.darkMode)
                                   ? Colors.white70
                                   : Colors.black87,
                               fontSize: 14),
@@ -899,7 +870,7 @@ class SettingsPlantillaBotton extends StatelessWidget {
                     child: Text(
                       "Username:",
                       style: TextStyle(
-                          color: (settings["darkMode"])
+                          color: (globalInfo.darkMode)
                               ? Colors.white
                               : Colors.black,
                           fontSize: 20),
@@ -916,7 +887,7 @@ class SettingsPlantillaBotton extends StatelessWidget {
                         width: 200,
                         child: TextField(
                           style: TextStyle(
-                              color: (settings["darkMode"])
+                              color: (globalInfo.darkMode)
                                   ? Colors.white70
                                   : Colors.black87,
                               fontSize: 14),
