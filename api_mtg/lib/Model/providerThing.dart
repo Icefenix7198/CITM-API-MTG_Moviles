@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:api_mtg/Model/card.dart';
 
 enum Idioma {
   spanish,
@@ -12,7 +13,12 @@ class GlobalInfo extends ChangeNotifier {
   bool private;
   bool darkMode;
   Idioma language;
-
+  List<MtgCard> tspList = [];
+  List<MtgCard> lrwList = [];
+  List<MtgCard> alaList = [];
+  List<MtgCard> nphList = [];
+  List<MtgCard> displayedList = [];
+  
   GlobalInfo({
     required this.name,
     required this.username,
@@ -24,6 +30,11 @@ class GlobalInfo extends ChangeNotifier {
   setDarkMode(bool newValue) {
     darkMode = newValue;
     notifyListeners(); //Update Real Time
+  }
+
+  setList(List<MtgCard> listCards, List<MtgCard> newListCards){
+    listCards = newListCards;
+    notifyListeners();
   }
 
   void setName(String newName) {

@@ -7,12 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:api_mtg/Model/card.dart';
 import 'package:provider/provider.dart';
 
-List<MtgCard> tspList = [];
-List<MtgCard> lrwList = [];
-List<MtgCard> alaList = [];
-List<MtgCard> nphList = [];
-List<MtgCard> displayedList = [];
-
 class ApiDataLoadApp extends StatefulWidget {
   const ApiDataLoadApp({super.key});
 
@@ -25,7 +19,7 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
   void initState() {
     loadFavoriteList().then((loadedFavoriteList) {
       setState(() {
-        favoriteCards = loadedFavoriteList; 
+        favoriteCards = loadedFavoriteList;
       });
     });
     super.initState();
@@ -45,7 +39,9 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
   Widget build(BuildContext context) {
     final globalInfo = context.watch<GlobalInfo>();
     return Scaffold(
-      backgroundColor: (globalInfo.darkMode) ?const Color.fromRGBO(33, 30, 30, 0.965) : Color.fromARGB(246, 227, 207, 207),
+      backgroundColor: (globalInfo.darkMode)
+          ? const Color.fromRGBO(33, 30, 30, 0.965)
+          : const Color.fromARGB(246, 227, 207, 207),
       body: FutureBuilder(
         future: Future.wait(
             [apiLoadTSP(), apiLoadLRW(), apiLoadALA(), apiLoadNPH()]),
@@ -55,7 +51,7 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
         ) {
           //Builder
           if (!snapshot.hasData) {
-            return  Center(
+            return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -63,11 +59,12 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
                     color: Colors.white,
                   ),
                   Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Text(
                       "Loading API",
                       style: TextStyle(
-                        color: (globalInfo.darkMode) ? Colors.white : Colors.black,
+                        color:
+                            (globalInfo.darkMode) ? Colors.white : Colors.black,
                       ),
                     ),
                   )
@@ -75,16 +72,17 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
               ),
             );
           }
-          tspList = snapshot.data![0];
-          lrwList = snapshot.data![1];
-          alaList = snapshot.data![2];
-          nphList = snapshot.data![3];
-          displayedList = List.from(tspList);
-          checkFavourites(tspList);//Check all the favourite cards when loading APIs, that information is not retrieved from the API
-          checkFavourites(lrwList);
-          checkFavourites(alaList);
-          checkFavourites(nphList);
-          return _CardFilter(cardListSearch: displayedList);
+          globalInfo.tspList = snapshot.data![0];
+          globalInfo.lrwList = snapshot.data![1];
+          globalInfo.alaList = snapshot.data![2];
+          globalInfo.nphList = snapshot.data![3];
+          globalInfo.displayedList = List.from(globalInfo.tspList);
+          checkFavourites(globalInfo
+              .tspList); //Check all the favourite cards when loading APIs, that information is not retrieved from the API
+          checkFavourites(globalInfo.lrwList);
+          checkFavourites(globalInfo.alaList);
+          checkFavourites(globalInfo.nphList);
+          return _CardFilter(cardListSearch: globalInfo.displayedList);
         },
       ),
     );
@@ -112,7 +110,7 @@ class _CardFilterState extends State<_CardFilter> {
   ];
   @override
   void initState() {
-    listFiltered = List.from(displayedList);
+    listFiltered = [];
     WidgetsBinding.instance.addPostFrameCallback((_) {
       for (var imageUrl in images) {
         precacheImage(AssetImage(imageUrl), context);
@@ -138,7 +136,7 @@ class _CardFilterState extends State<_CardFilter> {
           Expanded(
             flex: 70,
             child: CardGrid(
-              cardList: listFiltered,
+              cardList: listFiltered.isEmpty ? widget.cardListSearch : listFiltered,
             ),
           ),
           const NavigatorBar(
@@ -177,12 +175,22 @@ class _CardFilterState extends State<_CardFilter> {
               });
             },
             cursorColor: (globalInfo.darkMode) ? Colors.white : Colors.black,
-            style: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black,),
+            style: TextStyle(
+              color: (globalInfo.darkMode) ? Colors.white : Colors.black,
+            ),
             decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search, color: (globalInfo.darkMode) ? Colors.white : Colors.black,),
-              prefixIconColor: (globalInfo.darkMode) ? Colors.white : Colors.black,
+              prefixIcon: Icon(
+                Icons.search,
+                color: (globalInfo.darkMode) ? Colors.white : Colors.black,
+              ),
+              prefixIconColor:
+                  (globalInfo.darkMode) ? Colors.white : Colors.black,
               hintText: "Search Cards",
-              hintStyle: TextStyle(color: (globalInfo.darkMode) ? const Color.fromARGB(255, 155, 153, 153) : const Color.fromARGB(255, 75, 74, 74), ),
+              hintStyle: TextStyle(
+                color: (globalInfo.darkMode)
+                    ? const Color.fromARGB(255, 155, 153, 153)
+                    : const Color.fromARGB(255, 75, 74, 74),
+              ),
             ),
           ),
         ),
@@ -203,16 +211,16 @@ class _CardFilterState extends State<_CardFilter> {
             setState(() {
               switch (index) {
                 case 0:
-                  widget.cardListSearch = List.from(tspList);
+                  widget.cardListSearch = List.from(globalInfo.tspList);
                   break;
                 case 1:
-                  widget.cardListSearch = List.from(lrwList);
+                  widget.cardListSearch = List.from(globalInfo.lrwList);
                   break;
                 case 2:
-                  widget.cardListSearch = List.from(alaList);
+                  widget.cardListSearch = List.from(globalInfo.alaList);
                   break;
                 case 3:
-                  widget.cardListSearch = List.from(nphList);
+                  widget.cardListSearch = List.from(globalInfo.nphList);
                   break;
               }
               listFiltered = List.from(widget.cardListSearch);
@@ -226,7 +234,9 @@ class _CardFilterState extends State<_CardFilter> {
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 7.5,
-                    color: (globalInfo.darkMode) ? const Color.fromARGB(255, 97, 94, 94) : const Color.fromARGB(255, 169, 164, 164),
+                    color: (globalInfo.darkMode)
+                        ? const Color.fromARGB(255, 97, 94, 94)
+                        : const Color.fromARGB(255, 169, 164, 164),
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                 ),
@@ -255,7 +265,7 @@ class _Header extends StatelessWidget {
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.bold,
-                color: (globalInfo.darkMode) ?Colors.white : Colors.black,
+                color: (globalInfo.darkMode) ? Colors.white : Colors.black,
               ),
             ),
           ),
