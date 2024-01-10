@@ -1,4 +1,6 @@
+import 'package:api_mtg/Model/providerThing.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum NavScreens { home, social, colection, user }
 
@@ -23,6 +25,7 @@ class _NavigatorBarra extends State<NavigatorBar> {
   @override
   Widget build(BuildContext context) {
     pants = widget.actualScreen;
+    final globalInfo = context.watch<GlobalInfo>();
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -42,9 +45,13 @@ class _NavigatorBarra extends State<NavigatorBar> {
                       ? Colors.blueAccent
                       : null),
             ),
-            const Text(
-              "Home",
-              style: TextStyle(color: Colors.pinkAccent),
+            Text(
+              (globalInfo.language == Idioma.spanish)
+                  ? "Inicio"
+                  : (globalInfo.language == Idioma.catalan)
+                      ? "Inici"
+                      : "Home",
+              style: const TextStyle(color: Colors.pinkAccent),
             )
           ],
         ),
@@ -82,9 +89,13 @@ class _NavigatorBarra extends State<NavigatorBar> {
                       ? Colors.blueAccent
                       : null),
             ),
-            const Text(
-              "Collection",
-              style: TextStyle(color: Colors.pinkAccent),
+            Text(
+              (globalInfo.language == Idioma.spanish)
+                  ? "Coleccion"
+                  : (globalInfo.language == Idioma.catalan)
+                      ? "Coleccio"
+                      : "Collection",
+              style: const TextStyle(color: Colors.pinkAccent),
             )
           ],
         ),
@@ -102,9 +113,13 @@ class _NavigatorBarra extends State<NavigatorBar> {
                       ? Colors.blueAccent
                       : null),
             ),
-            const Text(
-              "Profile",
-              style: TextStyle(color: Colors.pinkAccent),
+            Text(
+              (globalInfo.language == Idioma.spanish)
+                  ? "Perfil"
+                  : (globalInfo.language == Idioma.catalan)
+                      ? "Perfil"
+                      : "Profile",
+              style: const TextStyle(color: Colors.pinkAccent),
             )
           ],
         ),

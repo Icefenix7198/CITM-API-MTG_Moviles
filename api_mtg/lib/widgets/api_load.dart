@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 Future<List<MtgCard>> apiLoadTSP() async {
   final uri =
       Uri.parse("https://api.scryfall.com/cards/search?order=set&q=e%3Atsp");
-  await Future.delayed(const Duration(seconds: 2));//delay for rate limit of calls (just to be safe)
+  await Future.delayed(const Duration(
+      seconds: 2)); //delay for rate limit of calls (just to be safe)
   final response = await http.get(uri);
   final json = jsonDecode(response.body);
   final jsonlistTSP = json["data"];
