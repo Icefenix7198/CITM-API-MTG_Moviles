@@ -13,7 +13,6 @@ class PersonalDeck extends StatelessWidget {
   List<MtgCard> ListCards;
   List<int> CardsSelected;
   Deck deck;
-  int i = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,21 +23,19 @@ class PersonalDeck extends StatelessWidget {
         crossAxisSpacing: 10,
         mainAxisSpacing: 5,
         children: [
-          for (i = 0; i < int.parse(deck.numCards); i++)
+          for (int i = 0; i < ListCards.length; i++)
             GestureDetector(
               onTap: () {
                 // Pass card reference
                 Navigator.of(context).pushNamed(
                   "/home/api/card",
-                  arguments: ListCards[i - 1],
+                  arguments: ListCards[i],
                 );
               },
-              child:
-              Container(
+              child: Container(
                 padding: EdgeInsets.all(4),
                 child: Image(
-                  image: NetworkImage(
-                      ListCards[i].imageUris.cardImg),
+                  image: NetworkImage(ListCards[i].imageUris.cardImg),
                 ),
               ),
             ),
