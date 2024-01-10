@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:api_mtg/Model/card.dart';
 import 'package:provider/provider.dart';
 import 'package:api_mtg/Model/deck.dart';
+import 'package:provider/provider.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
@@ -190,20 +191,34 @@ class DecksView extends StatefulWidget {
 class _DecksViewState extends State<DecksView> {
   @override
   Widget build(BuildContext context) {
-    return Decks();
+    return FutureBuilder(
+      future: readDeckListFromJsonFile(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return ErrorWidget(snapshot.error.toString());
+        }
+        if (!snapshot.hasData) {
+          return Center(child: CircularProgressIndicator(),);
+        }
+        final deckList = snapshot.data!;
+        return DecksWidget(deckList: deckList);
+      },
+    );
   }
 }
 
-class Decks extends StatefulWidget {
-  Decks({
-    super.key,
+class DecksWidget extends StatefulWidget {
+  DecksWidget({
+    super.key, required this.deckList,
   });
 
+  final List<Deck> deckList;
+
   @override
-  State<Decks> createState() => _DecksState();
+  State<DecksWidget> createState() => _DecksWidgetState();
 }
 
-class _DecksState extends State<Decks> {
+class _DecksWidgetState extends State<DecksWidget> {
   var num = 2;
   bool showText = false;
   final textController = TextEditingController();
@@ -252,12 +267,12 @@ class _DecksState extends State<Decks> {
             crossAxisSpacing: 20,
             mainAxisSpacing: 10,
             children: [
-              for (int i = 0; i < num; i++)
+              for (final deck in widget.deckList)
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushNamed("/home/user/deck");
+                    Navigator.of(context).pushNamed("/home/user/deck", arguments: deck);
                   },
-                  child: DeckUnit(deckname: textController.text),
+                  child: DeckUnit(deckname: deck.name),
                 ),
             ],
           ),
@@ -267,15 +282,20 @@ class _DecksState extends State<Decks> {
   }
 }
 
-class DeckUnit extends StatelessWidget {
+class DeckUnit extends StatefulWidget {
   DeckUnit({super.key, this.deckname = "Deck Name"});
 
   final String deckname;
-  //Decks deck;
 
+  @override
+  State<DeckUnit> createState() => _DeckUnitState();
+}
+
+class _DeckUnitState extends State<DeckUnit> {
   @override
   Widget build(BuildContext context) {
     final globalInfo = context.watch<GlobalInfo>();
+
     return SizedBox(
         child: Column(
       children: [
@@ -290,7 +310,7 @@ class DeckUnit extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(bottom: 4),
                 child: Text(
-                  deckname,
+                  widget.deckname,
                   style: TextStyle(
                       color:
                           (globalInfo.darkMode) ? Colors.white : Colors.black,

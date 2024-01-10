@@ -2,17 +2,22 @@ import 'package:api_mtg/Model/card.dart';
 import 'dart:convert';
 import 'dart:io';
 
-class Decks {
+import 'package:flutter/services.dart';
+
+class Deck {
   String name;
   String numCards;
   List<MtgCard> cards;
 
-  Decks(this.name, this.numCards, this.cards);
+  Deck(this.name, this.numCards, this.cards);
 
-  Decks.fromJson(Map<String, dynamic> json)
+  Deck.fromJson(Map<String, dynamic> json)
       : name = json["name"],
         numCards = json["numCards"],
-        cards = List<MtgCard>.from(json["cards"].map((x) => x));
+        cards = (json["cards"] as List)
+            .map((card) => MtgCard.fromJson(card))
+            .cast<MtgCard>()
+            .toList();
 
   Map<String, dynamic> toJson() => {
         "name": name,
@@ -21,8 +26,8 @@ class Decks {
       };
 }
 
-void readingJson(List<String> args) {
-  final file = File("deck.json");
-  final content = file.readAsStringSync(); 
-  final user = jsonDecode(content); 
+Future<List<Deck>> readDeckListFromJsonFile() async {
+  final content = await rootBundle.loadString("assets/deck.json");
+  final List deck = jsonDecode(content);
+  return deck.map((deckJson) => Deck.fromJson(deckJson)).toList();
 }
