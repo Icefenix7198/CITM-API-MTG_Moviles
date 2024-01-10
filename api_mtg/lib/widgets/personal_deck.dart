@@ -1,139 +1,47 @@
 import 'package:api_mtg/Model/card.dart';
+import 'package:api_mtg/Model/deck.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class PersonalDeck extends StatelessWidget {
   PersonalDeck(
-      {super.key, required this.ListCards, required this.CardsSelected});
+      {super.key,
+      required this.ListCards,
+      required this.CardsSelected,
+      required this.deck});
 
   List<MtgCard> ListCards;
   List<int> CardsSelected;
+  Deck deck;
+  int i = 0;
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
+      child: GridView.count(
+        crossAxisCount: 3,
+        padding: const EdgeInsets.all(8),
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 5,
         children: [
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Pass card reference
-                      Navigator.of(context).pushNamed(
-                        "/home/api/card",
-                        arguments: ListCards[CardsSelected[0]],
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(4),
-                      child: Image(
-                        image:
-                            NetworkImage(ListCards[CardsSelected[0]].imageUris.cardImg),
-                      ),
-                    ),
-                  ),
+          for (i = 0; i < int.parse(deck.numCards); i++)
+            GestureDetector(
+              onTap: () {
+                // Pass card reference
+                Navigator.of(context).pushNamed(
+                  "/home/api/card",
+                  arguments: ListCards[i - 1],
+                );
+              },
+              child:
+              Container(
+                padding: EdgeInsets.all(4),
+                child: Image(
+                  image: NetworkImage(
+                      ListCards[i].imageUris.cardImg),
                 ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Pass card reference
-                      Navigator.of(context).pushNamed(
-                        "/home/api/card",
-                        arguments: ListCards[CardsSelected[1]],
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(4),
-                      child: Image(
-                        image:
-                            NetworkImage(ListCards[CardsSelected[1]].imageUris.cardImg),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Pass card reference
-                      Navigator.of(context).pushNamed(
-                        "/home/api/card",
-                        arguments: ListCards[CardsSelected[2]],
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(4),
-                      child: Image(
-                        image:
-                            NetworkImage(ListCards[CardsSelected[2]].imageUris.cardImg),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Pass card reference
-                      Navigator.of(context).pushNamed(
-                        "/home/api/card",
-                        arguments: ListCards[CardsSelected[3]],
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(4),
-                      child: Image(
-                        image:
-                            NetworkImage(ListCards[CardsSelected[3]].imageUris.cardImg),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Pass card reference
-                      Navigator.of(context).pushNamed(
-                        "/home/api/card",
-                        arguments: ListCards[CardsSelected[4]],
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(4),
-                      child: Image(
-                        image:
-                            NetworkImage(ListCards[CardsSelected[4]].imageUris.cardImg),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Pass card reference
-                      Navigator.of(context).pushNamed(
-                        "/home/api/card",
-                        arguments: ListCards[CardsSelected[5]],
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(4),
-                      child: Image(
-                        image:
-                            NetworkImage(ListCards[CardsSelected[5]].imageUris.cardImg),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     );

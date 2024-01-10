@@ -368,7 +368,7 @@ class _UserScreenDeckState extends State<UserScreenDeck> {
               child: Container(
                 color: const Color.fromARGB(255, 33, 29, 29),
                 child: PersonalDeck(
-                    ListCards: deck.cards, CardsSelected: cartsToChoose),
+                    ListCards: deck.cards, CardsSelected: cartsToChoose, deck: deck,),
               ),
             ),
           ),
