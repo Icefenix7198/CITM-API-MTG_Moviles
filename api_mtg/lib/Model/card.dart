@@ -1,9 +1,6 @@
-
 import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
 import 'dart:io';
-
-
 
 class MtgCard {
   String name;
@@ -65,7 +62,7 @@ void addCard(List<MtgCard> listCards, MtgCard favCard) {
   saveFavoriteList(listCards);
 }
 
-void deleteCard(List<MtgCard> listCards,MtgCard favCard) {
+void deleteCard(List<MtgCard> listCards, MtgCard favCard) {
   listCards.removeWhere((element) => element.name == favCard.name);
   saveFavoriteList(listCards);
 }

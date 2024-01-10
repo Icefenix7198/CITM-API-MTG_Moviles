@@ -48,12 +48,12 @@ class _UserScreenDeckState extends State<UserScreenDeck> {
                       ),
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     flex: 30,
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: Text(
-                        "My Deck",
+                        deck.name,
                         style: TextStyle(color: Colors.white, fontSize: 35),
                       ),
                     ),
@@ -368,7 +368,10 @@ class _UserScreenDeckState extends State<UserScreenDeck> {
               child: Container(
                 color: const Color.fromARGB(255, 33, 29, 29),
                 child: PersonalDeck(
-                    ListCards: deck.cards, CardsSelected: cartsToChoose, deck: deck,),
+                  ListCards: deck.cards,
+                  CardsSelected: cartsToChoose,
+                  deck: deck,
+                ),
               ),
             ),
           ),

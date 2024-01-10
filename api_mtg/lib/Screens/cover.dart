@@ -5,14 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
-class PortadaScreen extends StatelessWidget {
+class PortadaScreen extends StatefulWidget {
   const PortadaScreen({
     super.key,
   });
 
   @override
+  State<PortadaScreen> createState() => _PortadaScreenState();
+}
+
+class _PortadaScreenState extends State<PortadaScreen> {
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final globalInfo = context.watch<GlobalInfo>();
+    return Scaffold(
       backgroundColor: Color.fromARGB(255, 26, 26, 26),
       //appBar: AppBar(title: const Text("Initial Screen")),
       body: Stack(
@@ -55,12 +61,25 @@ class PortadaScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       EnterButton(),
-                      Padding(
-                        padding: EdgeInsets.all(9.0),
-                        child: Text(
-                          "sign in",
-                          style: TextStyle(color: Colors.white, fontSize: 11),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      ElevatedButton(
+                        child: Padding(
+                          padding: EdgeInsets.all(9.0),
+                          child: Text(
+                            "sign in",
+                            style: TextStyle(color: Colors.white, fontSize: 11),
+                          ),
                         ),
+                        onPressed: () async {
+                          final user = await OpenPopup(context);
+                          if (user != null) {
+                            setState(() {
+                              globalInfo.name = user;
+                            });
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -71,6 +90,48 @@ class PortadaScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  // ignore: non_constant_identifier_names
+  Future<String?> OpenPopup(BuildContext context) async {
+    final TextEditingController controllerName = TextEditingController();
+    final popupResult = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        alignment: Alignment.center,
+        title: const Text('Sing Up'),
+        content: SizedBox(
+          height: 140,
+          child: Column(
+            children: [
+              TextField(
+                controller: controllerName,
+                decoration: const InputDecoration(
+                  labelText: 'Name',
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Create'),
+          ),
+        ],
+      ),
+    );
+    String name = controllerName.text;
+    controllerName.dispose();
+    if (popupResult != null && popupResult == true) {
+      return name;
+    } else {
+      return null;
+    }
   }
 }
 

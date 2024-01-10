@@ -198,7 +198,9 @@ class _DecksViewState extends State<DecksView> {
           return ErrorWidget(snapshot.error.toString());
         }
         if (!snapshot.hasData) {
-          return Center(child: CircularProgressIndicator(),);
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         }
         final deckList = snapshot.data!;
         return DecksWidget(deckList: deckList);
@@ -209,7 +211,8 @@ class _DecksViewState extends State<DecksView> {
 
 class DecksWidget extends StatefulWidget {
   DecksWidget({
-    super.key, required this.deckList,
+    super.key,
+    required this.deckList,
   });
 
   final List<Deck> deckList;
@@ -270,9 +273,13 @@ class _DecksWidgetState extends State<DecksWidget> {
               for (final deck in widget.deckList)
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushNamed("/home/user/deck", arguments: deck);
+                    Navigator.of(context)
+                        .pushNamed("/home/user/deck", arguments: deck);
                   },
-                  child: DeckUnit(deckname: deck.name),
+                  child: DeckUnit(
+                    deckname: deck.name,
+                    decknum: deck.numCards,
+                  ),
                 ),
             ],
           ),
@@ -283,9 +290,10 @@ class _DecksWidgetState extends State<DecksWidget> {
 }
 
 class DeckUnit extends StatefulWidget {
-  DeckUnit({super.key, this.deckname = "Deck Name"});
+  DeckUnit({super.key, this.deckname = "Deck Name", required this.decknum});
 
   final String deckname;
+  final String decknum;
 
   @override
   State<DeckUnit> createState() => _DeckUnitState();
@@ -331,7 +339,7 @@ class _DeckUnitState extends State<DeckUnit> {
             child: Align(
               alignment: Alignment.topLeft,
               child: Text(
-                "num cards",
+                "${widget.decknum}  cards",
                 style: TextStyle(
                     color:
                         (globalInfo.darkMode) ? Colors.white70 : Colors.black87,
