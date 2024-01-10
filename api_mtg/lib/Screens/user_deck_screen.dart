@@ -20,7 +20,7 @@ class _UserScreenDeckState extends State<UserScreenDeck> {
   Widget build(BuildContext context) {
     final deck = ModalRoute.of(context)!.settings.arguments as Deck;
     final globalInfo = context.watch<GlobalInfo>();
-    List<int> countedMana = counterCart(cartsToChoose, deck.cards);
+    List<int> countedMana = counterCart(cartsToChoose, deck.cards, deck);
     return Scaffold(
       backgroundColor: (globalInfo.darkMode)
           ? const Color.fromARGB(255, 49, 49, 49)
@@ -381,33 +381,20 @@ class _UserScreenDeckState extends State<UserScreenDeck> {
 List<int> counterCart(
     List<int> choosedCarts,
     // ignore: non_constant_identifier_names
-    List<MtgCard> CardList) {
+    List<MtgCard> CardList,
+    Deck deck) {
   // ignore: non_constant_identifier_names
   final List<int> CountedList = [];
 
-  String str = CardList[choosedCarts[0]].manaCost;
-  String aStr = str.replaceAll(RegExp(r'[^0-9]'), '');
-  CountedList.add(int.parse(aStr));
-
-  str = CardList[choosedCarts[1]].manaCost;
-  aStr = str.replaceAll(RegExp(r'[^0-9]'), '');
-  CountedList.add(int.parse(aStr));
-
-  str = CardList[choosedCarts[2]].manaCost;
-  aStr = str.replaceAll(RegExp(r'[^0-9]'), '');
-  CountedList.add(int.parse(aStr));
-
-  str = CardList[choosedCarts[3]].manaCost;
-  aStr = str.replaceAll(RegExp(r'[^0-9]'), '');
-  CountedList.add(int.parse(aStr));
-
-  str = CardList[choosedCarts[4]].manaCost;
-  aStr = str.replaceAll(RegExp(r'[^0-9]'), '');
-  CountedList.add(int.parse(aStr));
-
-  str = CardList[choosedCarts[5]].manaCost;
-  aStr = str.replaceAll(RegExp(r'[^0-9]'), '');
-  CountedList.add(int.parse(aStr));
+  for (int i = 0; i < 6; i++) {
+    if (i <= int.parse(deck.numCards)) {
+      String str = CardList[choosedCarts[i]].manaCost;
+      String aStr = str.replaceAll(RegExp(r'[^0-9]'), '');
+      CountedList.add(int.parse(aStr));
+    } else {
+      CountedList.add(0);
+    }
+  }
 
   int c_1 = 0, c_2 = 0, c_3 = 0, c_4 = 0, c_5 = 0, c_6 = 0;
 
