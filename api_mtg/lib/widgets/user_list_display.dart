@@ -11,6 +11,8 @@ class UsersListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String network = "https";
+
     return ListTile(
       tileColor: const Color.fromRGBO(33, 30, 30, 0.965),
       title: Text(
@@ -24,7 +26,9 @@ class UsersListItem extends StatelessWidget {
         ),
       ),
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(user.avatar),
+        backgroundImage:
+            user.avatar.contains(network) ? NetworkImage(user.avatar) : null,
+        child: user.avatar.contains(network) ? null : Image.asset(user.avatar),
       ),
       /*trailing: ElevatedButton(
         style: ElevatedButton.styleFrom(
