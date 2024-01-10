@@ -27,7 +27,7 @@ class SocialScreen extends StatelessWidget {
           AsyncSnapshot<List<User>> snapshot,
         ) {
           if (!snapshot.hasData) {
-            final globalInfo = context.watch<GlobalInfo>(); 
+            final globalInfo = context.watch<GlobalInfo>();
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -39,11 +39,14 @@ class SocialScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     child: Text(
                       (globalInfo.language == Idioma.spanish)
-                      ? "Cargando API"
-                      : (globalInfo.language == Idioma.catalan)
-                          ? "Carregant API"
-                          : "Loading API",
-                      style: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black),
+                          ? "Cargando API"
+                          : (globalInfo.language == Idioma.catalan)
+                              ? "Carregant API"
+                              : "Loading API",
+                      style: TextStyle(
+                          color: (globalInfo.darkMode)
+                              ? Colors.white
+                              : Colors.black),
                     ),
                   )
                 ],
@@ -72,11 +75,13 @@ class _SearchableList extends StatefulWidget {
 
 class _SearchableListState extends State<_SearchableList> {
   final controller = TextEditingController();
+  late List<User> userList;
   late List<User> filteredList;
 
   @override
   void initState() {
-    filteredList = List.from(widget.userList);
+    userList = List.from(widget.userList);
+    filteredList = List.from(userList);
     super.initState();
   }
 
@@ -109,11 +114,15 @@ class _SearchableListState extends State<_SearchableList> {
                       fit: BoxFit.contain,
                       child: Text(
                         (globalInfo.language == Idioma.spanish)
-                      ? "Conversaciones"
-                      : (globalInfo.language == Idioma.catalan)
-                          ? "Conversas"
-                          : "My Chats",
-                        style: TextStyle(fontSize: 40, color: (globalInfo.darkMode) ? Colors.white : Colors.black),
+                            ? "Conversaciones"
+                            : (globalInfo.language == Idioma.catalan)
+                                ? "Conversas"
+                                : "My Chats",
+                        style: TextStyle(
+                            fontSize: 40,
+                            color: (globalInfo.darkMode)
+                                ? Colors.white
+                                : Colors.black),
                       ),
                     ),
                   ),
@@ -134,65 +143,65 @@ class _SearchableListState extends State<_SearchableList> {
           flex: 10,
           child: Container(
             padding: const EdgeInsets.all(16),
-            child: Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: (globalInfo.darkMode) ? Color.fromARGB(255, 101, 101, 101) : Color.fromARGB(255, 161, 161, 161),
-                    borderRadius: const BorderRadius.all(Radius.circular(16))),
-                child: Row(
-                  children: [
-                    const Spacer(
-                      flex: 2,
-                    ),
-                    Expanded(
-                      flex: 10,
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Icon(Icons.search_rounded,
-                              size: 40, color: (globalInfo.darkMode) ? Colors.white : Colors.black),
-                        ),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: (globalInfo.darkMode)
+                      ? Color.fromARGB(255, 101, 101, 101)
+                      : Color.fromARGB(255, 161, 161, 161),
+                  borderRadius: const BorderRadius.all(Radius.circular(16))),
+              child: Row(
+                children: [
+                  const Spacer(
+                    flex: 2,
+                  ),
+                  Expanded(
+                    flex: 10,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: Icon(Icons.search_rounded,
+                            size: 40,
+                            color: (globalInfo.darkMode)
+                                ? Colors.white
+                                : Colors.black),
                       ),
                     ),
-                    Expanded(
-                      flex: 80,
-                      child: Container(
-                        padding: const EdgeInsets.all(6),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextField(
-                            controller: controller,
-                            onChanged: (_) {
-                              setState(() {
-                                final search = controller.text.toLowerCase();
-                                filteredList = widget.userList
-                                    .where((user) =>
-                                        user.firstName
-                                            .toLowerCase()
-                                            .contains(search) ||
-                                        user.secondName
-                                            .toLowerCase()
-                                            .contains(search))
-                                    .toList();
-                              });
-                            },
-                            cursorColor: (globalInfo.darkMode) ? Colors.white : Colors.black,
-                            style:  TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black),
-                            decoration: InputDecoration(
-                              hintText: (globalInfo.language == Idioma.spanish)
-                      ? "Buscar Contactos"
-                      : (globalInfo.language == Idioma.catalan)
-                          ? "Buscar Contactes"
-                          : "Search Contacts",
-                              hintStyle: TextStyle(color: (globalInfo.darkMode) ? Colors.white : Colors.black),
-                            ),
+                  ),
+                  Expanded(
+                    flex: 80,
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextField(
+                          controller: controller,
+                          onChanged: (_) {
+                            setState(updateFilteredList);
+                          },
+                          cursorColor: (globalInfo.darkMode)
+                              ? Colors.white
+                              : Colors.black,
+                          style: TextStyle(
+                              color: (globalInfo.darkMode)
+                                  ? Colors.white
+                                  : Colors.black),
+                          decoration: InputDecoration(
+                            hintText: (globalInfo.language == Idioma.spanish)
+                                ? "Buscar Contactos"
+                                : (globalInfo.language == Idioma.catalan)
+                                    ? "Buscar Contactes"
+                                    : "Search Contacts",
+                            hintStyle: TextStyle(
+                                color: (globalInfo.darkMode)
+                                    ? Colors.white
+                                    : Colors.black),
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -227,12 +236,14 @@ class _SearchableListState extends State<_SearchableList> {
                       color: Colors.black,
                       size: 40,
                     ),
-                    onPressed: () {
-                      setState(
-                        () {
-                          OpenPopup(context);
-                        },
-                      );
+                    onPressed: () async {
+                      final user = await OpenPopup(context);
+                      if (user != null) {
+                        setState(() {
+                          userList.add(user);
+                          updateFilteredList();
+                        });
+                      }
                     },
                   ),
                 ),
@@ -247,40 +258,64 @@ class _SearchableListState extends State<_SearchableList> {
     );
   }
 
+  void updateFilteredList() {
+    final search = controller.text.toLowerCase();
+    filteredList = userList
+        .where((user) =>
+            user.firstName.toLowerCase().contains(search) ||
+            user.secondName.toLowerCase().contains(search))
+        .toList();
+  }
+
   // ignore: non_constant_identifier_names
-  Future<String?> OpenPopup(BuildContext context) {
-    return showDialog<String>(
+  Future<User?> OpenPopup(BuildContext context) async {
+    final TextEditingController controllerName = TextEditingController();
+    final TextEditingController controllerSecondName = TextEditingController();
+    final popupResult = await showDialog<bool>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
+        alignment: Alignment.center,
         title: const Text('Add User'),
-        content: const Column(
-          children: [
-            Text('Fill user Data'),
-            TextField(
-              /*onChanged: (change) {
-                setState(
-                  () {
-                    final search = change;
-                  },
-                );
-              },*/
-              decoration: InputDecoration(
-                labelText: 'Name',
+        content: SizedBox(
+          height: 170,
+          child: Column(
+            children: [
+              const Text('Fill user Data'),
+              TextField(
+                controller: controllerName,
+                decoration: const InputDecoration(
+                  labelText: 'Name',
+                ),
               ),
-            ),
-          ],
+              TextField(
+                controller: controllerSecondName,
+                decoration: const InputDecoration(
+                  labelText: 'Second Name',
+                ),
+              ),
+            ],
+          ),
         ),
         actions: <Widget>[
           TextButton(
-            onPressed: () => Navigator.pop(context, 'Cancel'),
+            onPressed: () => Navigator.pop(context, false),
             child: const Text('Cancel'),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context, 'Create'),
+            onPressed: () => Navigator.pop(context, true),
             child: const Text('Create'),
           ),
         ],
       ),
     );
+    String name = controllerName.text;
+    String secondName = controllerSecondName.text;
+    controllerName.dispose();
+    controllerSecondName.dispose();
+    if (popupResult != null && popupResult == true) {
+      return User(name, secondName, "assets/IconsUser4.png");
+    } else {
+      return null;
+    }
   }
 }
