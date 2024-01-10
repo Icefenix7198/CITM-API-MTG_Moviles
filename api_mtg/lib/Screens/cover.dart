@@ -19,11 +19,11 @@ class _PortadaScreenState extends State<PortadaScreen> {
   Widget build(BuildContext context) {
     final globalInfo = context.watch<GlobalInfo>();
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 26, 26, 26),
+      backgroundColor: const Color.fromARGB(255, 26, 26, 26),
       //appBar: AppBar(title: const Text("Initial Screen")),
       body: Stack(
         children: [
-          Align(
+          const Align(
             alignment: Alignment(0, -0.8),
             child: Image(
               image: AssetImage("assets/LogoImage.png"),
@@ -31,7 +31,7 @@ class _PortadaScreenState extends State<PortadaScreen> {
           ),
           Column(
             children: [
-              Expanded(
+              const Expanded(
                 flex: 50,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -56,16 +56,16 @@ class _PortadaScreenState extends State<PortadaScreen> {
               Expanded(
                 flex: 50,
                 child: Align(
-                  alignment: Alignment(0, 0.2),
+                  alignment: const Alignment(0, 0.2),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      EnterButton(),
-                      SizedBox(
+                      const EnterButton(),
+                      const SizedBox(
                         height: 20,
                       ),
-                      ElevatedButton(
-                        child: Padding(
+                      TextButton(
+                        child: const Padding(
                           padding: EdgeInsets.all(9.0),
                           child: Text(
                             "sign in",
@@ -73,12 +73,9 @@ class _PortadaScreenState extends State<PortadaScreen> {
                           ),
                         ),
                         onPressed: () async {
-                          final user = await OpenPopup(context);
-                          if (user != null) {
-                            setState(() {
-                              globalInfo.name = user;
-                            });
-                          }
+                          List user = await OpenPopup(context);
+                          globalInfo.setName(user[0]);
+                          globalInfo.setUserName(user[1]);
                         },
                       ),
                     ],
@@ -93,13 +90,14 @@ class _PortadaScreenState extends State<PortadaScreen> {
   }
 
   // ignore: non_constant_identifier_names
-  Future<String?> OpenPopup(BuildContext context) async {
+  Future<List<String?>> OpenPopup(BuildContext context) async {
     final TextEditingController controllerName = TextEditingController();
+    final TextEditingController controllerUsername = TextEditingController();
     final popupResult = await showDialog<bool>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
         alignment: Alignment.center,
-        title: const Text('Sing Up'),
+        title: const Text('Sign In'),
         content: SizedBox(
           height: 140,
           child: Column(
@@ -108,6 +106,12 @@ class _PortadaScreenState extends State<PortadaScreen> {
                 controller: controllerName,
                 decoration: const InputDecoration(
                   labelText: 'Name',
+                ),
+              ),
+              TextField(
+                controller: controllerUsername,
+                decoration: const InputDecoration(
+                  labelText: 'Username',
                 ),
               ),
             ],
@@ -126,11 +130,14 @@ class _PortadaScreenState extends State<PortadaScreen> {
       ),
     );
     String name = controllerName.text;
+    String username = controllerUsername.text;
+    List<String?> userdata = [name, username];
     controllerName.dispose();
+    controllerUsername.dispose();
     if (popupResult != null && popupResult == true) {
-      return name;
+      return userdata;
     } else {
-      return null;
+      return userdata = ["Name", "Username"];
     }
   }
 }

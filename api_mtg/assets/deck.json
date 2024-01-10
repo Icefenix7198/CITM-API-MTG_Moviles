@@ -91,8 +91,203 @@
     },
     {
         "name": "Second Deck",
-        "numCards": "3",
+        "numCards": "8",
         "cards": [
+            {
+                "name": "Battle Mastery",
+                "type_line": "Enchantment — Aura",
+                "mana_cost": "{2}{W}",
+                "cmc": 3.0,
+                "colors": [
+                    "W"
+                ],
+                "artist": "Zoltan Boros & Gabor Szikszai",
+                "oracle_text": "Enchant creature\nEnchanted creature has double strike. (It deals both first-strike and regular combat damage.)",
+                "image_uris": {
+                    "border_crop": "https://cards.scryfall.io/border_crop/front/7/9/79e234ce-6d61-4d62-a8cd-fa985a6aba60.jpg?1596045443",
+                    "art_crop": "https://cards.scryfall.io/art_crop/front/7/9/79e234ce-6d61-4d62-a8cd-fa985a6aba60.jpg?1596045443"
+                },
+                "prices": {
+                    "usd": 0.25,
+                    "eur": 0.18,
+                    "tix": 0.03
+                },
+                "isFav": true
+            },
+            {
+                "name": "Welkin Guide",
+                "type_line": "Creature — Bird Cleric",
+                "mana_cost": "{4}{W}",
+                "cmc": 5.0,
+                "colors": [
+                    "W"
+                ],
+                "artist": "David Palumbo",
+                "oracle_text": "Flying\nWhen Welkin Guide enters the battlefield, target creature gets +2/+2 and gains flying until end of turn.",
+                "image_uris": {
+                    "border_crop": "https://cards.scryfall.io/border_crop/front/1/9/198363f2-1a19-4954-b527-6d10ac277719.jpg?1562701540",
+                    "art_crop": "https://cards.scryfall.io/art_crop/front/1/9/198363f2-1a19-4954-b527-6d10ac277719.jpg?1562701540"
+                },
+                "prices": {
+                    "usd": 0.15,
+                    "eur": 0.07,
+                    "tix": 0.04
+                },
+                "isFav": true
+            },
+            {
+                "name": "Cancel",
+                "type_line": "Instant",
+                "mana_cost": "{1}{U}{U}",
+                "cmc": 3.0,
+                "colors": [
+                    "U"
+                ],
+                "artist": "David Palumbo",
+                "oracle_text": "Counter target spell.",
+                "image_uris": {
+                    "border_crop": "https://cards.scryfall.io/border_crop/front/4/7/479f56c2-8256-4325-909a-bf460505dbc5.jpg?1562703421",
+                    "art_crop": "https://cards.scryfall.io/art_crop/front/4/7/479f56c2-8256-4325-909a-bf460505dbc5.jpg?1562703421"
+                },
+                "prices": {
+                    "usd": 0.03,
+                    "eur": 0.06,
+                    "tix": 0.04
+                },
+                "isFav": true
+            },
+            {
+                "name": "Master of Etherium",
+                "type_line": "Artifact Creature — Vedalken Wizard",
+                "mana_cost": "{2}{U}",
+                "cmc": 3.0,
+                "colors": [
+                    "U"
+                ],
+                "artist": "Matt Cavotta",
+                "oracle_text": "Master of Etherium's power and toughness are each equal to the number of artifacts you control.\nOther artifact creatures you control get +1/+1.",
+                "image_uris": {
+                    "border_crop": "https://cards.scryfall.io/border_crop/front/3/2/322cdf67-5b36-43f9-99b3-f0e24d423314.jpg?1562702574",
+                    "art_crop": "https://cards.scryfall.io/art_crop/front/3/2/322cdf67-5b36-43f9-99b3-f0e24d423314.jpg?1562702574"
+                },
+                "prices": {
+                    "usd": 0.55,
+                    "eur": 0.35,
+                    "tix": 0.02
+                },
+                "isFav": true
+            },
+            {
+                "name": "Blister Beetle",
+                "type_line": "Creature — Insect",
+                "mana_cost": "{1}{B}",
+                "cmc": 2.0,
+                "colors": [
+                    "B"
+                ],
+                "artist": "Anthony S. Waters",
+                "oracle_text": "When Blister Beetle enters the battlefield, target creature gets -1/-1 until end of turn.",
+                "image_uris": {
+                    "border_crop": "https://cards.scryfall.io/border_crop/front/7/f/7f42bdeb-5a51-4303-96d8-9722f95d2905.jpg?1562705893",
+                    "art_crop": "https://cards.scryfall.io/art_crop/front/7/f/7f42bdeb-5a51-4303-96d8-9722f95d2905.jpg?1562705893"
+                },
+                "prices": {
+                    "usd": 0.05,
+                    "eur": 0.05,
+                    "tix": 0.04
+                },
+                "isFav": true
+            },
+            {
+                "name": "Griffin Guide",
+                "type_line": "Enchantment — Aura",
+                "mana_cost": "{2}{W}",
+                "cmc": 3.0,
+                "colors": [
+                    "W"
+                ],
+                "artist": "Jim Nelson",
+                "oracle_text": "Enchant creature\nEnchanted creature gets +2/+2 and has flying.\nWhen enchanted creature dies, create a 2/2 white Griffin creature token with flying.",
+                "image_uris": {
+                    "border_crop": "https://cards.scryfall.io/border_crop/front/e/1/e19a15d9-5899-4b84-9c00-345b19df53ae.jpg?1562942578",
+                    "art_crop": "https://cards.scryfall.io/art_crop/front/e/1/e19a15d9-5899-4b84-9c00-345b19df53ae.jpg?1562942578"
+                },
+                "prices": {
+                    "usd": 0.12,
+                    "eur": 0.09,
+                    "tix": 0.03
+                },
+                "isFav": true
+            },
+            {
+                "name": "Evangelize",
+                "type_line": "Sorcery",
+                "mana_cost": "{4}{W}",
+                "cmc": 5.0,
+                "colors": [
+                    "W"
+                ],
+                "artist": "Randy Elliott",
+                "oracle_text": "Buyback {2}{W}{W} (You may pay an additional {2}{W}{W} as you cast this spell. If you do, put this card into your hand as it resolves.)\nGain control of target creature of an opponent's choice they control.",
+                "image_uris": {
+                    "border_crop": "https://cards.scryfall.io/border_crop/front/0/f/0f58e1aa-587c-4f89-9552-1128c8c2da1a.jpg?1562898171",
+                    "art_crop": "https://cards.scryfall.io/art_crop/front/0/f/0f58e1aa-587c-4f89-9552-1128c8c2da1a.jpg?1562898171"
+                },
+                "prices": {
+                    "usd": 0.27,
+                    "eur": 0.16,
+                    "tix": 0.02
+                },
+                "isFav": true
+            },
+            {
+                "name": "Angel's Grace",
+                "type_line": "Instant",
+                "mana_cost": "{W}",
+                "cmc": 1.0,
+                "colors": [
+                    "W"
+                ],
+                "artist": "Mark Zug",
+                "oracle_text": "Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nYou can't lose the game this turn and your opponents can't win the game this turn. Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.",
+                "image_uris": {
+                    "border_crop": "https://cards.scryfall.io/border_crop/front/5/8/580cb5be-fa59-4eb9-8808-7d2943fb6413.jpg?1562913383",
+                    "art_crop": "https://cards.scryfall.io/art_crop/front/5/8/580cb5be-fa59-4eb9-8808-7d2943fb6413.jpg?1562913383"
+                },
+                "prices": {
+                    "usd": 2.99,
+                    "eur": 1.34,
+                    "tix": 0.02
+                },
+                "isFav": true
+            }
+        ]
+    },
+    {
+        "name": "Third Deck",
+        "numCards": "6",
+        "cards": [
+            {
+                "name": "D'Avenant Healer",
+                "type_line": "Creature — Human Cleric Archer",
+                "mana_cost": "{1}{W}{W}",
+                "cmc": 3.0,
+                "colors": [
+                    "W"
+                ],
+                "artist": "Michael Sutfin",
+                "oracle_text": "{T}: D'Avenant Healer deals 1 damage to target attacking or blocking creature.\n{T}: Prevent the next 1 damage that would be dealt to any target this turn.",
+                "image_uris": {
+                    "border_crop": "https://cards.scryfall.io/border_crop/front/d/e/deac6492-ce39-4137-8418-6169d3b1b632.jpg?1562941960",
+                    "art_crop": "https://cards.scryfall.io/art_crop/front/d/e/deac6492-ce39-4137-8418-6169d3b1b632.jpg?1562941960"
+                },
+                "prices": {
+                    "usd": 0.12,
+                    "eur": 0.1,
+                    "tix": 0.03
+                },
+                "isFav": true
+            },
             {
                 "name": "Amrou Scout",
                 "type_line": "Creature — Kithkin Rebel Scout",
@@ -109,49 +304,91 @@
                 },
                 "prices": {
                     "usd": 0.05,
-                    "eur": 0.05,
+                    "eur": 0.04,
                     "tix": 0.03
                 },
                 "isFav": true
             },
             {
-                "name": "Liege of the Pit",
-                "type_line": "Creature — Demon",
-                "mana_cost": "{5}{B}{B}{B}",
-                "cmc": 8.0,
-                "colors": [
-                    "B"
-                ],
-                "artist": "Jeremy Jarvis",
-                "oracle_text": "Flying, trample\nAt the beginning of your upkeep, sacrifice a creature other than Liege of the Pit. If you can't, Liege of the Pit deals 7 damage to you.\nMorph {B}{B}{B}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)",
-                "image_uris": {
-                    "border_crop": "https://cards.scryfall.io/border_crop/front/5/2/52e7c608-d224-472b-8736-273874211f24.jpg?1562912268",
-                    "art_crop": "https://cards.scryfall.io/art_crop/front/5/2/52e7c608-d224-472b-8736-273874211f24.jpg?1562912268"
-                },
-                "prices": {
-                    "usd": 0.5,
-                    "eur": 0.29,
-                    "tix": 0.02
-                },
-                "isFav": true
-            },
-            {
-                "name": "Ajani Goldmane",
-                "type_line": "Legendary Planeswalker — Ajani",
+                "name": "Celestial Crusader",
+                "type_line": "Creature — Spirit",
                 "mana_cost": "{2}{W}{W}",
                 "cmc": 4.0,
                 "colors": [
                     "W"
                 ],
-                "artist": "Aleksi Briclot",
-                "oracle_text": "+1: You gain 2 life.\n−1: Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.\n−6: Create a white Avatar creature token. It has \"This creature's power and toughness are each equal to your life total.\"",
+                "artist": "Jim Murray",
+                "oracle_text": "Flash\nSplit second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nFlying\nOther white creatures get +1/+1.",
                 "image_uris": {
-                    "border_crop": "https://cards.scryfall.io/border_crop/front/2/a/2a1470a6-d09d-4a2a-84a6-d56e32ed237a.jpg?1562342454",
-                    "art_crop": "https://cards.scryfall.io/art_crop/front/2/a/2a1470a6-d09d-4a2a-84a6-d56e32ed237a.jpg?1562342454"
+                    "border_crop": "https://cards.scryfall.io/border_crop/front/7/f/7f5624d6-2c27-4c7a-8001-73edb2512ffb.jpg?1562921858",
+                    "art_crop": "https://cards.scryfall.io/art_crop/front/7/f/7f5624d6-2c27-4c7a-8001-73edb2512ffb.jpg?1562921858"
                 },
                 "prices": {
-                    "usd": 8.61,
-                    "eur": 2.16,
+                    "usd": 0.25,
+                    "eur": 0.08,
+                    "tix": 0.03
+                },
+                "isFav": true
+            },
+            {
+                "name": "Griffin Guide",
+                "type_line": "Enchantment — Aura",
+                "mana_cost": "{2}{W}",
+                "cmc": 3.0,
+                "colors": [
+                    "W"
+                ],
+                "artist": "Jim Nelson",
+                "oracle_text": "Enchant creature\nEnchanted creature gets +2/+2 and has flying.\nWhen enchanted creature dies, create a 2/2 white Griffin creature token with flying.",
+                "image_uris": {
+                    "border_crop": "https://cards.scryfall.io/border_crop/front/e/1/e19a15d9-5899-4b84-9c00-345b19df53ae.jpg?1562942578",
+                    "art_crop": "https://cards.scryfall.io/art_crop/front/e/1/e19a15d9-5899-4b84-9c00-345b19df53ae.jpg?1562942578"
+                },
+                "prices": {
+                    "usd": 0.12,
+                    "eur": 0.09,
+                    "tix": 0.03
+                },
+                "isFav": true
+            },
+            {
+                "name": "Evangelize",
+                "type_line": "Sorcery",
+                "mana_cost": "{4}{W}",
+                "cmc": 5.0,
+                "colors": [
+                    "W"
+                ],
+                "artist": "Randy Elliott",
+                "oracle_text": "Buyback {2}{W}{W} (You may pay an additional {2}{W}{W} as you cast this spell. If you do, put this card into your hand as it resolves.)\nGain control of target creature of an opponent's choice they control.",
+                "image_uris": {
+                    "border_crop": "https://cards.scryfall.io/border_crop/front/0/f/0f58e1aa-587c-4f89-9552-1128c8c2da1a.jpg?1562898171",
+                    "art_crop": "https://cards.scryfall.io/art_crop/front/0/f/0f58e1aa-587c-4f89-9552-1128c8c2da1a.jpg?1562898171"
+                },
+                "prices": {
+                    "usd": 0.27,
+                    "eur": 0.16,
+                    "tix": 0.02
+                },
+                "isFav": true
+            },
+            {
+                "name": "Angel's Grace",
+                "type_line": "Instant",
+                "mana_cost": "{W}",
+                "cmc": 1.0,
+                "colors": [
+                    "W"
+                ],
+                "artist": "Mark Zug",
+                "oracle_text": "Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nYou can't lose the game this turn and your opponents can't win the game this turn. Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.",
+                "image_uris": {
+                    "border_crop": "https://cards.scryfall.io/border_crop/front/5/8/580cb5be-fa59-4eb9-8808-7d2943fb6413.jpg?1562913383",
+                    "art_crop": "https://cards.scryfall.io/art_crop/front/5/8/580cb5be-fa59-4eb9-8808-7d2943fb6413.jpg?1562913383"
+                },
+                "prices": {
+                    "usd": 2.99,
+                    "eur": 1.34,
                     "tix": 0.02
                 },
                 "isFav": true

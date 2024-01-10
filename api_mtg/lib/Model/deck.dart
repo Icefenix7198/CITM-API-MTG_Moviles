@@ -1,6 +1,5 @@
 import 'package:api_mtg/Model/card.dart';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/services.dart';
 
