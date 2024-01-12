@@ -1,4 +1,4 @@
-import 'package:api_mtg/Model/providerThing.dart';
+import 'package:api_mtg/Model/global_provider.dart';
 import 'package:api_mtg/widgets/Card_grid.dart';
 import 'package:api_mtg/widgets/api_load.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
@@ -87,20 +87,16 @@ class _ApiDataLoadAppState extends State<ApiDataLoadApp> {
                 checkFavourites(globalInfo.favoriteCards, globalInfo.lrwList);
                 checkFavourites(globalInfo.favoriteCards, globalInfo.alaList);
                 checkFavourites(globalInfo.favoriteCards, globalInfo.nphList);
-                return _CardFilter(cardListSearch: globalInfo.displayedList);
+                return const _CardFilter();
               },
             )
-          : _CardFilter(cardListSearch: globalInfo.displayedList),
+          : const _CardFilter(),
     );
   }
 }
 
-// ignore: must_be_immutable
 class _CardFilter extends StatefulWidget {
-  _CardFilter({
-    required this.cardListSearch,
-  });
-  List<MtgCard> cardListSearch;
+  const _CardFilter();
   @override
   State<_CardFilter> createState() => _CardFilterState();
 }
@@ -133,6 +129,8 @@ class _CardFilterState extends State<_CardFilter> {
 
   @override
   Widget build(BuildContext context) {
+        final globalInfo = context.watch<GlobalInfo>();
+
     return Center(
       child: Column(
         children: [
@@ -143,7 +141,7 @@ class _CardFilterState extends State<_CardFilter> {
             flex: 70,
             child: CardGrid(
               cardList:
-                  listFiltered.isEmpty ? widget.cardListSearch : listFiltered,
+                  listFiltered.isEmpty ? globalInfo.displayedList : listFiltered,
             ),
           ),
           const NavigatorBar(
@@ -174,7 +172,7 @@ class _CardFilterState extends State<_CardFilter> {
             onChanged: (_) {
               setState(() {
                 final search = controller.text.toLowerCase();
-                listFiltered = widget.cardListSearch
+                listFiltered = globalInfo.displayedList
                     .where((cardMtg) =>
                         cardMtg.name.toLowerCase().contains(search) ||
                         cardMtg.type.toLowerCase().contains(search))
@@ -218,19 +216,19 @@ class _CardFilterState extends State<_CardFilter> {
             setState(() {
               switch (index) {
                 case 0:
-                  widget.cardListSearch = List.from(globalInfo.tspList);
+                  globalInfo.displayedList = List.from(globalInfo.tspList);
                   break;
                 case 1:
-                  widget.cardListSearch = List.from(globalInfo.lrwList);
+                  globalInfo.displayedList = List.from(globalInfo.lrwList);
                   break;
                 case 2:
-                  widget.cardListSearch = List.from(globalInfo.alaList);
+                  globalInfo.displayedList = List.from(globalInfo.alaList);
                   break;
                 case 3:
-                  widget.cardListSearch = List.from(globalInfo.nphList);
+                  globalInfo.displayedList = List.from(globalInfo.nphList);
                   break;
               }
-              listFiltered = List.from(widget.cardListSearch);
+              listFiltered = List.from(globalInfo.displayedList);
               controller.clear();
             });
           },

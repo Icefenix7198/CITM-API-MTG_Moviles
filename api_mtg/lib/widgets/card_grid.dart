@@ -16,7 +16,6 @@ class CardGrid extends StatefulWidget {
   State<CardGrid> createState() => _CardGridState();
 }
 
-//TODO: hacer bonito
 class _CardGridState extends State<CardGrid> {
   @override
   Widget build(BuildContext context) {

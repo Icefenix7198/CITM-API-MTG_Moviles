@@ -1,4 +1,4 @@
-import 'package:api_mtg/Model/providerThing.dart';
+import 'package:api_mtg/Model/global_provider.dart';
 import 'package:api_mtg/Screens/card_screen.dart';
 import 'package:api_mtg/Screens/settings_screen.dart';
 import 'package:api_mtg/Screens/social_screen.dart';

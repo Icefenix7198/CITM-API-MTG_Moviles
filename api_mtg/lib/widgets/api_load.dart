@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:api_mtg/Model/card.dart';
 import 'package:http/http.dart' as http;
 
