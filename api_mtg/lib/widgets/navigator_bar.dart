@@ -1,4 +1,4 @@
-import 'package:api_mtg/Model/providerThing.dart';
+import 'package:api_mtg/Model/global_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

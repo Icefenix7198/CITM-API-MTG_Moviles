@@ -1,7 +1,6 @@
 import 'package:api_mtg/Model/card.dart';
 import 'package:api_mtg/Model/deck.dart';
-import 'package:api_mtg/Model/providerThing.dart';
-import 'package:api_mtg/widgets/api_load.dart';
+import 'package:api_mtg/Model/global_provider.dart';
 import 'package:api_mtg/widgets/personal_deck.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

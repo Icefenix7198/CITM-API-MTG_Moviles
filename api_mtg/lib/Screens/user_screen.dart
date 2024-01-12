@@ -1,4 +1,4 @@
-import 'package:api_mtg/Model/providerThing.dart';
+import 'package:api_mtg/Model/global_provider.dart';
 import 'package:api_mtg/widgets/TabBarCards.dart';
 import 'package:api_mtg/widgets/card_grid.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';

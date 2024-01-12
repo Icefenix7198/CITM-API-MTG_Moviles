@@ -1,4 +1,4 @@
-import 'package:api_mtg/Model/providerThing.dart';
+import 'package:api_mtg/Model/global_provider.dart';
 import 'package:api_mtg/widgets/api_load.dart';
 import 'package:api_mtg/widgets/card_grid_home.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
@@ -117,7 +117,6 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final globalInfo = context.watch<GlobalInfo>();
     return Row(
       children: [
         Expanded(

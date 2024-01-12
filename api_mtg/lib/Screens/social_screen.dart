@@ -1,5 +1,5 @@
 import 'package:api_mtg/Model/Users.dart';
-import 'package:api_mtg/Model/providerThing.dart';
+import 'package:api_mtg/Model/global_provider.dart';
 import 'package:api_mtg/widgets/api_users.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
 //import 'package:api_mtg/widgets/api_users.dart';
