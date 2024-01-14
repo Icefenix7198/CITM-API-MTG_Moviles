@@ -10,7 +10,7 @@ https://github.com/Icefenix7198/CITM-API-MTG_Moviles
 
 Tasks:
 
-- Eric Segovia: Home screen page and User Settings screen page.
+- Eric Segovia: Navigation bar, Home screen page and User Settings screen page.
 - Andreu Nosas: Collection screen page (Card Searcher in Visual) and Card screen page.
 - Sonia Ojeda: Cover screen page and Profile screen page (User Screen in Visual).
 - Alberto Hidalgo: Social screen page and User Deck screen page.
