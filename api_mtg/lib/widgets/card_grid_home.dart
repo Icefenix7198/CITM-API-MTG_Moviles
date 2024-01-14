@@ -16,7 +16,6 @@ class CardGridHome extends StatefulWidget {
   State<CardGridHome> createState() => _CardGridHomeState();
 }
 
-//TODO: hacer bonito
 class _CardGridHomeState extends State<CardGridHome> {
   @override
   Widget build(BuildContext context) {
@@ -47,18 +46,16 @@ class _CardGridHomeState extends State<CardGridHome> {
               arguments: widget.cardList[index],
             );
           },
-          child: Container(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 2.0),
-                    child: Image(
-                        image: NetworkImage(
-                            widget.cardList[index].imageUris.cardImg)),
-                  ),
-                ],
-              ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 2.0),
+                  child: Image(
+                      image: NetworkImage(
+                          widget.cardList[index].imageUris.cardImg)),
+                ),
+              ],
             ),
           ),
         );

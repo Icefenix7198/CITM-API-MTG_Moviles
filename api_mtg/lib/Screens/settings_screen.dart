@@ -377,7 +377,7 @@ class _SettingsEditProfileBottonState extends State<SettingsEditProfileBotton> {
 
 // ignore: must_be_immutable
 class SettingsAccountManagmentBotton extends StatelessWidget {
-  SettingsAccountManagmentBotton({
+  const SettingsAccountManagmentBotton({
     super.key,
     required this.open,
     required this.onPressed,
@@ -401,7 +401,7 @@ class SettingsAccountManagmentBotton extends StatelessWidget {
                 color: (globalInfo.darkMode) ? Colors.white : Colors.black,
               ),
               Padding(
-                padding: EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "Account Managment",
                   style: TextStyle(
@@ -437,7 +437,7 @@ class SettingsAccountManagmentBotton extends StatelessWidget {
 
 // ignore: must_be_immutable
 class SettingsVisibilityBotton extends StatefulWidget {
-  SettingsVisibilityBotton({
+  const SettingsVisibilityBotton({
     super.key,
     required this.open,
     required this.onPressed,
@@ -612,7 +612,7 @@ class _SettingsNotificationsBottonState
 
 // ignore: must_be_immutable
 class LanguageBotton extends StatefulWidget {
-  LanguageBotton({
+  const LanguageBotton({
     super.key,
     required this.open,
     required this.onPressed,
@@ -749,7 +749,7 @@ class _LanguageBottonState extends State<LanguageBotton> {
 
 // ignore: must_be_immutable
 class HelpBotton extends StatelessWidget {
-  HelpBotton({
+  const HelpBotton({
     super.key,
     required this.open,
     required this.onPressed,
@@ -810,7 +810,11 @@ class HelpBotton extends StatelessWidget {
         ),
         open
             ? Text(
-                "Muuuuuucho texto:",
+                (globalInfo.language == Idioma.spanish)
+                    ? "Es una API que muestra informacion sobre cartas Magic"
+                    : (globalInfo.language == Idioma.catalan)
+                        ? "Es una API que mostra informació de las cartes Magic"
+                        : "This is an API that show info of MTG cards, its simpe",
                 style: TextStyle(
                     color: (globalInfo.darkMode) ? Colors.white : Colors.black,
                     fontSize: 20),

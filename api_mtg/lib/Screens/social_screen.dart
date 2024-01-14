@@ -226,7 +226,6 @@ class _SearchableListState extends State<_SearchableList> {
 
   // ignore: non_constant_identifier_names
   Future<User?> OpenPopup(BuildContext context) async {
-    final globalInfo = context.watch<GlobalInfo>();
     final TextEditingController controllerName = TextEditingController();
     final TextEditingController controllerSecondName = TextEditingController();
     final popupResult = await showDialog<bool>(

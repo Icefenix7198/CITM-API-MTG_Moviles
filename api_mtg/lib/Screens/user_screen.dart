@@ -80,7 +80,7 @@ class UserScreen extends StatelessWidget {
                       fontSize: 12),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -116,7 +116,7 @@ class UserScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(bottom: 7),
+                    padding: const EdgeInsets.only(bottom: 7),
                     child: SizedBox(
                       height: 25,
                       width: 150,

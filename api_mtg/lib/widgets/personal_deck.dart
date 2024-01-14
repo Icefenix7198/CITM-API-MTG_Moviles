@@ -6,11 +6,15 @@ import 'package:flutter/material.dart';
 class PersonalDeck extends StatelessWidget {
   PersonalDeck(
       {super.key,
+      // ignore: non_constant_identifier_names
       required this.ListCards,
+      // ignore: non_constant_identifier_names
       required this.CardsSelected,
       required this.deck});
 
+  // ignore: non_constant_identifier_names
   List<MtgCard> ListCards;
+  // ignore: non_constant_identifier_names
   List<int> CardsSelected;
   Deck deck;
 
@@ -33,7 +37,7 @@ class PersonalDeck extends StatelessWidget {
                 );
               },
               child: Container(
-                padding: EdgeInsets.all(4),
+                padding: const EdgeInsets.all(4),
                 child: Image(
                   image: NetworkImage(ListCards[i].imageUris.cardImg),
                 ),
