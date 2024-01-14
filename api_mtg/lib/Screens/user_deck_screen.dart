@@ -26,56 +26,7 @@ class _UserScreenDeckState extends State<UserScreenDeck> {
           : const Color.fromARGB(255, 223, 223, 223),
       body: Column(
         children: [
-          Expanded(
-            flex: 10,
-            child: Container(
-              color: const Color.fromRGBO(33, 30, 30, 0.965),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    flex: 10,
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          color: Colors.grey,
-                          size: 40,
-                        ),
-                        onPressed: () => Navigator.of(context).pop(),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 30,
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: Text(
-                        deck.name,
-                        style: TextStyle(color: Colors.white, fontSize: 35),
-                      ),
-                    ),
-                  ),
-                  const Spacer(
-                    flex: 10,
-                  ),
-
-                  /*Align(
-                        alignment: Alignment.topRight,
-                        child: Container(
-                          padding: const EdgeInsets.all(12),
-                          child: const Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                            size: 40,
-                          ),
-                        ),
-                      ),*/
-                ],
-              ),
-            ),
-          ),
+          UpperBox(deck: deck),
           Expanded(
             flex: 45,
             child: Container(
@@ -85,259 +36,7 @@ class _UserScreenDeckState extends State<UserScreenDeck> {
                   Center(
                     child: Column(
                       children: [
-                        Expanded(
-                          flex: 70,
-                          child: SizedBox(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Spacer(),
-                                Expanded(
-                                  flex: 3,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        flex: 80,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            for (int i = 0; i < 6; i++)
-                                              Expanded(
-                                                child: Container(
-                                                  padding:
-                                                      const EdgeInsets.all(4),
-                                                  child: Column(
-                                                    children: [
-                                                      Expanded(
-                                                        flex: countedMana[i] ==
-                                                                0
-                                                            ? 99
-                                                            : 6 -
-                                                                countedMana[i],
-                                                        child: Center(
-                                                          child: Text(
-                                                            "${countedMana[i]}",
-                                                            style:
-                                                                const TextStyle(
-                                                                    color: Colors
-                                                                        .white),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        flex: countedMana[i] ==
-                                                                0
-                                                            ? 1
-                                                            : countedMana[i],
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                              color: const Color(
-                                                                  0xFFF05A22),
-                                                              style: BorderStyle
-                                                                  .solid,
-                                                              width: 1.0,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 20,
-                                        child: Container(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(0),
-                                                child: Stack(
-                                                  children: [
-                                                    Container(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              6),
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              color:
-                                                                  Colors.white),
-                                                      child: const FittedBox(
-                                                        fit: BoxFit.contain,
-                                                        child: Text(
-                                                          "1-",
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .purple),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(0),
-                                                child: Stack(
-                                                  children: [
-                                                    Container(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8),
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              color:
-                                                                  Colors.white),
-                                                      child: const FittedBox(
-                                                        fit: BoxFit.contain,
-                                                        child: Text(
-                                                          "2",
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .purple),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(0),
-                                                child: Stack(
-                                                  children: [
-                                                    Container(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8),
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              color:
-                                                                  Colors.white),
-                                                      child: const FittedBox(
-                                                        fit: BoxFit.contain,
-                                                        child: Text(
-                                                          "3",
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .purple),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(0),
-                                                child: Stack(
-                                                  children: [
-                                                    Container(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8),
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              color:
-                                                                  Colors.white),
-                                                      child: const FittedBox(
-                                                        fit: BoxFit.contain,
-                                                        child: Text(
-                                                          "4",
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .purple),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(0),
-                                                child: Stack(
-                                                  children: [
-                                                    Container(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8),
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              color:
-                                                                  Colors.white),
-                                                      child: const FittedBox(
-                                                        fit: BoxFit.contain,
-                                                        child: Text(
-                                                          "5",
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .purple),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(0),
-                                                child: Stack(
-                                                  children: [
-                                                    Container(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              4),
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              color:
-                                                                  Colors.white),
-                                                      child: const FittedBox(
-                                                        fit: BoxFit.contain,
-                                                        child: Text(
-                                                          "6+",
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .purple),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const Spacer(),
-                              ],
-                            ),
-                          ),
-                        ),
+                        ManaCostCards(countedMana: countedMana),
                         const Align(
                           alignment: Alignment.center,
                           child: FittedBox(
@@ -372,6 +71,267 @@ class _UserScreenDeckState extends State<UserScreenDeck> {
                   deck: deck,
                 ),
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class UpperBox extends StatelessWidget {
+  const UpperBox({
+    super.key,
+    required this.deck,
+  });
+
+  final Deck deck;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 10,
+      child: Container(
+        color: const Color.fromRGBO(33, 30, 30, 0.965),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              flex: 10,
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.grey,
+                    size: 40,
+                  ),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 30,
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: Text(
+                  deck.name,
+                  style: const TextStyle(color: Colors.white, fontSize: 35),
+                ),
+              ),
+            ),
+            const Spacer(
+              flex: 10,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ManaCostCards extends StatelessWidget {
+  const ManaCostCards({
+    super.key,
+    required this.countedMana,
+  });
+
+  final List<int> countedMana;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 70,
+      child: SizedBox(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Spacer(),
+            Expanded(
+              flex: 3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 80,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        for (int i = 0; i < 6; i++)
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.all(4),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    flex: countedMana[i] == 0
+                                        ? 99
+                                        : 6 - countedMana[i],
+                                    child: Center(
+                                      child: Text(
+                                        "${countedMana[i]}",
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: countedMana[i] == 0
+                                        ? 1
+                                        : countedMana[i],
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: const Color(0xFFF05A22),
+                                          style: BorderStyle.solid,
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  const CirclesOfMana(),
+                ],
+              ),
+            ),
+            const Spacer(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CirclesOfMana extends StatelessWidget {
+  const CirclesOfMana({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 20,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(0),
+            child: Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.white),
+                  child: const FittedBox(
+                    fit: BoxFit.contain,
+                    child: Text(
+                      "1-",
+                      style: TextStyle(color: Colors.purple),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(0),
+            child: Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.white),
+                  child: const FittedBox(
+                    fit: BoxFit.contain,
+                    child: Text(
+                      "2",
+                      style: TextStyle(color: Colors.purple),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(0),
+            child: Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.white),
+                  child: const FittedBox(
+                    fit: BoxFit.contain,
+                    child: Text(
+                      "3",
+                      style: TextStyle(color: Colors.purple),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(0),
+            child: Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.white),
+                  child: const FittedBox(
+                    fit: BoxFit.contain,
+                    child: Text(
+                      "4",
+                      style: TextStyle(color: Colors.purple),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(0),
+            child: Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.white),
+                  child: const FittedBox(
+                    fit: BoxFit.contain,
+                    child: Text(
+                      "5",
+                      style: TextStyle(color: Colors.purple),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(0),
+            child: Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.white),
+                  child: const FittedBox(
+                    fit: BoxFit.contain,
+                    child: Text(
+                      "6+",
+                      style: TextStyle(color: Colors.purple),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

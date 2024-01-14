@@ -63,7 +63,6 @@ class SocialScreen extends StatelessWidget {
 
 class _SearchableList extends StatefulWidget {
   const _SearchableList({
-    super.key,
     required this.userList,
   });
 
@@ -96,49 +95,7 @@ class _SearchableListState extends State<_SearchableList> {
     final globalInfo = context.watch<GlobalInfo>();
     return Column(
       children: [
-        Expanded(
-          flex: 8,
-          child: Row(
-            children: [
-              Expanded(
-                flex: 70,
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(16),
-                          bottomRight: Radius.circular(16))),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: Text(
-                        (globalInfo.language == Idioma.spanish)
-                            ? "Conversaciones"
-                            : (globalInfo.language == Idioma.catalan)
-                                ? "Conversas"
-                                : "My Chats",
-                        style: TextStyle(
-                            fontSize: 40,
-                            color: (globalInfo.darkMode)
-                                ? Colors.white
-                                : Colors.black),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 30,
-                child: Icon(
-                  Icons.chat_bubble,
-                  color: (globalInfo.darkMode) ? Colors.white : Colors.black,
-                  size: 40,
-                ),
-              ),
-            ],
-          ),
-        ),
+        UpperBox(globalInfo: globalInfo),
         Expanded(
           flex: 10,
           child: Container(
@@ -146,8 +103,8 @@ class _SearchableListState extends State<_SearchableList> {
             child: Container(
               decoration: BoxDecoration(
                   color: (globalInfo.darkMode)
-                      ? Color.fromARGB(255, 101, 101, 101)
-                      : Color.fromARGB(255, 161, 161, 161),
+                      ? const Color.fromARGB(255, 101, 101, 101)
+                      : const Color.fromARGB(255, 161, 161, 161),
                   borderRadius: const BorderRadius.all(Radius.circular(16))),
               child: Row(
                 children: [
@@ -227,7 +184,7 @@ class _SearchableListState extends State<_SearchableList> {
               Align(
                 alignment: Alignment.bottomRight,
                 child: Container(
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       color: Colors.red.shade400, shape: BoxShape.circle),
                   child: IconButton(
@@ -317,5 +274,61 @@ class _SearchableListState extends State<_SearchableList> {
     } else {
       return null;
     }
+  }
+}
+
+class UpperBox extends StatelessWidget {
+  const UpperBox({
+    super.key,
+    required this.globalInfo,
+  });
+
+  final GlobalInfo globalInfo;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 8,
+      child: Row(
+        children: [
+          Expanded(
+            flex: 70,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(16),
+                      bottomRight: Radius.circular(16))),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  child: Text(
+                    (globalInfo.language == Idioma.spanish)
+                        ? "Conversaciones"
+                        : (globalInfo.language == Idioma.catalan)
+                            ? "Conversas"
+                            : "My Chats",
+                    style: TextStyle(
+                        fontSize: 40,
+                        color: (globalInfo.darkMode)
+                            ? Colors.white
+                            : Colors.black),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 30,
+            child: Icon(
+              Icons.chat_bubble,
+              color: (globalInfo.darkMode) ? Colors.white : Colors.black,
+              size: 40,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

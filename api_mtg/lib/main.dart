@@ -33,13 +33,13 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         routes: {
           "/": (context) => const PortadaScreen(),
-          "/home": (context) => HomeScreen(),
-          "/home/api": (_) => ApiDataLoadApp(),
-          "/home/social": (context) => SocialScreen(),
-          "/home/api/card": (context) => CardScreen(),
-          "/home/user": (context) => UserScreen(),
-          "/home/user/deck": (context) => UserScreenDeck(),
-          "/home/settings": (context) => SettingsScreen(),
+          "/home": (context) => const HomeScreen(),
+          "/home/api": (_) => const ApiDataLoadApp(),
+          "/home/social": (context) => const SocialScreen(),
+          "/home/api/card": (context) => const CardScreen(),
+          "/home/user": (context) => const UserScreen(),
+          "/home/user/deck": (context) => const UserScreenDeck(),
+          "/home/settings": (context) => const SettingsScreen(),
         },
       ),
     );
