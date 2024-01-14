@@ -5,16 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
-class PortadaScreen extends StatefulWidget {
-  const PortadaScreen({
+class CoverScreen extends StatelessWidget {
+  const CoverScreen({
     super.key,
   });
 
-  @override
-  State<PortadaScreen> createState() => _PortadaScreenState();
-}
-
-class _PortadaScreenState extends State<PortadaScreen> {
   @override
   Widget build(BuildContext context) {
     final globalInfo = context.watch<GlobalInfo>();
@@ -142,16 +137,11 @@ class _PortadaScreenState extends State<PortadaScreen> {
   }
 }
 
-class EnterButton extends StatefulWidget {
+class EnterButton extends StatelessWidget {
   const EnterButton({
     super.key,
   });
 
-  @override
-  State<EnterButton> createState() => _EnterButtonState();
-}
-
-class _EnterButtonState extends State<EnterButton> {
   @override
   Widget build(BuildContext context) {
     final globalInfo = context.watch<GlobalInfo>();

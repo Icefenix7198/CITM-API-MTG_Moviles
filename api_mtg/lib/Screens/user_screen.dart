@@ -288,7 +288,13 @@ class _DeckUnitState extends State<DeckUnit> {
         ),
         Expanded(
           flex: 55,
-          child: Container(color: Colors.blue),
+          child: Container(
+            color: Colors.black,
+            child: const Image(
+              image: AssetImage("assets/icon_deck.jpg"),
+              fit: BoxFit.fill,
+            ),
+          ),
         ),
         Expanded(
           flex: 15,
