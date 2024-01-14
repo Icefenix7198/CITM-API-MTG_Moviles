@@ -1,5 +1,7 @@
 import 'package:api_mtg/Model/Users.dart';
+import 'package:api_mtg/Model/global_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UsersListItem extends StatelessWidget {
   const UsersListItem({
@@ -13,11 +15,16 @@ class UsersListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     String network = "https";
 
+    final globalInfo = context.watch<GlobalInfo>();
     return ListTile(
-      tileColor: const Color.fromRGBO(33, 30, 30, 0.965),
+      tileColor: (globalInfo.darkMode)
+          ? const Color.fromRGBO(33, 30, 30, 0.965)
+          : const Color.fromARGB(255, 233, 233, 233),
       title: Text(
         "${user.firstName} ${user.secondName}",
-        style: const TextStyle(color: Colors.white),
+        style: TextStyle(
+          color: (globalInfo.darkMode) ? Colors.white : Colors.black,
+        ),
       ),
       subtitle: Text(
         userStatus(user.status),

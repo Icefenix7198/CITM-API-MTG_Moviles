@@ -311,6 +311,7 @@ class UpperBox extends StatelessWidget {
                             : "My Chats",
                     style: TextStyle(
                         fontSize: 40,
+                        fontWeight: FontWeight.bold,
                         color: (globalInfo.darkMode)
                             ? Colors.white
                             : Colors.black),

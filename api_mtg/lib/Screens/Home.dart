@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:api_mtg/Model/global_provider.dart';
 import 'package:api_mtg/widgets/api_load.dart';
 import 'package:api_mtg/widgets/card_grid_home.dart';
@@ -20,8 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: (globalInfo.darkMode)
           ? const Color.fromRGBO(33, 30, 30, 0.965)
-          : const Color.fromARGB(246, 227, 207, 207),
-      body: (globalInfo.tspList.isEmpty)
+          : const Color.fromARGB(246, 205, 200, 200),
+      body: (globalInfo.alaList.isEmpty)
           ? FutureBuilder(
               future: Future.wait(
                   [apiLoadTSP(), apiLoadLRW(), apiLoadALA(), apiLoadNPH()]),
@@ -53,13 +54,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 }
-                if (globalInfo.tspList.isEmpty)
-                  globalInfo.tspList = snapshot.data![0];
+                if (globalInfo.alaList.isEmpty) {
+                  globalInfo.alaList = snapshot.data![0];
+                }
 
-                return _CardList(cardListSearch: globalInfo.tspList);
+                return _CardList(cardListSearch: globalInfo.alaList);
               },
             )
-          : _CardList(cardListSearch: globalInfo.tspList),
+          : _CardList(cardListSearch: globalInfo.alaList),
     );
   }
 }
@@ -117,19 +119,31 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final globalInfo = context.watch<GlobalInfo>();
     return Row(
       children: [
         Expanded(
           child: Container(
             padding: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 201, 83, 81),
+            decoration: BoxDecoration(
+              color: (globalInfo.darkMode)
+                  ? const Color.fromARGB(255, 44, 41, 41)
+                  : const Color.fromARGB(255, 233, 233, 233),
             ),
-            child: const Align(
+            child: Align(
               alignment: Alignment.centerLeft,
-              child: Text(
-                "Home",
-                style: TextStyle(fontSize: 50, color: Colors.white),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Home",
+                  style: TextStyle(
+                    fontSize: 50,
+                    color: (globalInfo.darkMode)
+                        ? Colors.white
+                        : const Color.fromARGB(255, 29, 28, 28),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
           ),
