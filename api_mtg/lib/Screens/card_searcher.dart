@@ -129,7 +129,7 @@ class _CardFilterState extends State<_CardFilter> {
 
   @override
   Widget build(BuildContext context) {
-        final globalInfo = context.watch<GlobalInfo>();
+    final globalInfo = context.watch<GlobalInfo>();
 
     return Center(
       child: Column(
@@ -140,8 +140,9 @@ class _CardFilterState extends State<_CardFilter> {
           Expanded(
             flex: 70,
             child: CardGrid(
-              cardList:
-                  listFiltered.isEmpty ? globalInfo.displayedList : listFiltered,
+              cardList: listFiltered.isEmpty
+                  ? globalInfo.displayedList
+                  : listFiltered,
             ),
           ),
           const NavigatorBar(
@@ -190,7 +191,11 @@ class _CardFilterState extends State<_CardFilter> {
               ),
               prefixIconColor:
                   (globalInfo.darkMode) ? Colors.white : Colors.black,
-              hintText: "Search Cards",
+              hintText: (globalInfo.language == Idioma.spanish)
+                  ? "Buscar Carta"
+                  : (globalInfo.language == Idioma.catalan)
+                      ? "Busca carta"
+                      : "Search Card",
               hintStyle: TextStyle(
                 color: (globalInfo.darkMode)
                     ? const Color.fromARGB(255, 155, 153, 153)
@@ -266,7 +271,11 @@ class _Header extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(20.0),
             child: Text(
-              "Discover",
+              (globalInfo.language == Idioma.spanish)
+                  ? "Descubrir"
+                  : (globalInfo.language == Idioma.catalan)
+                      ? "Descubri"
+                      : "Discover",
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.bold,

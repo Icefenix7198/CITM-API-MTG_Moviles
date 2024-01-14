@@ -226,13 +226,14 @@ class _SearchableListState extends State<_SearchableList> {
 
   // ignore: non_constant_identifier_names
   Future<User?> OpenPopup(BuildContext context) async {
+    final globalInfo = context.watch<GlobalInfo>();
     final TextEditingController controllerName = TextEditingController();
     final TextEditingController controllerSecondName = TextEditingController();
     final popupResult = await showDialog<bool>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
         alignment: Alignment.center,
-        title: const Text('Add User'),
+        title: const Text('Add Friend'),
         content: SizedBox(
           height: 170,
           child: Column(

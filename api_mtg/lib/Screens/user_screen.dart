@@ -79,21 +79,29 @@ class UserScreen extends StatelessWidget {
                           : const Color.fromARGB(255, 56, 56, 56),
                       fontSize: 12),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(top: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(right: 20),
+                        padding: const EdgeInsets.only(right: 20),
                         child: BoxInfo(
                           num: 10,
-                          text: "followers",
+                          text: (globalInfo.language == Idioma.spanish)
+                              ? "seguidores"
+                              : (globalInfo.language == Idioma.catalan)
+                                  ? "seguidors"
+                                  : "followers",
                         ),
                       ),
                       BoxInfo(
                         num: 10,
-                        text: "following",
+                        text: (globalInfo.language == Idioma.spanish)
+                            ? "siguiendo"
+                            : (globalInfo.language == Idioma.catalan)
+                                ? "seguint"
+                                : "following",
                       ),
                     ],
                   ),
@@ -107,15 +115,27 @@ class UserScreen extends StatelessWidget {
               length: 2,
               child: Column(
                 children: [
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(bottom: 7),
                     child: SizedBox(
                       height: 25,
                       width: 150,
                       child: TabBarCards(
                         tabs: [
-                          Tab(text: "Cards"),
-                          Tab(text: "Decks"),
+                          Tab(
+                            text: (globalInfo.language == Idioma.spanish)
+                                ? "Cartas"
+                                : (globalInfo.language == Idioma.catalan)
+                                    ? "Cartes"
+                                    : "Cards",
+                          ),
+                          Tab(
+                            text: (globalInfo.language == Idioma.spanish)
+                                ? "Mazos"
+                                : (globalInfo.language == Idioma.catalan)
+                                    ? "Molls"
+                                    : "Decks",
+                          ),
                         ],
                       ),
                     ),

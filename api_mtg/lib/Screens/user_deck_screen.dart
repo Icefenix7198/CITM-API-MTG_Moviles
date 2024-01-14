@@ -37,13 +37,17 @@ class _UserScreenDeckState extends State<UserScreenDeck> {
                     child: Column(
                       children: [
                         ManaCostCards(countedMana: countedMana),
-                        const Align(
+                        Align(
                           alignment: Alignment.center,
                           child: FittedBox(
                             fit: BoxFit.contain,
                             child: Text(
-                              "Mana Cost",
-                              style: TextStyle(
+                              (globalInfo.language == Idioma.spanish)
+                                  ? "Coste Mana"
+                                  : (globalInfo.language == Idioma.catalan)
+                                      ? "Cost Mana"
+                                      : "Mana Cost",
+                              style: const TextStyle(
                                   color: Color(0xFFF05A22), fontSize: 20),
                             ),
                           ),
