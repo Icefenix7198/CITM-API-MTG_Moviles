@@ -1,7 +1,7 @@
 import 'package:api_mtg/Model/global_provider.dart';
-import 'package:api_mtg/widgets/TabBarCards.dart';
 import 'package:api_mtg/widgets/card_grid.dart';
 import 'package:api_mtg/widgets/navigator_bar.dart';
+import 'package:api_mtg/widgets/tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:api_mtg/Model/card.dart';
 import 'package:provider/provider.dart';
@@ -308,7 +308,13 @@ class _DeckUnitState extends State<DeckUnit> {
         ),
         Expanded(
           flex: 55,
-          child: Container(color: Colors.blue),
+          child: Container(
+            color: Colors.black,
+            child: const Image(
+              image: AssetImage("assets/icon_deck.jpg"),
+              fit: BoxFit.fill,
+            ),
+          ),
         ),
         Expanded(
           flex: 15,

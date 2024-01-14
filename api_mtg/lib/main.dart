@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       ),
       child: MaterialApp(
         routes: {
-          "/": (context) => const PortadaScreen(),
+          "/": (context) => const CoverScreen(),
           "/home": (context) => const HomeScreen(),
           "/home/api": (_) => const ApiDataLoadApp(),
           "/home/social": (context) => const SocialScreen(),
